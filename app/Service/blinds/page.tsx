@@ -1,15 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px" }} // Changed margin to 0px so it triggers earlier on scroll
+      viewport={{ once: true, margin: "0px" }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
       className={className}
     >
@@ -18,27 +19,73 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
+// Background images for the slider
+const heroImages = [
+  "/snaglist.png", 
+  "/flooring.jpeg", 
+  "/Blinds.png", 
+  "/wall-panels-prep.png"
+];
+
 export default function BlindsPage() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Changes the image every 6 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+    }, 6000); 
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <main className="w-full bg-[#f0ede6] text-gray-900 selection:bg-[#b7935b] selection:text-white pb-0 overflow-x-hidden -mb-16">
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
-        <FadeUp>
-          <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block">Made to Measure Excellence</span>
-        </FadeUp>
+      {/* Hero Section with Integrated Slider */}
+      <section className="relative w-full min-h-[65vh] md:min-h-[75vh] flex flex-col items-center justify-center overflow-hidden bg-[#1a1814]">
         
-        <FadeUp delay={0.1}>
-          <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 leading-[1.1] mb-8 tracking-tight">
-            Premium Blinds.
-          </h1>
-        </FadeUp>
-        
-        <FadeUp delay={0.2}>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            From hand-finished wooden Venetians to thermal blackout rollers. We combine the vast selection of a superstore with the flawless, personalized fitting of Dublin PropTech.
-          </p>
-        </FadeUp>
+        {/* Background Sliding Images */}
+        <AnimatePresence mode="popLayout">
+          <motion.img
+            key={currentIndex}
+            src={heroImages[currentIndex]}
+            alt={`Blinds Service Background ${currentIndex + 1}`}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3, ease: "easeInOut" }} 
+          />
+        </AnimatePresence>
+
+        {/* Dark Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-black/50 z-10" />
+
+        {/* Hero Content (Floating on top) */}
+        <div className="relative z-20 pt-24 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
+          <FadeUp>
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block drop-shadow-md">Made to Measure Excellence</span>
+          </FadeUp>
+          
+          <FadeUp delay={0.1}>
+            <h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-8 tracking-tight drop-shadow-lg">
+              Premium Blinds.
+            </h1>
+          </FadeUp>
+          
+          <FadeUp delay={0.2}>
+            <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-medium leading-relaxed mb-10 drop-shadow-md">
+              From hand-finished wooden Venetians to thermal blackout rollers.
+            </p>
+          </FadeUp>
+
+          {/* Hero CTA Added Here */}
+          <FadeUp delay={0.3}>
+            <Link href="/service/contact" className="inline-block bg-[#b7935b] text-white px-10 py-4 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg text-center">
+              Get a Quote
+            </Link>
+          </FadeUp>
+        </div>
       </section>
 
       {/* Trust & Features Banner */}
@@ -85,7 +132,7 @@ export default function BlindsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Wooden Blinds</h3>
                 <p className="text-gray-200 text-sm mb-4">Real wood & moisture-proof faux wood.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -97,7 +144,7 @@ export default function BlindsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Roller Blinds</h3>
                 <p className="text-gray-200 text-sm mb-4">Sleek, simple, and available in blackout.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -109,7 +156,7 @@ export default function BlindsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Roman Blinds</h3>
                 <p className="text-gray-200 text-sm mb-4">Luxurious fabrics with thermal linings.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -121,7 +168,7 @@ export default function BlindsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Vertical Blinds</h3>
                 <p className="text-gray-200 text-sm mb-4">Perfect for large windows and sliding doors.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -133,7 +180,7 @@ export default function BlindsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Perfect Fit</h3>
                 <p className="text-gray-200 text-sm mb-4">No-drill installation. Clicks into the frame.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -145,7 +192,7 @@ export default function BlindsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Aluminum Venetians</h3>
                 <p className="text-gray-200 text-sm mb-4">Modern, highly durable, and easy to clean.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -173,7 +220,6 @@ export default function BlindsPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              {/* Added priority tag to fix LCP warning from terminal */}
               <Image src="/blinds-detail.png" alt="Blinds Close Up Detail" fill className="object-cover" unoptimized priority />
             </div>
           </div>
@@ -210,7 +256,7 @@ export default function BlindsPage() {
           </div>
           
           <FadeUp delay={0.4} className="mt-20">
-             <Link href="/Service/contact" className="inline-block bg-[#b7935b] text-white px-12 py-5 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg">
+             <Link href="/service/contact" className="inline-block bg-[#b7935b] text-white px-12 py-5 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg">
               Book Your Free Measure
             </Link>
           </FadeUp>
@@ -224,7 +270,6 @@ export default function BlindsPage() {
           {/* Left Column: Image */}
           <div className="w-full md:w-5/12 p-8 md:p-16 flex items-center justify-center md:justify-end">
             <FadeUp>
-              {/* Rigid internal div with strict boundaries and a fallback color */}
               <div className="relative w-[280px] md:w-[320px] h-[350px] md:h-[400px] shadow-2xl rounded-lg overflow-hidden bg-[#2a2215]">
                 <Image 
                   src="/anil.jpeg" 
@@ -240,12 +285,11 @@ export default function BlindsPage() {
           {/* Right Column: Quote Text */}
           <div className="w-full md:w-7/12 p-8 md:p-16 flex flex-col justify-center">
             <FadeUp delay={0.1}>
-              {/* Custom Gold Quote Icon */}
               <svg width="42" height="42" viewBox="0 0 24 24" fill="#b7935b" className="mb-6">
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>
               <p className="text-white text-2xl md:text-3xl lg:text-4xl font-serif leading-[1.6] max-w-2xl">
-                Exceptional precision, delivered exactly on time. We demand outstanding quality in every snagging report so your new home is flawlessly finished.
+                Exceptional precision, delivered exactly on time. We demand outstanding quality in every bespoke blind fitting so your new home is flawlessly finished.
               </p>
             </FadeUp>
           </div>

@@ -30,19 +30,19 @@ export default function TilesPage() {
         
         <FadeUp delay={0.1}>
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 leading-[1.1] mb-8 tracking-tight">
-            Luxury Tiles <br /> & Vinyl.
+            Luxury Tiles. <br />
           </h1>
         </FadeUp>
         
         <FadeUp delay={0.2}>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            From large-format porcelain to the advanced engineering of LVT and rigid-core SPC. We deliver flawless finishes designed for high-moisture and heavy-traffic environments.
+            From large-format porcelain to advanced engineering of LVT & core SPC.
           </p>
         </FadeUp>
         
         <FadeUp delay={0.3}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/Service/contact" className="inline-block bg-[#1a1814] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors rounded-full shadow-md text-center">
+            <Link href="/service/contact" className="inline-block bg-[#1a1814] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors rounded-full shadow-md text-center">
               Request a Quote
             </Link>
           </div>
@@ -130,7 +130,7 @@ export default function TilesPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-10">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Porcelain</h3>
                 <p className="text-gray-200 text-sm mb-6 max-w-sm">Denser and more durable than standard ceramic. The ultimate choice for high-traffic hallways and open-plan kitchen diners.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -145,7 +145,7 @@ export default function TilesPage() {
                 </div>
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Luxury Vinyl Tile (LVT)</h3>
                 <p className="text-gray-200 text-sm mb-6 max-w-sm">The visual appeal of natural stone or wood, with a softer, warmer underfoot feel. Fully waterproof and highly scratch-resistant.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -160,7 +160,7 @@ export default function TilesPage() {
                 </div>
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">SPC Rigid Core</h3>
                 <p className="text-gray-200 text-sm mb-6 max-w-sm">Engineered with a limestone core for extreme dent resistance and stability. The heavy-duty upgrade for demanding spaces.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -182,7 +182,7 @@ export default function TilesPage() {
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>
               <p className="text-white text-2xl md:text-3xl lg:text-4xl font-serif leading-[1.6] max-w-2xl">
-                Exceptional precision, delivered exactly on time. We demand outstanding quality in every snagging report so your new home is flawlessly finished.
+                Exceptional realism, delivered exactly on time. We demand outstanding quality in every luxury vinyl tile fit-out so your space is flawlessly finished.
               </p>
             </FadeUp>
           </div>

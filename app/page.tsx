@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
+import HeroSlider from "./components/HeroSlider"; // <-- SLIDER IMPORTED HERE
 
 // Fade up animation wrapper
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
@@ -28,7 +29,7 @@ function AnimatedCounter({ to }: { to: number }) {
 
   useEffect(() => {
     if (isInView) {
-      const duration = 4000; // 4 seconds
+      const duration = 2000; // 2 seconds
       const startTime = performance.now();
       
       const updateCounter = (currentTime: number) => {
@@ -56,34 +57,9 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900 selection:bg-gray-900 selection:text-white pb-1 font-sans overflow-x-hidden">
       
-      {/* Hero Section */}
-      <section className="pt-12 md:pt-18 pb-10 px-6 max-w-5xl mx-auto text-center flex flex-col items-center">
-        <FadeUp>
-          <span className="text-sm font-bold tracking-widest uppercase text-gray-500 mb-6 block">New Build Specialist</span>
-        </FadeUp>
-        
-        <FadeUp delay={0.1}>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 text-gray-900">
-            Crafting Perfection.
-          </h1>
-        </FadeUp>
-        
-        <FadeUp delay={0.5}>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl font-medium leading-relaxed mb-10">
-            Expert snagging. Premium finishes. Flawless spaces.
-          </p>
-        </FadeUp>
-
-        {/* Single CTA Button - Pill Shape */}
-        <FadeUp delay={0.3}>
-          <div className="flex flex-wrap justify-center mt-2">
-            <Link href="/Service/contact" className="bg-[#b7935b] text-white px-10 py-4 font-semibold tracking-wide hover:bg-[#a0804f] transition-all shadow-md hover:shadow-lg rounded-full">
-              Book a Consultation
-            </Link>
-          </div>
-        </FadeUp>
-      </section>
-
+      {/* 4-Image Slider added right at the top (now contains the text overlay!) */}
+      <HeroSlider />
+      
       {/* Transform Spaces / Animated Stats Section */}
       <section className="px-6 max-w-6xl mx-auto w-full py-12 mt-4 border-t border-gray-100">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 mb-24">
@@ -140,7 +116,7 @@ export default function Home() {
           {/* Card 1: Flooring */}
           <FadeUp delay={0.1} className="h-full">
             <div className="bg-white p-4 md:p-6 shadow-sm flex flex-col h-full border border-gray-200 hover:shadow-md transition-shadow">
-              <Link href="/Service/flooring" className="relative w-full aspect-square mb-6 overflow-hidden bg-gray-100 block group">
+              <Link href="/service/flooring" className="relative w-full aspect-square mb-6 overflow-hidden bg-gray-100 block group">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10" />
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Flooring
@@ -151,7 +127,7 @@ export default function Home() {
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
                   Premium flooring solutions and expert installation, tailored to your style and built to last.
                 </p>
-                <Link href="/Service/flooring" className="mt-auto text-gray-900 font-medium hover:text-[#b7935b] transition-colors flex items-center gap-2">
+                <Link href="/service/flooring" className="mt-auto text-gray-900 font-medium hover:text-[#b7935b] transition-colors flex items-center gap-2">
                   Explore more &rarr;
                 </Link>
               </div>
@@ -161,7 +137,7 @@ export default function Home() {
           {/* Card 2: Snaglist */}
           <FadeUp delay={0.2} className="h-full">
             <div className="bg-white p-4 md:p-6 shadow-sm flex flex-col h-full border border-gray-200 hover:shadow-md transition-shadow">
-              <Link href="/Service/snaglist" className="relative w-full aspect-square mb-6 overflow-hidden bg-gray-100 block group">
+              <Link href="/service/snaglist" className="relative w-full aspect-square mb-6 overflow-hidden bg-gray-100 block group">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10" />
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Snaglist
@@ -172,7 +148,7 @@ export default function Home() {
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
                   Expert snagging inspections delivering a perfect property handover and complete peace of mind.
                 </p>
-                <Link href="/Service/snaglist" className="mt-auto text-gray-900 font-medium hover:text-[#b7935b] transition-colors flex items-center gap-2">
+                <Link href="/service/snaglist" className="mt-auto text-gray-900 font-medium hover:text-[#b7935b] transition-colors flex items-center gap-2">
                   Explore more &rarr;
                 </Link>
               </div>
@@ -182,7 +158,7 @@ export default function Home() {
           {/* Card 3: Blinds */}
           <FadeUp delay={0.3} className="h-full">
             <div className="bg-white p-4 md:p-6 shadow-sm flex flex-col h-full border border-gray-200 hover:shadow-md transition-shadow">
-              <Link href="/Service/blinds" className="relative w-full aspect-square mb-6 overflow-hidden bg-gray-100 block group">
+              <Link href="/service/blinds" className="relative w-full aspect-square mb-6 overflow-hidden bg-gray-100 block group">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10" />
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Blinds
@@ -193,7 +169,7 @@ export default function Home() {
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
                   Custom blind installations providing the perfect blend of privacy, light control, and modern design.
                 </p>
-                <Link href="/Service/blinds" className="mt-auto text-gray-900 font-medium hover:text-[#b7935b] transition-colors flex items-center gap-2">
+                <Link href="/service/blinds" className="mt-auto text-gray-900 font-medium hover:text-[#b7935b] transition-colors flex items-center gap-2">
                   Explore more &rarr;
                 </Link>
               </div>

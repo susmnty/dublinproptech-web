@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -18,38 +19,78 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
+// Background images for the slider
+const heroImages = [
+  "/snaglist.png", 
+  "/flooring.jpeg", 
+  "/Blinds.png", 
+  "/wall-panels-prep.png"
+];
+
 export default function SnaglistPage() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Changes the image every 6 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % heroImages.length);
+    }, 6000); 
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <main className="w-full bg-[#f0ede6] text-gray-900 selection:bg-[#b7935b] selection:text-white pb-0 overflow-x-hidden -mb-12 md:-mb-16">
       
-      {/* Hero Section */}
-      <section className="pt-24 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
-        <FadeUp>
-          <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block">Protect Your Investment</span>
-        </FadeUp>
+      {/* Hero Section with Integrated Slider */}
+      <section className="relative w-full min-h-[65vh] md:min-h-[75vh] flex flex-col items-center justify-center overflow-hidden bg-[#1a1814]">
         
-        <FadeUp delay={0.1}>
-          <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 leading-[1.1] mb-8 tracking-tight">
-            Meticulous <br /> Snagging Inspections.
-          </h1>
-        </FadeUp>
-        
-        <FadeUp delay={0.2}>
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            Don&apos;t settle for developer defects. Even the best new builds average over 100 hidden issues. Our comprehensive 300+ point inspections ensure your new Dublin home is finished to the absolute highest standard before you receive the keys.
-          </p>
-        </FadeUp>
-        
-        <FadeUp delay={0.3}>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/Service/contact" className="inline-block bg-[#1a1814] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors rounded-full shadow-md text-center">
-              Book Inspection
-            </Link>
-            <a href="#report-details" className="inline-block bg-white text-[#1a1814] border border-gray-200 px-8 py-4 font-bold tracking-widest uppercase text-sm hover:border-[#b7935b] transition-colors rounded-full shadow-sm text-center">
-              View Sample Report
-            </a>
-          </div>
-        </FadeUp>
+        {/* Background Sliding Images */}
+        <AnimatePresence mode="popLayout">
+          <motion.img
+            key={currentIndex}
+            src={heroImages[currentIndex]}
+            alt={`Snagging Service Background ${currentIndex + 1}`}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3, ease: "easeInOut" }} 
+          />
+        </AnimatePresence>
+
+        {/* Dark Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-black/50 z-10" />
+
+        {/* Hero Content (Floating on top) */}
+        <div className="relative z-20 pt-24 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
+          <FadeUp>
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block drop-shadow-md">Protect Your Investment</span>
+          </FadeUp>
+          
+          <FadeUp delay={0.1}>
+            <h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-8 tracking-tight drop-shadow-lg">
+              Meticulous <br /> Snagging Inspections.
+            </h1>
+          </FadeUp>
+          
+          <FadeUp delay={0.2}>
+            <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-medium leading-relaxed mb-10 drop-shadow-md">
+              Uncompromising detail, delivered exactly on time.<br />
+              We uncover over 100 hidden issues with our rigorous snagging report so your new home is flawlessly finished.
+            </p>
+          </FadeUp>
+          
+          <FadeUp delay={0.3}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/service/contact" className="inline-block bg-[#b7935b] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg text-center">
+                Book Inspection
+              </Link>
+              <a href="#report-details" className="inline-block bg-transparent text-white border border-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-sm text-center">
+                View Sample Report
+              </a>
+            </div>
+          </FadeUp>
+        </div>
       </section>
 
       {/* Trust & Features Banner */}
@@ -293,7 +334,7 @@ export default function SnaglistPage() {
           </div>
           
           <FadeUp delay={0.4} className="mt-20">
-             <Link href="/Service/contact" className="inline-block bg-[#b7935b] text-white px-12 py-5 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg">
+             <Link href="/service/contact" className="inline-block bg-[#b7935b] text-white px-12 py-5 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg">
               Secure Your Date
             </Link>
           </FadeUp>

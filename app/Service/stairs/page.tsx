@@ -36,13 +36,13 @@ export default function StairsPage() {
         
         <FadeUp delay={0.2}>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            Turn a structural necessity into a stunning architectural feature. We specialize in premium stair cladding, luxury carpet runners, custom nosing, and seamless transitions from hallway to landing.
+            We specialize in premium stair cladding, luxury carpet runners, custom nosing, and seamless transitions from hallway to landing.
           </p>
         </FadeUp>
         
         <FadeUp delay={0.3}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/Service/contact" className="inline-block bg-[#1a1814] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors rounded-full shadow-md text-center">
+            <Link href="/service/contact" className="inline-block bg-[#1a1814] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors rounded-full shadow-md text-center">
               Request a Quote
             </Link>
           </div>
@@ -131,7 +131,7 @@ export default function StairsPage() {
                 </div>
                 <h3 className="text-3xl font-serif font-bold text-white mb-3">Stair Cladding</h3>
                 <p className="text-gray-200 text-sm md:text-base mb-6 leading-relaxed">Clad your existing stairs in premium Engineered Wood, Laminate, or LVT to perfectly match your hallway flooring.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -146,7 +146,7 @@ export default function StairsPage() {
                 </div>
                 <h3 className="text-3xl font-serif font-bold text-white mb-3">Carpet Runners</h3>
                 <p className="text-gray-200 text-sm md:text-base mb-6 leading-relaxed">Bespoke carpet runners with taped or whipped edges, finished with high-end brass, chrome, or matte black stair rods.</p>
-                <Link href="/Service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
+                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
               </div>
             </div>
           </FadeUp>
@@ -168,7 +168,7 @@ export default function StairsPage() {
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>
               <p className="text-white text-2xl md:text-3xl lg:text-4xl font-serif leading-[1.6] max-w-2xl">
-                Exceptional precision, delivered exactly on time. We demand outstanding quality in every snagging report so your new home is flawlessly finished.
+                Exceptional craftsmanship, delivered exactly on time. We demand outstanding durability in every staircase installation so your space is flawlessly finished.
               </p>
             </FadeUp>
           </div>

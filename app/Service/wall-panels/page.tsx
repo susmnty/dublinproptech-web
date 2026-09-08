@@ -36,13 +36,13 @@ export default function WallPanelsPage() {
         
         <FadeUp delay={0.2}>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            From acoustic slatted wood that transforms your living room, to 100% waterproof, seamless SPC panels that replace bathroom tiles. We install striking, zero-maintenance surfaces.
+            From acoustic slatted wood that transforms your living room, to 100% waterproof, seamless SPC panels that replace bathroom tiles.
           </p>
         </FadeUp>
         
         <FadeUp delay={0.3}>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/Service/contact" className="inline-block bg-[#1a1814] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors rounded-full shadow-md text-center">
+            <Link href="/service/contact" className="inline-block bg-[#1a1814] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors rounded-full shadow-md text-center">
               Request a Quote
             </Link>
           </div>
@@ -124,7 +124,7 @@ export default function WallPanelsPage() {
                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
               </svg>
               <p className="text-white text-2xl md:text-3xl lg:text-4xl font-serif leading-[1.6] max-w-2xl">
-                Exceptional precision, delivered exactly on time. We demand outstanding quality in every snagging report so your new home is flawlessly finished.
+                Exceptional craftsmanship, delivered exactly on time. We demand outstanding durability in every wall panel fit-out so your space is flawlessly finished.
               </p>
             </FadeUp>
           </div>
