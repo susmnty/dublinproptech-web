@@ -16,10 +16,10 @@ export default function PrivacyPolicy() {
           <div className="text-gray-600 space-y-6 leading-relaxed">
             <p><strong>Last Updated:</strong> September 2026</p>
             
-            <p>Dublin Proptech ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by Dublin Proptech in compliance with the General Data Protection Regulation (GDPR).</p>
+            <p>Dublin Proptech ("we", "our", or "us"), operating under the developer name <strong>Anil Kumar Nayak</strong>, is committed to protecting your privacy. This Privacy Policy applies to our website services as well as our mobile application, <strong>Floor Measure</strong>. It explains how your personal information is collected, used, and disclosed in compliance with the General Data Protection Regulation (GDPR).</p>
             
             <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">Information We Collect</h2>
-            <p>We only collect information that you voluntarily provide to us when expressing an interest in obtaining information about our services (Snagging, Flooring, Blinds) or when contacting us via our website forms. The personal information we collect may include:</p>
+            <p>We collect information that you voluntarily provide to us when expressing an interest in our services, when contacting us via our website forms, or when using our mobile application, <strong>Floor Measure</strong>. The personal information we collect may include:</p>
             <ul className="list-disc pl-6 space-y-2">
               <li>First and Last Name</li>
               <li>Email Address</li>
@@ -37,7 +37,7 @@ export default function PrivacyPolicy() {
               <li>Request portability of your Personal Data.</li>
             </ul>
             
-            <p>To exercise any of these rights, please contact us directly at <strong>info@dublinproptech.com</strong>.</p>
+            <p>To exercise any of these rights, please contact us directly at <strong>dublinproptech@gmail.com</strong>.</p>
           </div>
         </div>
       </div>
