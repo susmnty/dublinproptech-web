@@ -18,8 +18,8 @@ export default function RootLayout({
       <body className="antialiased bg-white text-black flex flex-col min-h-screen">
         
         {/* Navigation */}
-        <nav className="flex justify-between items-center p-6 border-b border-gray-200 max-w-6xl mx-auto w-full">
-          <Link href="/" className="flex items-center">
+        <nav className="flex flex-col md:flex-row justify-between items-center gap-4 p-4 md:p-6 border-b border-gray-200 max-w-6xl mx-auto w-full">
+          <Link href="/" className="flex items-center shrink-0">
             {/* Make sure to place your actual logo file (e.g., logo.png) in the public folder */}
             <Image 
               src="/logo.png" 
@@ -31,7 +31,7 @@ export default function RootLayout({
             />
           </Link>
           
-          <div className="flex gap-6 text-lg font-semibold text-gray-800">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-base md:text-lg font-semibold text-gray-800">
             {/* Added Home Link Here */}
             <Link href="/" className="hover:text-[#b7935b] transition-colors">Home</Link>
             <Link href="/service/flooring" className="hover:text-[#b7935b] transition-colors">Flooring</Link>
@@ -51,7 +51,7 @@ export default function RootLayout({
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             
             {/* Logo Section */}
-            <div className="mb-6">
+            <div className="mb-6 flex justify-center md:justify-start">
               <Image 
                 src="/logo.png" 
                 alt="Dublin PropTech" 
@@ -65,7 +65,7 @@ export default function RootLayout({
             <div className="border-t border-gray-700 mb-10"></div>
 
             {/* Columns Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mb-16 text-center sm:text-left">
               
               {/* Column 1: Contact us */}
               <div className="flex flex-col gap-4 text-[15px]">
@@ -74,7 +74,7 @@ export default function RootLayout({
                 <span className="text-gray-300">dublinproptech@gmail.com</span>
                 
                 {/* Social Media Icons */}
-                <div className="flex gap-6 mt-4 text-white">
+                <div className="flex justify-center sm:justify-start gap-6 mt-4 text-white">
                   <a href="https://www.instagram.com/dublinproptech/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#b7935b] transition-colors">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                   </a>
@@ -110,7 +110,7 @@ export default function RootLayout({
             </div>
 
             {/* Bottom Divider & Legal Links */}
-            <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row gap-6 text-[14px] text-gray-400">
+            <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-center md:justify-start gap-4 md:gap-6 text-[14px] text-gray-400 text-center md:text-left">
               <Link href="/cookie-policy" className="hover:text-white underline underline-offset-4">Cookie Policy</Link>
               <Link href="/privacy-policy" className="hover:text-white underline underline-offset-4">Legal & privacy</Link>
               <Link href="/terms-conditions" className="hover:text-white underline underline-offset-4">Terms & conditions</Link>
