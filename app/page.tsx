@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
 import { useState, useEffect, useRef } from "react";
 import HeroSlider from "./components/HeroSlider"; // <-- SLIDER IMPORTED HERE
 
@@ -95,10 +96,14 @@ export default function Home() {
             <span className="text-gray-600 font-medium text-sm">Years of Experience</span>
           </FadeUp>
           <FadeUp delay={0.7} className="flex flex-col border-l border-gray-200 pl-6">
-            <span className="text-[4rem] font-light text-[#b7935b] leading-none mb-3 tracking-tighter">
-              <AnimatedCounter to={40} />+
-            </span>
-            <span className="text-gray-600 font-medium text-sm">5-Star Reviews</span>
+            <Link href="/reviews" className="flex flex-col group cursor-pointer touch-manipulation active:opacity-70">
+              <span className="text-[4rem] font-light text-[#b7935b] leading-none mb-3 tracking-tighter group-hover:opacity-80 transition-opacity">
+                <AnimatedCounter to={40} />+
+              </span>
+              <span className="text-gray-600 font-medium text-sm underline decoration-gray-300 underline-offset-4 group-hover:decoration-[#b7935b] transition-colors">
+                5-Star Reviews
+              </span>
+            </Link>
           </FadeUp>
         </div>
       </section>
@@ -260,6 +265,13 @@ export default function Home() {
         </FadeUp>
       </section>
 
+      {/* Compact Reviews Carousel */}
+      <section className="px-4 md:px-6 max-w-5xl mx-auto w-full mb-20">
+        <FadeUp>
+          <div className="elfsight-app-6086c492-1131-4b31-b55f-06e7d2b57d8d" data-elfsight-app-lazy></div>
+        </FadeUp>
+      </section>
+
       {/* Contact Section */}
       <section className="px-4 md:px-6 max-w-4xl mx-auto w-full">
         <FadeUp>
@@ -299,6 +311,8 @@ export default function Home() {
           </div>
         </FadeUp>
       </section>
+
+      <Script src="https://elfsightcdn.com/platform.js" strategy="lazyOnload" />
 
     </main>
   );
