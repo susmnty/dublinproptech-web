@@ -24,54 +24,34 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus("Sending...");
 
-    // 1. Save the form reference IMMEDIATELY before any 'await' happens
     const form = e.currentTarget;
-
-    // Use the saved 'form' variable here
     const formData = new FormData(form);
-    const object = Object.fromEntries(formData.entries());
-    const json = JSON.stringify(object);
+
+    const payload = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      phone: formData.get("phone") || "",
+      message: formData.get("message"),
+    };
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
         },
-        body: json
+        body: JSON.stringify(payload),
       });
 
-      // Grab the raw text response first
-      const rawText = await response.text();
-      let data;
-      
-      try {
-        // Try to read it as JSON
-        data = JSON.parse(rawText);
-      } catch (err) {
-        // If it fails to read as JSON but the server said "200 OK", the email still sent!
-        if (response.ok) {
-          setStatus("Message Sent!");
-          form.reset(); // Use saved form reference
-          setTimeout(() => setStatus("Submit Request"), 3000);
-          return;
-        }
-      }
-
-      // Standard success check
-      if (data && data.success) {
+      if (response.ok) {
         setStatus("Message Sent!");
-        form.reset(); // Use saved form reference
-      } else if (response.ok) {
-         // Fallback success
-         setStatus("Message Sent!");
-         form.reset(); // Use saved form reference
+        form.reset();
       } else {
         setStatus("Error. Try Again.");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Submission error:", error);
       setStatus("Error. Try Again.");
     }
 
@@ -123,34 +103,72 @@ export default function ContactPage() {
               <h2 className="text-3xl font-serif font-bold text-gray-900 mb-10">Send us a message</h2>
               
               <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-                {/* Web3Forms required access key input */}
-                <input type="hidden" name="access_key" value="91c32c02-f485-4f5f-b8d8-af16516ae3f6" />
-                
-                {/* Web3Forms Spam Protection Honeypot */}
-                <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
-                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="flex flex-col gap-2 group">
                     <label htmlFor="firstName" className="text-xs font-bold text-gray-500 uppercase tracking-widest group-focus-within:text-[#b7935b] transition-colors">First Name</label>
-                    <input type="text" id="firstName" name="First Name" required className="bg-transparent border-b-2 border-gray-100 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 font-medium" placeholder="Your first name"/>
+                    <input 
+                      type="text" 
+                      id="firstName" 
+                      name="firstName" 
+                      required 
+                      className="bg-transparent border-b-2 border-gray-100 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 font-medium" 
+                      placeholder="Your first name"
+                    />
                   </div>
                   <div className="flex flex-col gap-2 group">
                     <label htmlFor="lastName" className="text-xs font-bold text-gray-500 uppercase tracking-widest group-focus-within:text-[#b7935b] transition-colors">Last Name</label>
-                    <input type="text" id="lastName" name="Last Name" required className="bg-transparent border-b-2 border-gray-100 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 font-medium" placeholder="Your last name"/>
+                    <input 
+                      type="text" 
+                      id="lastName" 
+                      name="lastName" 
+                      required 
+                      className="bg-transparent border-b-2 border-gray-100 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 font-medium" 
+                      placeholder="Your last name"
+                    />
                   </div>
                 </div>
-                
-                <div className="flex flex-col gap-2 group">
-                  <label htmlFor="email" className="text-xs font-bold text-gray-500 uppercase tracking-widest group-focus-within:text-[#b7935b] transition-colors">Email Address</label>
-                  <input type="email" id="email" name="email" required className="bg-transparent border-b-2 border-gray-100 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 font-medium" placeholder="your.email@example.com"/>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="flex flex-col gap-2 group">
+                    <label htmlFor="email" className="text-xs font-bold text-gray-500 uppercase tracking-widest group-focus-within:text-[#b7935b] transition-colors">Email Address</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email" 
+                      required 
+                      className="bg-transparent border-b-2 border-gray-100 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 font-medium" 
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2 group">
+                    <label htmlFor="phone" className="text-xs font-bold text-gray-500 uppercase tracking-widest group-focus-within:text-[#b7935b] transition-colors">Phone Number</label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      name="phone" 
+                      className="bg-transparent border-b-2 border-gray-100 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 font-medium" 
+                      placeholder="+353 ..."
+                    />
+                  </div>
                 </div>
                 
                 <div className="flex flex-col gap-2 group">
                   <label htmlFor="message" className="text-xs font-bold text-gray-500 uppercase tracking-widest group-focus-within:text-[#b7935b] transition-colors">How can we help?</label>
-                  <textarea id="message" name="Message" rows={5} required className="bg-transparent border-b-2 border-gray-100 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 font-medium resize-none" placeholder="Tell us about your services..."></textarea>
+                  <textarea 
+                    id="message" 
+                    name="message" 
+                    rows={5} 
+                    required 
+                    className="bg-transparent border-b-2 border-gray-100 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 font-medium resize-none" 
+                    placeholder="Tell us about your services..."
+                  ></textarea>
                 </div>
                 
-                <button type="submit" disabled={status === "Sending..."} className="mt-4 bg-[#1a1814] text-white px-8 py-5 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors self-start shadow-md rounded-full w-full md:w-auto text-center disabled:opacity-50">
+                <button 
+                  type="submit" 
+                  disabled={status === "Sending..."} 
+                  className="mt-4 bg-[#1a1814] text-white px-8 py-5 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors self-start shadow-md rounded-full w-full md:w-auto text-center disabled:opacity-50"
+                >
                   {status}
                 </button>
               </form>
