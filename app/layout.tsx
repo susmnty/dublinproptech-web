@@ -36,7 +36,8 @@ export default function RootLayout({
             <Link href="/" className="hover:text-[#b7935b] transition-colors">Home</Link>
             <Link href="/service/flooring" className="hover:text-[#b7935b] transition-colors">Flooring</Link>
             <Link href="/service/snaglist" className="hover:text-[#b7935b] transition-colors">Snaglist</Link>
-            <Link href="/service/blinds" className="hover:text-[#b7935b] transition-colors">Blinds</Link>
+            {/* Blinds link now opens in a new tab */}
+            <Link href="https://luxblinds.ie/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b7935b] transition-colors">Blinds</Link>
             <Link href="/service/contact" className="hover:text-[#b7935b] transition-colors">Contact</Link>
           </div>
         </nav>
@@ -97,6 +98,8 @@ export default function RootLayout({
               <div className="flex flex-col gap-4 text-[15px]">
                 <h4 className="font-bold text-white text-base mb-1">About</h4>
                 <Link href="/" className="text-gray-300 hover:text-white transition-colors">Dublin Proptech</Link>
+                {/* REVIEWS LINK ADDED HERE */}
+                <Link href="/reviews" className="text-gray-300 hover:text-white transition-colors">Reviews</Link>
               </div>
 
               {/* Column 4: Services */}
@@ -104,7 +107,7 @@ export default function RootLayout({
                 <h4 className="font-bold text-white text-base mb-1">Services</h4>
                 <Link href="/service/flooring" className="text-gray-300 hover:text-white transition-colors">Premium Flooring</Link>
                 <Link href="/service/snaglist" className="text-gray-300 hover:text-white transition-colors">Snagging Inspections</Link>
-                <Link href="/service/blinds" className="text-gray-300 hover:text-white transition-colors">Custom Blinds</Link>
+                <Link href="https://luxblinds.ie/" className="text-gray-300 hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">Custom Blinds</Link>
               </div>
 
             </div>

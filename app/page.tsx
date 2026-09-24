@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
 import { useState, useEffect, useRef } from "react";
-import HeroSlider from "./components/HeroSlider"; // <-- SLIDER IMPORTED HERE
+import HeroSlider from "./components/HeroSlider";
 
 // Fade up animation wrapper
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
@@ -58,8 +58,10 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900 selection:bg-gray-900 selection:text-white pb-1 font-sans overflow-x-hidden">
       
-      {/* 4-Image Slider added right at the top (now contains the text overlay!) */}
-      <HeroSlider />
+      {/* 4-Image Slider added right at the top - Social icons are inside this component now! */}
+      <div className="relative w-full">
+        <HeroSlider />
+      </div>
       
       {/* Transform Spaces / Animated Stats Section */}
       <section className="px-6 max-w-6xl mx-auto w-full py-12 mt-4 border-t border-gray-100">
@@ -160,23 +162,23 @@ export default function Home() {
             </div>
           </FadeUp>
 
-          {/* Card 3: Blinds */}
+          {/* Card 3: Blinds - external redirect to luxblinds.ie */}
           <FadeUp delay={0.3} className="h-full">
             <div className="bg-white p-4 md:p-6 shadow-sm flex flex-col h-full border border-gray-200 hover:shadow-md transition-shadow">
-              <Link href="/service/blinds" className="relative w-full aspect-square mb-6 overflow-hidden bg-gray-100 block group">
+              <a href="https://luxblinds.ie/" target="_blank" rel="noopener noreferrer" className="relative w-full aspect-square mb-6 overflow-hidden bg-gray-100 block group">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10" />
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Blinds
                 </h3>
                 <Image src="/Blinds.png" alt="Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
-              </Link>
+              </a>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
                   Custom blind installations providing the perfect blend of privacy, light control, and modern design.
                 </p>
-                <Link href="/service/blinds" className="mt-auto text-gray-900 font-medium hover:text-[#b7935b] transition-colors flex items-center gap-2">
+                <a href="https://luxblinds.ie/" target="_blank" rel="noopener noreferrer" className="mt-auto text-gray-900 font-medium hover:text-[#b7935b] transition-colors flex items-center gap-2">
                   Explore more &rarr;
-                </Link>
+                </a>
               </div>
             </div>
           </FadeUp>
@@ -273,7 +275,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="px-4 md:px-6 max-w-4xl mx-auto w-full">
+      <section className="px-4 md:px-6 max-w-4xl mx-auto w-full mb-20">
         <FadeUp>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-12 text-center tracking-tight">
             Get in Touch
