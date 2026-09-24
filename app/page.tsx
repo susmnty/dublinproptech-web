@@ -246,6 +246,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Instagram Feed - MOVED HERE */}
+      <section className="px-4 md:px-6 max-w-5xl mx-auto w-full mb-32 text-center">
+        <FadeUp>
+          {/* Made "Discover" exactly match "Why Choose Us?" sizing */}
+          <h2 className="text-5xl md:text-[3.5rem] font-serif font-bold text-gray-800 mb-20 tracking-tight">
+            Discover
+          </h2>
+          {/* Removed lazy loading tag to force display */}
+          <div className="elfsight-app-b2db6c3f-151d-46a5-87e0-a1d8e3bc34b7"></div>
+        </FadeUp>
+      </section>
+
       {/* Split Image / Quote Section */}
       <section className="px-4 md:px-6 max-w-[1400px] mx-auto w-full mb-32">
         <FadeUp>
@@ -268,9 +280,10 @@ export default function Home() {
       </section>
 
       {/* Compact Reviews Carousel */}
-      <section className="px-4 md:px-6 max-w-5xl mx-auto w-full mb-20">
+      <section className="px-4 md:px-6 max-w-5xl mx-auto w-full mb-20 text-center">
         <FadeUp>
-          <div className="elfsight-app-6086c492-1131-4b31-b55f-06e7d2b57d8d" data-elfsight-app-lazy></div>
+          {/* Removed lazy loading tag to force display */}
+          <div className="elfsight-app-6086c492-1131-4b31-b55f-06e7d2b57d8d"></div>
         </FadeUp>
       </section>
 
@@ -314,7 +327,8 @@ export default function Home() {
         </FadeUp>
       </section>
 
-      <Script src="https://elfsightcdn.com/platform.js" strategy="lazyOnload" />
+      {/* Updated Script tag for Elfsight using afterInteractive */}
+      <Script src="https://static.elfsight.com/platform/platform.js" strategy="afterInteractive" />
 
     </main>
   );
