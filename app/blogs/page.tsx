@@ -13,7 +13,7 @@ export default async function BlogIndexPage() {
   return (
     <main className="min-h-screen bg-[#faf9f5] text-gray-900 pb-24 font-sans">
       
-      {/* Top Header Section - Cleaned up and brightened text */}
+      {/* Top Header Section */}
       <section className="bg-[#1a1814] text-white py-24 px-6 text-center border-b border-[#2a261f]">
         <div className="max-w-3xl mx-auto">
           <span className="text-[#b7935b] font-bold tracking-widest uppercase text-xs mb-4 block">Dublin PropTech Journal</span>
@@ -47,7 +47,7 @@ export default async function BlogIndexPage() {
           <div className="space-y-6">
             {blogs.map((blog: any, index: number) => (
               <Link 
-                href={`/blog/${blog.slug}`} 
+                href={`/blogs/${blog.slug}`} 
                 key={blog.id || index} 
                 className="group flex flex-col sm:flex-row items-stretch bg-white rounded-2xl overflow-hidden border border-gray-200/80 shadow-[0_2px_15px_rgba(0,0,0,0.02)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1"
               >

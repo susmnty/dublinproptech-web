@@ -5,8 +5,8 @@ import Link from "next/link";
 // Required for static export to generate pages for each Notion blog slug
 export async function generateStaticParams() {
   const blogs = await getAllBlogs();
-  return blogs.map((blog: any) => ({
-    slug: blog.slug,
+  return blogs.map((blogs: any) => ({
+    slug: blogs.slug,
   }));
 }
 
@@ -23,7 +23,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <main className="min-h-screen bg-white text-gray-900 pb-24 font-sans">
       {/* Back to Blog Button */}
       <div className="max-w-4xl mx-auto px-6 pt-12">
-        <Link href="/blog" className="text-sm font-semibold text-[#b7935b] hover:underline flex items-center gap-2">
+        <Link href="/blogs" className="text-sm font-semibold text-[#b7935b] hover:underline flex items-center gap-2">
           &larr; Back to all articles
         </Link>
       </div>

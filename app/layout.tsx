@@ -82,7 +82,7 @@ export default function RootLayout({
                 <h4 className="font-bold text-white text-base mb-1">About</h4>
                 <Link href="/" className="text-gray-300 hover:text-white transition-colors">Dublin Proptech</Link>
                 <Link href="/reviews" className="text-gray-300 hover:text-white transition-colors">Reviews</Link>
-                <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">Blogs</Link>
+                <Link href="/blogs" className="text-gray-300 hover:text-white transition-colors">Blogs</Link>
               </div>
 
               {/* Column 4: Services */}

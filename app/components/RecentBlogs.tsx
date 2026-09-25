@@ -18,7 +18,7 @@ export default async function RecentBlogs() {
           <span className="text-xs font-bold tracking-widest uppercase text-[#b7935b] mb-1 block">Expert Advice</span>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 tracking-tight">Latest Insights.</h2>
         </div>
-        <Link href="/blog" className="text-sm font-semibold text-gray-900 hover:text-[#b7935b] transition-colors flex items-center gap-1">
+        <Link href="/blogs" className="text-sm font-semibold text-gray-900 hover:text-[#b7935b] transition-colors flex items-center gap-1">
           View all articles &rarr;
         </Link>
       </div>
@@ -28,7 +28,7 @@ export default async function RecentBlogs() {
         {blogs.map((blog: any) => (
           <Link 
             key={blog.slug} 
-            href={`/blog/${blog.slug}`}
+            href={`/blogs/${blog.slug}`}
             className="group w-[320px] md:w-[360px] flex-shrink-0 snap-start bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col"
           >
             {/* Blog Cover Image */}
