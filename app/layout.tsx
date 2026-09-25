@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import "./globals.css";
 import RecentBlogs from "./components/RecentBlogs";
+import Navbar from "./components/Navbar"; // <-- Imported the new Navbar component
 
 export const metadata: Metadata = {
   title: "Dublin Proptech",
@@ -18,27 +19,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased bg-white text-black flex flex-col min-h-screen">
         
-        {/* Exact Header matching dublinproptech.com */}
-        <nav className="w-full bg-white border-b border-gray-200 py-6 px-6 md:px-20 flex justify-between items-center">
-          <Link href="/" className="flex items-center shrink-0">
-            <Image 
-              src="/logo.png" 
-              alt="Dublin PropTech Logo" 
-              width={130} 
-              height={50} 
-              className="w-[195px] md:w-[120px] h-auto object-contain"
-              priority
-            />
-          </Link>
-          
-          <div className="flex items-center gap-x-4 text-base md:text-lg font-bold text-gray-900">
-            <Link href="/" className="hover:text-[#b7935b] transition-colors">Home</Link>
-            <Link href="/service/flooring" className="hover:text-[#b7935b] transition-colors">Flooring</Link>
-            <Link href="/service/snaglist" className="hover:text-[#b7935b] transition-colors">Snaglist</Link>
-            <Link href="https://luxblinds.ie/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b7935b] transition-colors">Blinds</Link>
-            <Link href="/service/contact" className="hover:text-[#b7935b] transition-colors">Contact</Link>
-          </div>
-        </nav>
+        {/* Responsive Mobile & Desktop Navbar */}
+        <Navbar />
         
         {/* Main Content Area */}
         <div className="w-full flex-grow">
