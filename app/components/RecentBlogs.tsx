@@ -10,7 +10,7 @@ export default async function RecentBlogs() {
   }
 
   return (
-    <section className="px-6 md:px-12 max-w-7xl mx-auto w-full py-1 border-t border-gray-100">
+    <section className="px-6 max-w-7xl mx-auto w-full pt-12 pb-10 border-t border-gray-100 mt-0 bg-white">
       
       {/* Section Header */}
       <div className="flex justify-between items-end mb-8">
