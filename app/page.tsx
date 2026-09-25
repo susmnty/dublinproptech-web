@@ -217,7 +217,7 @@ export default function Home() {
               </a>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
-                  Custom blind installations providing the perfect blend of privacy, light control, and modern design.
+                  Custom blind installations providing the perfect blend of privacy, light control, and modern design by luxblinds.
                 </p>
                 <a href="https://luxblinds.ie/" target="_blank" rel="noopener noreferrer" className="mt-auto text-gray-900 font-medium hover:text-[#b7935b] transition-colors flex items-center gap-2">
                   Explore more &rarr;
