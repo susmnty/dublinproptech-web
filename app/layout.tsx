@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import "./globals.css";
+import RecentBlogs from "./components/RecentBlogs";
 
 export const metadata: Metadata = {
   title: "Dublin Proptech",
@@ -17,26 +18,23 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased bg-white text-black flex flex-col min-h-screen">
         
-        {/* Navigation */}
-        <nav className="flex flex-col md:flex-row justify-between items-center gap-4 p-4 md:p-6 border-b border-gray-200 max-w-6xl mx-auto w-full">
+        {/* Exact Header matching dublinproptech.com */}
+        <nav className="w-full bg-white border-b border-gray-200 py-6 px-6 md:px-20 flex justify-between items-center">
           <Link href="/" className="flex items-center shrink-0">
-            {/* Make sure to place your actual logo file (e.g., logo.png) in the public folder */}
             <Image 
               src="/logo.png" 
               alt="Dublin PropTech Logo" 
-              width={120} 
-              height={60} 
-              className="object-contain"
+              width={130} 
+              height={50} 
+              className="w-[195px] md:w-[120px] h-auto object-contain"
               priority
             />
           </Link>
           
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-base md:text-lg font-semibold text-gray-800">
-            {/* Added Home Link Here */}
+          <div className="flex items-center gap-x-4 text-base md:text-lg font-bold text-gray-900">
             <Link href="/" className="hover:text-[#b7935b] transition-colors">Home</Link>
             <Link href="/service/flooring" className="hover:text-[#b7935b] transition-colors">Flooring</Link>
             <Link href="/service/snaglist" className="hover:text-[#b7935b] transition-colors">Snaglist</Link>
-            {/* Blinds link now opens in a new tab */}
             <Link href="https://luxblinds.ie/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b7935b] transition-colors">Blinds</Link>
             <Link href="/service/contact" className="hover:text-[#b7935b] transition-colors">Contact</Link>
           </div>
@@ -47,17 +45,20 @@ export default function RootLayout({
           {children}
         </div>
 
+        {/* NOTION BLOGS COMPONENT */}
+        <RecentBlogs />
+
         {/* Global Footer */}
         <footer className="bg-[#1a1814] text-white pt-14 pb-8 w-full mt-10 font-sans">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="max-w-7xl mx-auto px-6 md:px-10">
             
             {/* Logo Section */}
             <div className="mb-6 flex justify-center md:justify-start">
               <Image 
                 src="/logo.png" 
                 alt="Dublin PropTech" 
-                width={180} 
-                height={60} 
+                width={240} 
+                height={100} 
                 className="w-[180px] h-auto object-contain brightness-0 invert" 
               />
             </div>
@@ -98,8 +99,8 @@ export default function RootLayout({
               <div className="flex flex-col gap-4 text-[15px]">
                 <h4 className="font-bold text-white text-base mb-1">About</h4>
                 <Link href="/" className="text-gray-300 hover:text-white transition-colors">Dublin Proptech</Link>
-                {/* REVIEWS LINK ADDED HERE */}
                 <Link href="/reviews" className="text-gray-300 hover:text-white transition-colors">Reviews</Link>
+                <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">Blogs</Link>
               </div>
 
               {/* Column 4: Services */}

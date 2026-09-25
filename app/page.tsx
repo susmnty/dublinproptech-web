@@ -55,6 +55,49 @@ function AnimatedCounter({ to }: { to: number }) {
 }
 
 export default function Home() {
+  // Added HubSpot / Custom API Form State and Handler
+  const [status, setStatus] = useState("Send Message");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("Sending...");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const payload = {
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
+      email: formData.get("email"),
+      phone: formData.get("phone") || "",
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        setStatus("Message Sent!");
+        form.reset();
+      } else {
+        setStatus("Error. Try Again.");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStatus("Error. Try Again.");
+    }
+
+    setTimeout(() => {
+      setStatus("Send Message");
+    }, 3000);
+  };
+
   return (
     <main className="min-h-screen bg-white text-gray-900 selection:bg-gray-900 selection:text-white pb-1 font-sans overflow-x-hidden">
       
@@ -246,14 +289,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Instagram Feed - MOVED HERE */}
+      {/* Instagram Feed */}
       <section className="px-4 md:px-6 max-w-5xl mx-auto w-full mb-32 text-center">
         <FadeUp>
-          {/* Made "Discover" exactly match "Why Choose Us?" sizing */}
           <h2 className="text-5xl md:text-[3.5rem] font-serif font-bold text-gray-800 mb-20 tracking-tight">
             Discover
           </h2>
-          {/* Removed lazy loading tag to force display */}
           <div className="elfsight-app-b2db6c3f-151d-46a5-87e0-a1d8e3bc34b7"></div>
         </FadeUp>
       </section>
@@ -282,12 +323,11 @@ export default function Home() {
       {/* Compact Reviews Carousel */}
       <section className="px-4 md:px-6 max-w-5xl mx-auto w-full mb-20 text-center">
         <FadeUp>
-          {/* Removed lazy loading tag to force display */}
           <div className="elfsight-app-6086c492-1131-4b31-b55f-06e7d2b57d8d"></div>
         </FadeUp>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact Section WITH HUBSPOT INTEGRATION */}
       <section className="px-4 md:px-6 max-w-4xl mx-auto w-full mb-20">
         <FadeUp>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-12 text-center tracking-tight">
@@ -295,39 +335,41 @@ export default function Home() {
           </h2>
           
           <div className="bg-white border border-gray-200 rounded-xl p-8 md:p-12 shadow-sm relative overflow-hidden">
-            <form action="https://api.web3forms.com/submit" method="POST" className="flex flex-col gap-6 relative z-10">
-              <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="firstName" className="text-sm font-semibold text-gray-600 uppercase tracking-wider">First Name</label>
-                  <input type="text" id="firstName" name="First Name" required className="bg-transparent border-b border-gray-200 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900" placeholder="your first name" />
+                  <input type="text" id="firstName" name="firstName" required className="bg-transparent border-b border-gray-200 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900" placeholder="your first name" />
                 </div>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="lastName" className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Last Name</label>
-                  <input type="text" id="lastName" name="Last Name" required className="bg-transparent border-b border-gray-200 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900" placeholder="your last name" />
+                  <input type="text" id="lastName" name="lastName" required className="bg-transparent border-b border-gray-200 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900" placeholder="your last name" />
                 </div>
               </div>
               
               <div className="flex flex-col gap-2">
                 <label htmlFor="email" className="text-sm font-semibold text-gray-600 uppercase tracking-wider">Email Address</label>
-                <input type="email" id="email" name="Email" required className="bg-transparent border-b border-gray-200 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900" placeholder="your@example.com" />
+                <input type="email" id="email" name="email" required className="bg-transparent border-b border-gray-200 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900" placeholder="your@example.com" />
               </div>
               
               <div className="flex flex-col gap-2">
                 <label htmlFor="message" className="text-sm font-semibold text-gray-600 uppercase tracking-wider">How can we help?</label>
-                <textarea id="message" name="Message" rows={4} required className="bg-transparent border-b border-gray-200 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 resize-none" placeholder="Tell us about your required services..."></textarea>
+                <textarea id="message" name="message" rows={4} required className="bg-transparent border-b border-gray-200 py-3 w-full focus:outline-none focus:border-[#b7935b] transition-colors text-gray-900 resize-none" placeholder="Tell us about your required services..."></textarea>
               </div>
               
-              <button type="submit" className="mt-6 bg-[#b7935b] text-white px-8 py-4 font-semibold tracking-wide hover:bg-[#a0804f] transition-colors self-start shadow-sm rounded-md">
-                Send Message
+              <button 
+                type="submit" 
+                disabled={status === "Sending..."}
+                className="mt-6 bg-[#b7935b] text-white px-8 py-4 font-semibold tracking-wide hover:bg-[#a0804f] transition-colors self-start shadow-sm rounded-md disabled:opacity-50"
+              >
+                {status}
               </button>
             </form>
           </div>
         </FadeUp>
       </section>
 
-      {/* Updated Script tag for Elfsight using afterInteractive */}
       <Script src="https://static.elfsight.com/platform/platform.js" strategy="afterInteractive" />
 
     </main>
