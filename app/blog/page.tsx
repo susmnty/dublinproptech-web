@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getAllBlogs } from "../lib/blogs";
 
 export const metadata = {
-  title: "Expert Insights & Articles | Dublin PropTech",
+  title: "Insights & Articles | Dublin PropTech",
   description: "Read our latest expert guides on property snagging, premium flooring, and new build tips in Dublin.",
 };
 
@@ -17,9 +17,9 @@ export default async function BlogIndexPage() {
       <section className="bg-[#1a1814] text-white py-24 px-6 text-center border-b border-[#2a261f]">
         <div className="max-w-3xl mx-auto">
           <span className="text-[#b7935b] font-bold tracking-widest uppercase text-xs mb-4 block">Dublin PropTech Journal</span>
-          <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight mb-6 text-white">Expert Insights & Articles</h1>
+          <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight mb-6 text-white">Insights & Articles</h1>
           <p className="text-gray-300 text-base md:text-lg max-w-xl mx-auto font-normal leading-relaxed">
-            Guides, tips, and industry standards for new build homeowners in Ireland.
+            Guides, tips, and many more for new build homeowners in Ireland.
           </p>
         </div>
       </section>
