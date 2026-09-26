@@ -5,8 +5,8 @@ import Link from "next/link";
 // Required for static export to generate pages for each Notion blog slug
 export async function generateStaticParams() {
   const blogs = await getAllBlogs();
-  return blogs.map((blogs: any) => ({
-    slug: blogs.slug,
+  return blogs.map((blog: any) => ({
+    slug: blog.slug,
   }));
 }
 
