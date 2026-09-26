@@ -62,13 +62,13 @@ export default function HerringbonePage() {
                 </div>
                 <div>
                   <h4 className="text-xl font-serif font-bold text-gray-900 mb-2">The Chevron Pattern</h4>
-                  <p className="text-gray-600 leading-relaxed">Cut at a perfect angle to create a continuous \"V\" shape. Chevron flooring delivers a sharper, more contemporary geometric flow that draws the eye and elevates modern interiors.</p>
+                  <p className="text-gray-600 leading-relaxed">Cut at a perfect angle to create a continuous "V" shape. Chevron flooring delivers a sharper, more contemporary geometric flow that draws the eye and elevates modern interiors.</p>
                 </div>
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              {/* Ensure you have an image named herringbone-detail.jpg in your public folder, or change this src */}
-              <Image src="/herringbone-detail.png" alt="Herringbone Floor Detail" fill className="object-cover" unoptimized priority />
+              {/* Added priority tag here to fix the LCP warning */}
+              <Image src="/herringbone-detail.png" alt="Herringbone Floor Detail" fill className="object-cover" priority />
             </div>
           </div>
         </FadeUp>

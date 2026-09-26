@@ -170,7 +170,7 @@ export default function SnaglistPage() {
           <div className="flex flex-col md:flex-row-reverse w-full overflow-hidden bg-white border border-gray-200 rounded-2xl shadow-sm">
             <div className="w-full md:w-1/2 p-12 md:p-20 flex flex-col justify-center">
               <span className="text-[#b7935b] font-bold tracking-widest uppercase text-sm mb-4 block">Hold Developers Accountable</span>
-              <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 leading-tight">New doesn&apos;t always mean flawless.</h2>
+              <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 leading-tight">New doesn't always mean flawless.</h2>
               
               <div className="mt-8 space-y-6">
                 <p className="text-gray-600 leading-relaxed text-lg">
@@ -193,7 +193,7 @@ export default function SnaglistPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/snagging-inspection.png" alt="Professional Snagging Inspection" fill className="object-cover" unoptimized priority />
+              <Image src="/snagging-inspection.png" alt="Professional Snagging Inspection" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -240,7 +240,7 @@ export default function SnaglistPage() {
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
               </div>
               <div>
-                <h4 className="font-serif font-bold text-xl md:text-2xl tracking-wide mb-2">Snaglist Specialist - Dublin&apos;s #1</h4>
+                <h4 className="font-serif font-bold text-xl md:text-2xl tracking-wide mb-2">Snaglist Specialist - Dublin's #1</h4>
                 <div className="flex flex-col gap-2">
                   <p className="text-gray-300 flex items-center justify-center md:justify-start gap-2">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -343,7 +343,8 @@ export default function SnaglistPage() {
           </div>
           <div className="w-full md:w-1/2">
             <FadeUp delay={0.2} className="relative w-full aspect-[4/3] shadow-2xl rounded-xl overflow-hidden bg-[#1a1814]">
-              <Image src="/report-mockup.png" alt="Sample Snagging Report" fill className="object-cover opacity-90" unoptimized />
+              {/* Added priority tag to prevent LCP warnings */}
+              <Image src="/report-mockup.png" alt="Sample Snagging Report" fill className="object-cover opacity-90" priority />
             </FadeUp>
           </div>
         </div>
@@ -398,7 +399,6 @@ export default function SnaglistPage() {
                 alt="Dublin PropTech Quality Standard" 
                 fill 
                 className="object-cover" 
-                unoptimized 
               />
             </FadeUp>
           </div>

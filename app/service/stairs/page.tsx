@@ -20,7 +20,7 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 export default function StairsPage() {
   return (
-    <main className="w-full bg-[#f0ede6] text-gray-900 selection:bg-[#b7935b] selection:text-white pb-0 overflow-x-hidden -mb-16">
+    <main className="w-full bg-[#f0ede6] text-gray-900 selection:bg-[#b7935b] selection:text-white pb-0 overflow-x-hidden">
       
       {/* Hero Section */}
       <section className="pt-24 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
@@ -104,7 +104,7 @@ export default function StairsPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/stair-solutions.jpeg" alt="Stair Installation Preparation" fill className="object-cover" unoptimized />
+              <Image src="/stair-solutions.jpeg" alt="Stair Installation Preparation" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -124,7 +124,7 @@ export default function StairsPage() {
           {/* Stair Cladding */}
           <FadeUp delay={0.1}>
             <div className="group relative h-[500px] overflow-hidden rounded-2xl bg-gray-200 shadow-sm">
-              <Image src="/stair-cladding.png" alt="Stair Cladding" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized />
+              <Image src="/stair-cladding.png" alt="Stair Cladding" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-10">
                 <div className="flex gap-2 mb-3">
                   <span className="text-[10px] font-bold tracking-widest uppercase text-gray-900 bg-white px-3 py-1 rounded-full">Seamless Flow</span>
@@ -139,7 +139,7 @@ export default function StairsPage() {
           {/* Carpet Runners */}
           <FadeUp delay={0.2}>
             <div className="group relative h-[500px] overflow-hidden rounded-2xl bg-gray-200 shadow-sm">
-              <Image src="/carpet-runners.png" alt="Carpet Runners" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized />
+              <Image src="/carpet-runners.png" alt="Carpet Runners" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-10">
                 <div className="flex gap-2 mb-3">
                   <span className="text-[10px] font-bold tracking-widest uppercase text-white bg-[#b7935b] px-3 py-1 rounded-full">Classic Elegance</span>
@@ -159,7 +159,7 @@ export default function StairsPage() {
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row">
           <div className="w-full md:w-5/12 p-8 md:p-16 flex items-center justify-center md:justify-end">
             <FadeUp className="relative w-[280px] md:w-[320px] h-[350px] md:h-[400px] shadow-2xl overflow-hidden bg-[#2a2215]">
-              <Image src="/anil.jpeg" alt="Dublin PropTech Quality Standard" fill className="object-cover" unoptimized />
+              <Image src="/anil.jpeg" alt="Dublin PropTech Quality Standard" fill className="object-cover" />
             </FadeUp>
           </div>
           <div className="w-full md:w-7/12 p-8 md:p-16 flex flex-col justify-center">

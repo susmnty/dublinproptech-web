@@ -20,7 +20,7 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 export default function WallPanelsPage() {
   return (
-    <main className="w-full bg-[#f0ede6] text-gray-900 selection:bg-[#b7935b] selection:text-white pb-0 overflow-x-hidden -mb-16">
+    <main className="w-full bg-[#f0ede6] text-gray-900 selection:bg-[#b7935b] selection:text-white pb-0 overflow-x-hidden">
       
       {/* Hero Section */}
       <section className="pt-24 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
@@ -104,7 +104,7 @@ export default function WallPanelsPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/wall-panels-prep.png" alt="Wall Panel Installation" fill className="object-cover" unoptimized />
+              <Image src="/wall-panels-prep.png" alt="Wall Panel Installation" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -115,7 +115,8 @@ export default function WallPanelsPage() {
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row">
           <div className="w-full md:w-5/12 p-8 md:p-16 flex items-center justify-center md:justify-end">
             <FadeUp className="relative w-[280px] md:w-[320px] h-[350px] md:h-[400px] shadow-2xl overflow-hidden bg-[#2a2215]">
-              <Image src="/anil.jpeg" alt="Dublin PropTech Quality Standard" fill className="object-cover" unoptimized />
+              {/* Added priority to clear the Next.js LCP warning */}
+              <Image src="/anil.jpeg" alt="Dublin PropTech Quality Standard" fill className="object-cover" priority />
             </FadeUp>
           </div>
           <div className="w-full md:w-7/12 p-8 md:p-16 flex flex-col justify-center">

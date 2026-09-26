@@ -171,7 +171,7 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Flooring
                 </h3>
-                <Image src="/flooring.jpeg" alt="Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
+                <Image src="/flooring.jpeg" alt="Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </Link>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -192,7 +192,7 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Snaglist
                 </h3>
-                <Image src="/snaglist.png" alt="Snaglist" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
+                <Image src="/snaglist.png" alt="Snaglist" fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
               </Link>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -213,7 +213,7 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Blinds
                 </h3>
-                <Image src="/Blinds.png" alt="Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
+                <Image src="/Blinds.png" alt="Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </a>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -304,7 +304,7 @@ export default function Home() {
         <FadeUp>
           <div className="flex flex-col md:flex-row w-full overflow-hidden border border-gray-200 bg-white">
             <div className="w-full md:w-[40%] relative min-h-[400px] md:min-h-[500px] bg-gray-100 border-b md:border-b-0 md:border-r border-gray-200">
-              <Image src="/anil.jpeg" alt="Dublin PropTech Inspector" fill className="object-cover" unoptimized />
+              <Image src="/anil.jpeg" alt="Dublin PropTech Inspector" fill className="object-cover" />
             </div>
             <div className="w-full md:w-[60%] bg-[#52452c] p-12 md:p-20 flex flex-col justify-center">
               <div className="text-[#cba052] mb-10">
