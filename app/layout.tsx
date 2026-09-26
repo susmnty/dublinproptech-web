@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script"; // <-- 1. Imported Next.js Script component
 import "./globals.css";
 import RecentBlogs from "./components/RecentBlogs";
 import Navbar from "./components/Navbar"; // <-- Imported the new Navbar component
@@ -104,6 +105,13 @@ export default function RootLayout({
             
           </div>
         </footer>
+
+        {/* 2. HubSpot Tracking Script */}
+        <Script
+          id="hs-script-loader"
+          strategy="afterInteractive"
+          src="//js-na2.hs-scripts.com/246058565.js"
+        />
         
       </body>
     </html>
