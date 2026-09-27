@@ -1,14 +1,50 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import Script from "next/script"; // <-- 1. Imported Next.js Script component
+import Script from "next/script"; 
+import { GoogleAnalytics } from '@next/third-parties/google';
 import "./globals.css";
 import RecentBlogs from "./components/RecentBlogs";
-import Navbar from "./components/Navbar"; // <-- Imported the new Navbar component
+import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
-  title: "Dublin Proptech",
+  metadataBase: new URL("https://dublinproptech.com"),
+  title: "Dublin PropTech | Snagging & Premium Flooring",
   description: "Premium flooring, blinds, and snagging inspections in Dublin.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Dublin PropTech",
+    description: "Premium flooring, blinds, and snagging inspections in Dublin.",
+    url: "https://dublinproptech.com",
+    siteName: "Dublin PropTech",
+    images: [
+      {
+        url: "/logo.png", 
+        width: 1200,
+        height: 630,
+        alt: "Dublin PropTech",
+      },
+    ],
+    locale: "en_IE",
+    type: "website",
+  },
+};
+
+// Define the Local Business structured data for Google Maps & Local SEO
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Dublin PropTech",
+  "image": "https://dublinproptech.com/logo.png",
+  "url": "https://dublinproptech.com",
+  "telephone": "+353899655102",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Dublin",
+    "addressCountry": "IE"
+  }
 };
 
 export default function RootLayout({
@@ -19,6 +55,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased bg-white text-black flex flex-col min-h-screen">
+        
+        {/* Inject the invisible SEO script right at the top of the body */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         
         {/* Responsive Mobile & Desktop Navbar */}
         <Navbar />
@@ -106,7 +148,7 @@ export default function RootLayout({
           </div>
         </footer>
 
-        {/* 2. HubSpot Tracking Script */}
+        {/* HubSpot Tracking Script */}
         <Script
           id="hs-script-loader"
           strategy="afterInteractive"
@@ -114,6 +156,10 @@ export default function RootLayout({
         />
         
       </body>
+      
+      {/* Google Analytics Component initialized with your ID */}
+      <GoogleAnalytics gaId="G-BX0MTVEM6X" />
+      
     </html>
   );
 }
