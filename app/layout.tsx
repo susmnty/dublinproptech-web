@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: "Dublin PropTech",
     images: [
       {
-        url: "/logo.png", 
+        url: "/d-logo-irish.png", 
         width: 1200,
         height: 630,
         alt: "Dublin PropTech",
