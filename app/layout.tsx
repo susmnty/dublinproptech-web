@@ -84,7 +84,8 @@ export default function RootLayout({
                 alt="Dublin PropTech" 
                 width={240} 
                 height={100} 
-                className="w-[180px] h-auto object-contain brightness-0 invert" 
+                className="w-[180px] h-auto object-contain brightness-0 invert"
+                priority 
               />
             </div>
 
@@ -148,10 +149,10 @@ export default function RootLayout({
           </div>
         </footer>
 
-        {/* HubSpot Tracking Script */}
+        {/* HubSpot Tracking Script - Updated to lazyOnload */}
         <Script
           id="hs-script-loader"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           src="//js-na2.hs-scripts.com/246058565.js"
         />
         

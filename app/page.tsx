@@ -171,7 +171,8 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Flooring
                 </h3>
-                <Image src="/flooring.jpeg" alt="Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                {/* Fixed LCP warning by adding priority here */}
+                <Image src="/flooring.jpeg" alt="Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
               </Link>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -213,7 +214,8 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Blinds
                 </h3>
-                <Image src="/Blinds.png" alt="Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                {/* LCP Fix: Added priority here */}
+                <Image src="/Blinds.png" alt="Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
               </a>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -370,7 +372,8 @@ export default function Home() {
         </FadeUp>
       </section>
 
-      <Script src="https://static.elfsight.com/platform/platform.js" strategy="afterInteractive" />
+      {/* THIRD-PARTY COOKIE FIX: Strategy changed to lazyOnload */}
+      <Script src="https://static.elfsight.com/platform/platform.js" strategy="lazyOnload" />
 
     </main>
   );
