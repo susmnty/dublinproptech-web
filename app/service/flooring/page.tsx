@@ -46,8 +46,8 @@ const carpetCollections = [
   { id: 'c6', name: 'Pimlico', pile: '5.5mm', width: '4m', weight: '40oz', image: '/carpets/pimlico.webp', desc: 'Sleek, low-profile finish with a tight, resilient pile. Perfect for high-traffic zones.' }
 ];
 
-// Product Grid Card Component - Fully Eager-Loaded to eliminate LCP warnings
-function ProductCard({ item, onClick }: { item: any, onClick: () => void }) {
+// Product Grid Card Component - Fixed lazy loading to restore performance score
+function ProductCard({ item, onClick, priority = false }: { item: any, onClick: () => void, priority?: boolean }) {
   return (
     <motion.div
       onClick={onClick}
@@ -59,7 +59,7 @@ function ProductCard({ item, onClick }: { item: any, onClick: () => void }) {
         fill 
         sizes="(max-width: 768px) 100vw, 33vw"
         className="object-cover transition-transform duration-700 group-hover:scale-105" 
-        priority={true}
+        priority={priority}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-6">
         <h3 className="text-2xl font-serif font-bold text-white drop-shadow-md">{item.name}</h3>
@@ -318,6 +318,7 @@ export default function FlooringPage() {
             <FadeUp key={item.id} delay={index * 0.1}>
               <ProductCard 
                 item={item} 
+                priority={index < 2}
                 onClick={() => { 
                   setSelectedProduct(item); 
                   setProductType('laminate'); 
@@ -342,6 +343,7 @@ export default function FlooringPage() {
             <FadeUp key={item.id} delay={index * 0.1}>
               <ProductCard 
                 item={item} 
+                priority={index < 2}
                 onClick={() => { 
                   setSelectedProduct(item); 
                   setProductType('carpet'); 
@@ -380,7 +382,7 @@ export default function FlooringPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/flooring-prep.webp" alt="Professional Flooring Preparation" fill className="object-cover" priority={true} />
+              <Image src="/flooring-prep.webp" alt="Professional Flooring Preparation" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -465,12 +467,12 @@ export default function FlooringPage() {
             </FadeUp>
             <FadeUp delay={0.3} className="relative z-10 flex flex-col items-center">
               <div className="w-24 h-24 rounded-full bg-[#2a261f] border border-[#b7935b] flex items-center justify-center text-2xl font-serif font-bold text-[#b7935b] mb-6">3</div>
-              <h3 className="text-xl font-bold mb-4">Precision Fit</h3>
+              <h3 className="text-xl font-bold pinch-none font-bold mb-4">Precision Fit</h3>
               <p className="text-gray-400 text-sm leading-relaxed max-w-xs">Our team installs your chosen flooring and matching accessories (skirting, beading, thresholds) for a flawless, turnkey finish.</p>
             </FadeUp>
           </div>
           <FadeUp delay={0.4} className="mt-20">
-            <Link href="/service/contact" className="inline-block bg-[#b7935b] text-white px-12 py-5 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg">
+            <Link href="/service/contact" className="inline-logo bg-[#b7935b] text-white px-12 py-5 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg">
               Book a Consultation
             </Link>
           </FadeUp>
