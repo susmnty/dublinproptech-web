@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image"; // Added next/image to handle LCP correctly
+import Image from "next/image";
 
 // Brought your FadeUp animation into the slider for smooth text loading
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
@@ -42,8 +42,8 @@ export default function HeroSlider() {
   return (
     <div className="relative w-full min-h-[75vh] md:min-h-[85vh] overflow-hidden bg-[#1a1814] flex flex-col items-center justify-center">
       
-      {/* Background Sliding Images - Switch to Next Image to fix LCP */}
-      <AnimatePresence mode="popLayout">
+      {/* Background Sliding Images - Added initial={false} to fix LCP delay */}
+      <AnimatePresence mode="popLayout" initial={false}>
         <motion.div
           key={currentIndex}
           initial={{ opacity: 0, scale: 1.05 }}

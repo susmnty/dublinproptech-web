@@ -155,12 +155,11 @@ export default function RootLayout({
           strategy="lazyOnload"
           src="//js-na2.hs-scripts.com/246058565.js"
         />
+
+        {/* Google Analytics Component initialized with your ID (Moved inside body) */}
+        <GoogleAnalytics gaId="G-BX0MTVEM6X" />
         
       </body>
-      
-      {/* Google Analytics Component initialized with your ID */}
-      <GoogleAnalytics gaId="G-BX0MTVEM6X" />
-      
     </html>
   );
 }
