@@ -31,7 +31,7 @@ export async function getRecentBlogs() {
       title: page.properties.Name?.title[0]?.plain_text || "Untitled",
       slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
       date: page.properties.Date?.date?.start || "",
-      coverImage: page.cover?.external?.url || page.cover?.file?.url || "/flooring.jpeg", 
+      coverImage: page.cover?.external?.url || page.cover?.file?.url || "/flooring.webp", 
       description: page.properties.Description?.rich_text[0]?.plain_text || "",
     }));
   } catch (error) {
@@ -72,7 +72,7 @@ export async function getAllBlogs() {
       title: page.properties.Name?.title[0]?.plain_text || "Untitled",
       slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
       date: page.properties.Date?.date?.start || "",
-      coverImage: page.cover?.external?.url || page.cover?.file?.url || "/flooring.jpeg", 
+      coverImage: page.cover?.external?.url || page.cover?.file?.url || "/flooring.webp", 
       description: page.properties.Description?.rich_text[0]?.plain_text || "",
     }));
   } catch (error) {
@@ -124,7 +124,7 @@ export async function getBlogPost(slug: string) {
     return {
       title: page.properties.Name?.title[0]?.plain_text || "Untitled",
       date: page.properties.Date?.date?.start || "",
-      coverImage: page.cover?.external?.url || page.cover?.file?.url || "/flooring.jpeg",
+      coverImage: page.cover?.external?.url || page.cover?.file?.url || "/flooring.webp",
       description: page.properties.Description?.rich_text[0]?.plain_text || "",
       contentBlocks: blocksData.results || [],
     };

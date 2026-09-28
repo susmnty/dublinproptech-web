@@ -68,7 +68,7 @@ export default function HerringbonePage() {
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
               {/* Added priority tag here to fix the LCP warning */}
-              <Image src="/herringbone-detail.png" alt="Herringbone Floor Detail" fill className="object-cover" priority />
+              <Image src="/herringbone-detail.webp" alt="Herringbone Floor Detail" fill className="object-cover" priority />
             </div>
           </div>
         </FadeUp>

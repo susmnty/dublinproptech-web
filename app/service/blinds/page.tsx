@@ -21,10 +21,10 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 // Background images for the slider
 const heroImages = [
-  "/snaglist.png", 
-  "/flooring.jpeg", 
-  "/Blinds.png", 
-  "/wall-panels-prep.png"
+  "/snaglist.webp", 
+  "/flooring.webp", 
+  "/Blinds.webp", 
+  "/wall-panels-prep.webp"
 ];
 
 export default function BlindsPage() {
@@ -128,7 +128,7 @@ export default function BlindsPage() {
           {/* Wooden Blinds */}
           <FadeUp delay={0.1}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/wooden-blinds.png" alt="Wooden Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
+              <Image src="/wooden-blinds.webp" alt="Wooden Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Wooden Blinds</h3>
                 <p className="text-gray-200 text-sm mb-4">Real wood & moisture-proof faux wood.</p>
@@ -140,7 +140,7 @@ export default function BlindsPage() {
           {/* Roller Blinds */}
           <FadeUp delay={0.2}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/roller-blinds.png" alt="Roller Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
+              <Image src="/roller-blinds.webp" alt="Roller Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Roller Blinds</h3>
                 <p className="text-gray-200 text-sm mb-4">Sleek, simple, and available in blackout.</p>
@@ -152,7 +152,7 @@ export default function BlindsPage() {
           {/* Roman Blinds */}
           <FadeUp delay={0.3}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/roman-blinds.png" alt="Roman Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
+              <Image src="/roman-blinds.webp" alt="Roman Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized priority />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Roman Blinds</h3>
                 <p className="text-gray-200 text-sm mb-4">Luxurious fabrics with thermal linings.</p>
@@ -164,7 +164,7 @@ export default function BlindsPage() {
           {/* Vertical Blinds */}
           <FadeUp delay={0.4}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/vertical-blinds.png" alt="Vertical Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized />
+              <Image src="/vertical-blinds.webp" alt="Vertical Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Vertical Blinds</h3>
                 <p className="text-gray-200 text-sm mb-4">Perfect for large windows and sliding doors.</p>
@@ -176,7 +176,7 @@ export default function BlindsPage() {
           {/* Perfect Fit Blinds */}
           <FadeUp delay={0.5}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/perfect-fit.png" alt="Perfect Fit Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized />
+              <Image src="/perfect-fit.webp" alt="Perfect Fit Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Perfect Fit</h3>
                 <p className="text-gray-200 text-sm mb-4">No-drill installation. Clicks into the frame.</p>
@@ -188,7 +188,7 @@ export default function BlindsPage() {
           {/* Venetian Blinds (Aluminum) */}
           <FadeUp delay={0.6}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/venetian-blinds.png" alt="Aluminum Venetian Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized />
+              <Image src="/venetian-blinds.webp" alt="Aluminum Venetian Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" unoptimized />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Aluminum Venetians</h3>
                 <p className="text-gray-200 text-sm mb-4">Modern, highly durable, and easy to clean.</p>
@@ -220,7 +220,7 @@ export default function BlindsPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/blinds-detail.png" alt="Blinds Close Up Detail" fill className="object-cover" unoptimized priority />
+              <Image src="/blinds-detail.webp" alt="Blinds Close Up Detail" fill className="object-cover" unoptimized priority />
             </div>
           </div>
         </FadeUp>
@@ -272,7 +272,7 @@ export default function BlindsPage() {
             <FadeUp>
               <div className="relative w-[280px] md:w-[320px] h-[350px] md:h-[400px] shadow-2xl rounded-lg overflow-hidden bg-[#2a2215]">
                 <Image 
-                  src="/anil.jpeg" 
+                  src="/anil.webp" 
                   alt="Dublin PropTech Quality Standard" 
                   fill 
                   className="object-cover" 

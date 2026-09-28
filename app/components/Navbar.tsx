@@ -16,7 +16,7 @@ export default function Navbar() {
         {/* Logo on the far left edge */}
         <Link href="/" className="flex items-center shrink-0" onClick={closeMenu}>
           <Image 
-            src="/logo.png" 
+            src="/logo.webp" 
             alt="Dublin PropTech Logo" 
             width={60} 
             height={20} 

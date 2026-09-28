@@ -104,7 +104,7 @@ export default function WallPanelsPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/wall-panels-prep.png" alt="Wall Panel Installation" fill className="object-cover" />
+              <Image src="/wall-panels-prep.webp" alt="Wall Panel Installation" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -116,7 +116,7 @@ export default function WallPanelsPage() {
           <div className="w-full md:w-5/12 p-8 md:p-16 flex items-center justify-center md:justify-end">
             <FadeUp className="relative w-[280px] md:w-[320px] h-[350px] md:h-[400px] shadow-2xl overflow-hidden bg-[#2a2215]">
               {/* Added priority to clear the Next.js LCP warning */}
-              <Image src="/anil.jpeg" alt="Dublin PropTech Quality Standard" fill className="object-cover" priority />
+              <Image src="/anil.webp" alt="Dublin PropTech Quality Standard" fill className="object-cover" priority />
             </FadeUp>
           </div>
           <div className="w-full md:w-7/12 p-8 md:p-16 flex flex-col justify-center">

@@ -21,10 +21,10 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 // Background images for the slider
 const heroImages = [
-  "/snaglist.png", 
-  "/flooring.jpeg", 
-  "/Blinds.png", 
-  "/wall-panels-prep.png"
+  "/snaglist.webp", 
+  "/flooring.webp", 
+  "/Blinds.webp", 
+  "/wall-panels-prep.webp"
 ];
 
 export default function FlooringPage() {
@@ -171,7 +171,7 @@ export default function FlooringPage() {
           <FadeUp delay={0.1} className="relative group h-[400px] md:h-full overflow-hidden rounded-xl bg-[#2a261f]">
             {/* Link points to future page - ADDED RELATIVE HERE */}
             <Link href="/service/lvt" className="relative block w-full h-full">
-              <Image src="/lvt-cat.png" alt="LVT" fill className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" priority />
+              <Image src="/lvt-cat.webp" alt="LVT" fill className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" priority />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex items-center justify-center">
                 <h3 className="text-4xl md:text-5xl font-serif font-bold text-white text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
                   LVT
@@ -184,7 +184,7 @@ export default function FlooringPage() {
           <FadeUp delay={0.2} className="relative group h-[400px] md:h-full overflow-hidden rounded-xl bg-[#2a261f]">
             {/* Link points to future page - ADDED RELATIVE HERE */}
             <Link href="/service/stairs" className="relative block w-full h-full">
-              <Image src="/stair-solutions.jpeg" alt="Stair Solutions" fill className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" priority />
+              <Image src="/stair-solutions.webp" alt="Stair Solutions" fill className="object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100" priority />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex items-center justify-center">
                 <h3 className="text-4xl md:text-5xl font-serif font-bold text-white text-center drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)]">
                   Stair <br /> Solutions
@@ -238,7 +238,7 @@ export default function FlooringPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/flooring-prep.jpeg" alt="Professional Flooring Preparation" fill className="object-cover" />
+              <Image src="/flooring-prep.webp" alt="Professional Flooring Preparation" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -259,7 +259,7 @@ export default function FlooringPage() {
           <FadeUp delay={0.1}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
               {/* FIXED: Priority tag added to fix the Next.js LCP warning */}
-              <Image src="/herringbone.png" alt="Herringbone Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
+              <Image src="/herringbone.webp" alt="Herringbone Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
                 <div className="flex gap-2 mb-3">
                   <span className="text-[10px] font-bold tracking-widest uppercase text-gray-900 bg-white px-2 py-1 rounded">Architectural Statement</span>
@@ -274,7 +274,7 @@ export default function FlooringPage() {
           {/* Engineered Wood */}
           <FadeUp delay={0.2}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/engineered-wood.png" alt="Engineered Wood Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src="/engineered-wood.webp" alt="Engineered Wood Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
                 <div className="flex gap-2 mb-3">
                   <span className="text-[10px] font-bold tracking-widest uppercase text-white bg-[#b7935b] px-2 py-1 rounded">Authentic Timber</span>
@@ -289,7 +289,7 @@ export default function FlooringPage() {
           {/* Premium Laminate */}
           <FadeUp delay={0.3}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/laminate.png" alt="Premium Laminate Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src="/laminate.webp" alt="Premium Laminate Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
                 <div className="flex gap-2 mb-3">
                   <span className="text-[10px] font-bold tracking-widest uppercase text-white bg-[#b7935b] px-2 py-1 rounded">AC5 Rated</span>
@@ -304,7 +304,7 @@ export default function FlooringPage() {
           {/* SPC / LVT */}
           <FadeUp delay={0.4}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/spc-flooring.png" alt="SPC Rigid Core Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src="/spc-flooring.webp" alt="SPC Rigid Core Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-12">
                 <div className="flex gap-2 mb-3">
                   <span className="text-[10px] font-bold tracking-widest uppercase text-gray-900 bg-white px-2 py-1 rounded">100% Waterproof</span>
@@ -339,7 +339,7 @@ export default function FlooringPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/flooring-details.png" alt="Flooring Skirting Details" fill className="object-cover" />
+              <Image src="/flooring-details.webp" alt="Flooring Skirting Details" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -390,7 +390,7 @@ export default function FlooringPage() {
           <div className="w-full md:w-5/12 p-8 md:p-16 flex items-center justify-center md:justify-end">
             <FadeUp className="relative w-[280px] md:w-[320px] h-[350px] md:h-[400px] shadow-2xl overflow-hidden bg-[#2a2215]">
               <Image 
-                src="/anil.jpeg" 
+                src="/anil.webp" 
                 alt="Dublin PropTech Quality Standard" 
                 fill 
                 className="object-cover" 

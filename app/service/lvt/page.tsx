@@ -106,7 +106,7 @@ export default function TilesPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/tiles-prep.png" alt="Tile and LVT Fitting" fill className="object-cover" />
+              <Image src="/tiles-prep.webp" alt="Tile and LVT Fitting" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -126,7 +126,7 @@ export default function TilesPage() {
           {/* Porcelain Tiles */}
           <FadeUp delay={0.1}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/porcelain-tiles.png" alt="Porcelain Tiles" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src="/porcelain-tiles.webp" alt="Porcelain Tiles" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-10">
                 <h3 className="text-3xl font-serif font-bold text-white mb-2">Porcelain</h3>
                 <p className="text-gray-200 text-sm mb-6 max-w-sm">Denser and more durable than standard ceramic. The ultimate choice for high-traffic hallways and open-plan kitchen diners.</p>
@@ -138,7 +138,7 @@ export default function TilesPage() {
           {/* LVT */}
           <FadeUp delay={0.2}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/lvt-cat.png" alt="LVT Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src="/lvt-cat.webp" alt="LVT Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-10">
                 <div className="flex gap-2 mb-3">
                   <span className="text-[10px] font-bold tracking-widest uppercase text-gray-900 bg-white px-2 py-1 rounded">Flexible Core</span>
@@ -153,7 +153,7 @@ export default function TilesPage() {
           {/* SPC Rigid Core */}
           <FadeUp delay={0.3}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/spc-flooring.png" alt="SPC Rigid Core Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Image src="/spc-flooring.webp" alt="SPC Rigid Core Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-10">
                  <div className="flex gap-2 mb-3">
                   <span className="text-[10px] font-bold tracking-widest uppercase text-white bg-[#b7935b] px-2 py-1 rounded">Rigid Core</span>
@@ -173,7 +173,7 @@ export default function TilesPage() {
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row">
           <div className="w-full md:w-5/12 p-8 md:p-16 flex items-center justify-center md:justify-end">
             <FadeUp className="relative w-[280px] md:w-[320px] h-[350px] md:h-[400px] shadow-2xl overflow-hidden bg-[#2a2215]">
-              <Image src="/anil.jpeg" alt="Dublin PropTech Quality Standard" fill className="object-cover" />
+              <Image src="/anil.webp" alt="Dublin PropTech Quality Standard" fill className="object-cover" />
             </FadeUp>
           </div>
           <div className="w-full md:w-7/12 p-8 md:p-16 flex flex-col justify-center">

@@ -21,10 +21,10 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 // Background images for the slider
 const heroImages = [
-  "/snaglist.png", 
-  "/flooring.jpeg", 
-  "/Blinds.png", 
-  "/wall-panels-prep.png"
+  "/snaglist.webp", 
+  "/flooring.webp", 
+  "/Blinds.webp", 
+  "/wall-panels-prep.webp"
 ];
 
 export default function SnaglistPage() {
@@ -193,7 +193,7 @@ export default function SnaglistPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/snagging-inspection.png" alt="Professional Snagging Inspection" fill className="object-cover" />
+              <Image src="/snagging-inspection.webp" alt="Professional Snagging Inspection" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -344,7 +344,7 @@ export default function SnaglistPage() {
           <div className="w-full md:w-1/2">
             <FadeUp delay={0.2} className="relative w-full aspect-[4/3] shadow-2xl rounded-xl overflow-hidden bg-[#1a1814]">
               {/* Added priority tag to prevent LCP warnings */}
-              <Image src="/report-mockup.png" alt="Sample Snagging Report" fill className="object-cover opacity-90" priority />
+              <Image src="/report-mockup.webp" alt="Sample Snagging Report" fill className="object-cover opacity-90" priority />
             </FadeUp>
           </div>
         </div>
@@ -395,7 +395,7 @@ export default function SnaglistPage() {
           <div className="w-full md:w-5/12 p-8 md:p-16 flex items-center justify-center md:justify-end">
             <FadeUp className="relative w-[280px] md:w-[320px] h-[350px] md:h-[400px] shadow-2xl rounded-lg overflow-hidden bg-[#2a2215]">
               <Image 
-                src="/anil.jpeg" 
+                src="/anil.webp" 
                 alt="Dublin PropTech Quality Standard" 
                 fill 
                 className="object-cover" 

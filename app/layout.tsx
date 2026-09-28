@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     siteName: "Dublin PropTech",
     images: [
       {
-        url: "/d-logo-irish.png", 
+        url: "/d-logo-irish.webp", 
         width: 1200,
         height: 630,
         alt: "Dublin PropTech",
@@ -37,7 +37,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Dublin PropTech",
-  "image": "https://dublinproptech.com/logo.png",
+  "image": "https://dublinproptech.com/logo.webp",
   "url": "https://dublinproptech.com",
   "telephone": "+353899655102",
   "address": {
@@ -80,7 +80,7 @@ export default function RootLayout({
             {/* Logo Section */}
             <div className="mb-6 flex justify-center md:justify-start">
               <Image 
-                src="/logo.png" 
+                src="/logo.webp" 
                 alt="Dublin PropTech" 
                 width={240} 
                 height={100} 

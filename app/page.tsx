@@ -194,7 +194,7 @@ export default function Home() {
                   Flooring
                 </h3>
                 {/* Fixed LCP & Performance by adding strict priority={true} */}
-                <Image src="/flooring.jpeg" alt="Flooring" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" priority={true} />
+                <Image src="/flooring.webp" alt="Flooring" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" priority={true} />
               </Link>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -215,7 +215,7 @@ export default function Home() {
                   Snaglist
                 </h3>
                 {/* Fixed LCP & Performance by adding strict priority={true} */}
-                <Image src="/snaglist.png" alt="Snaglist" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" priority={true} />
+                <Image src="/snaglist.webp" alt="Snaglist" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" priority={true} />
               </Link>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -236,7 +236,7 @@ export default function Home() {
                   Blinds
                 </h3>
                 {/* Fixed LCP & Performance by adding strict priority={true} */}
-                <Image src="/Blinds.png" alt="Blinds" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" priority={true} />
+                <Image src="/Blinds.webp" alt="Blinds" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" priority={true} />
               </a>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -325,7 +325,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row w-full overflow-hidden border border-gray-200 bg-white">
             <div className="w-full md:w-[40%] relative min-h-[400px] md:min-h-[500px] bg-gray-100 border-b md:border-b-0 md:border-r border-gray-200">
               {/* Added sizes attribute */}
-              <Image src="/anil.jpeg" alt="Dublin PropTech Inspector" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+              <Image src="/anil.webp" alt="Dublin PropTech Inspector" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
             </div>
             <div className="w-full md:w-[60%] bg-[#52452c] p-12 md:p-20 flex flex-col justify-center">
               <div className="text-[#cba052] mb-10">

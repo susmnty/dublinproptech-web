@@ -67,7 +67,7 @@ export default function EngineeredWoodPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/engineered-detail.png" alt="Engineered Wood Detail" fill className="object-cover" priority />
+              <Image src="/engineered-detail.webp" alt="Engineered Wood Detail" fill className="object-cover" priority />
             </div>
           </div>
         </FadeUp>

@@ -22,10 +22,10 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 // Your exact images!
 const images = [
-  "/snaglist.png", 
-  "/flooring.jpeg", 
-  "/Blinds.png", 
-  "/wall-panels-prep.png"
+  "/snaglist.webp", 
+  "/flooring.webp", 
+  "/Blinds.webp", 
+  "/wall-panels-prep.webp"
 ];
 
 export default function HeroSlider() {
