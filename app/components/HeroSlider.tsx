@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image"; // Added next/image to handle LCP correctly
 
 // Brought your FadeUp animation into the slider for smooth text loading
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
@@ -41,18 +42,26 @@ export default function HeroSlider() {
   return (
     <div className="relative w-full min-h-[75vh] md:min-h-[85vh] overflow-hidden bg-[#1a1814] flex flex-col items-center justify-center">
       
-      {/* Background Sliding Images */}
+      {/* Background Sliding Images - Switch to Next Image to fix LCP */}
       <AnimatePresence mode="popLayout">
-        <motion.img
+        <motion.div
           key={currentIndex}
-          src={images[currentIndex]}
-          alt={`Dublin PropTech Service ${currentIndex + 1}`}
-          className="absolute inset-0 w-full h-full object-cover"
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 3, ease: "easeInOut" }} 
-        />
+          transition={{ duration: 3, ease: "easeInOut" }}
+          className="absolute inset-0 w-full h-full"
+        >
+          {/* LCP FIX: Use Next/Image and set priority=true for the very first image */}
+          <Image
+            src={images[currentIndex]}
+            alt={`Dublin PropTech Service ${currentIndex + 1}`}
+            fill
+            className="object-cover"
+            priority={currentIndex === 0} 
+            unoptimized // Bypass extreme compression limits if the images look blurry
+          />
+        </motion.div>
       </AnimatePresence>
 
       {/* Subtle Dark Overlay to make the white text pop */}
@@ -84,7 +93,7 @@ export default function HeroSlider() {
           </div>
         </FadeUp>
 
-        {/* UPDATED Social Icons - Styled to match your screenshot */}
+        {/* ACCESSIBILITY FIX: Added sr-only spans for screen readers */}
         <FadeUp delay={0.6} className="mt-8">
           <div className="flex justify-center gap-6 relative z-20">
             {/* Instagram */}
@@ -94,6 +103,7 @@ export default function HeroSlider() {
               rel="noopener noreferrer" 
               className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"
             >
+              <span className="sr-only">Instagram</span>
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -108,6 +118,7 @@ export default function HeroSlider() {
               rel="noopener noreferrer" 
               className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"
             >
+              <span className="sr-only">Facebook</span>
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
               </svg>
@@ -120,6 +131,7 @@ export default function HeroSlider() {
               rel="noopener noreferrer" 
               className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"
             >
+              <span className="sr-only">YouTube</span>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
                 <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>

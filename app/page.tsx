@@ -55,8 +55,34 @@ function AnimatedCounter({ to }: { to: number }) {
 }
 
 export default function Home() {
-  // Added HubSpot / Custom API Form State and Handler
   const [status, setStatus] = useState("Send Message");
+  
+  // BEST PRACTICES FIX: State to delay third-party widgets
+  const [loadThirdParty, setLoadThirdParty] = useState(false);
+
+  useEffect(() => {
+    // Only load Elfsight when a real user interacts (scrolls, touches, or moves mouse)
+    const handleInteraction = () => {
+      setLoadThirdParty(true);
+      window.removeEventListener("scroll", handleInteraction);
+      window.removeEventListener("mousemove", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+    };
+
+    window.addEventListener("scroll", handleInteraction, { passive: true });
+    window.addEventListener("mousemove", handleInteraction, { passive: true });
+    window.addEventListener("touchstart", handleInteraction, { passive: true });
+
+    // Fallback: load after 5 seconds just in case
+    const timer = setTimeout(() => setLoadThirdParty(true), 5000);
+
+    return () => {
+      window.removeEventListener("scroll", handleInteraction);
+      window.removeEventListener("mousemove", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
+      clearTimeout(timer);
+    };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -171,7 +197,6 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Flooring
                 </h3>
-                {/* Fixed LCP warning by adding priority here */}
                 <Image src="/flooring.jpeg" alt="Flooring" fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
               </Link>
               <div className="flex flex-col flex-grow px-2">
@@ -214,7 +239,6 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Blinds
                 </h3>
-                {/* LCP Fix: Added priority here */}
                 <Image src="/Blinds.png" alt="Blinds" fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
               </a>
               <div className="flex flex-col flex-grow px-2">
@@ -372,8 +396,10 @@ export default function Home() {
         </FadeUp>
       </section>
 
-      {/* THIRD-PARTY COOKIE FIX: Strategy changed to lazyOnload */}
-      <Script src="https://static.elfsight.com/platform/platform.js" strategy="lazyOnload" />
+      {/* THIRD-PARTY COOKIE FIX: Script only mounts when user interacts */}
+      {loadThirdParty && (
+        <Script src="https://static.elfsight.com/platform/platform.js" strategy="afterInteractive" />
+      )}
 
     </main>
   );
