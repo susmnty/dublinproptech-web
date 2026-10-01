@@ -5,8 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
-// Brought your FadeUp animation into the slider for smooth text loading
-function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
+function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -20,29 +19,23 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-// Your exact images!
-const images = [
-  "/snaglist.webp", 
-  "/flooring.webp", 
-  "/Blinds.webp", 
-  "/wall-panels-prep.webp"
+const slides = [
+  { src: "/snaglist.webp", alt: "Snagging inspector checking a new build home in Dublin" },
+  { src: "/flooring.webp", alt: "Premium laminate flooring fitted in a Dublin home" },
+  { src: "/Blinds.webp", alt: "Made-to-measure window blinds in a living room" },
+  { src: "/wall-panels-prep.webp", alt: "Acoustic slat wall panel installation" },
 ];
 
 export default function HeroSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Changes the image every 6 seconds
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 6000); 
+    const timer = setInterval(() => setCurrentIndex((prev) => (prev + 1) % slides.length), 6000);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <div className="relative w-full min-h-[75vh] md:min-h-[85vh] overflow-hidden bg-[#1a1814] flex flex-col items-center justify-center">
-      
-      {/* Background Sliding Images - Added initial={false} to fix LCP delay */}
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.div
           key={currentIndex}
@@ -52,90 +45,59 @@ export default function HeroSlider() {
           transition={{ duration: 3, ease: "easeInOut" }}
           className="absolute inset-0 w-full h-full"
         >
-          {/* LCP FIX: Use Next/Image and set priority=true for the very first image */}
           <Image
-            src={images[currentIndex]}
-            alt={`Dublin PropTech Service ${currentIndex + 1}`}
+            src={slides[currentIndex].src}
+            alt={slides[currentIndex].alt}
             fill
+            sizes="100vw"
             className="object-cover"
-            priority={currentIndex === 0} 
-            unoptimized // Bypass extreme compression limits if the images look blurry
+            priority={currentIndex === 0}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Subtle Dark Overlay to make the white text pop */}
       <div className="absolute inset-0 bg-black/40 z-10" />
 
-      {/* Floating Text & Button Overlay */}
       <div className="relative z-20 text-center flex flex-col items-center px-6 pt-16 pb-10 max-w-5xl mx-auto">
-        <FadeUp>
-          <span className="text-sm font-bold tracking-widest uppercase text-white/80 mb-6 block drop-shadow-md">New Build Specialist</span>
-        </FadeUp>
-        
-        <FadeUp delay={0.1}>
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 text-white drop-shadow-lg">
-            Crafting Perfection.
-          </h1>
-        </FadeUp>
-        
-        <FadeUp delay={0.5}>
+        <span className="text-sm font-bold tracking-widest uppercase text-white/80 mb-6 block drop-shadow-md">
+          Crafting Perfection · New Build Specialist
+        </span>
+
+        {/* H1 with keyword + location, not inside FadeUp so it's visible on first paint */}
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-8 text-white drop-shadow-lg max-w-4xl">
+          Snagging Inspections &amp; Premium Flooring in Dublin
+        </h1>
+
+        <FadeUp delay={0.2}>
           <p className="text-lg md:text-xl text-white/90 max-w-2xl font-medium leading-relaxed mb-10 drop-shadow-md">
             Expert snagging. Premium finishes. Flawless spaces.
           </p>
         </FadeUp>
 
         <FadeUp delay={0.3}>
-          <div className="flex flex-wrap justify-center mt-2">
-            <Link href="/service/contact" className="bg-[#b7935b] text-white px-10 py-4 font-semibold tracking-wide hover:bg-[#a0804f] transition-all shadow-lg rounded-full">
-              Book a Consultation
+          <div className="flex flex-wrap justify-center gap-4 mt-2">
+            <Link href="/service/snaglist" className="bg-[#b7935b] text-white px-10 py-4 font-semibold tracking-wide hover:bg-[#a0804f] transition-all shadow-lg rounded-full">
+              Book a Snag List
+            </Link>
+            <Link href="/service/flooring" className="bg-transparent border border-white text-white px-10 py-4 font-semibold tracking-wide hover:bg-white hover:text-[#1a1814] transition-all shadow-lg rounded-full">
+              Flooring Quote
             </Link>
           </div>
         </FadeUp>
 
-        {/* ACCESSIBILITY FIX: Added sr-only spans for screen readers */}
         <FadeUp delay={0.6} className="mt-8">
           <div className="flex justify-center gap-6 relative z-20">
-            {/* Instagram */}
-            <a 
-              href="https://www.instagram.com/dublinproptech/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"
-            >
+            <a href="https://www.instagram.com/dublinproptech/" target="_blank" rel="noopener noreferrer" className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg">
               <span className="sr-only">Instagram</span>
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
-
-            {/* Facebook */}
-            <a 
-              href="https://www.facebook.com/people/Dublin-Proptech/61580488380589/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"
-            >
+            <a href="https://www.facebook.com/people/Dublin-Proptech/61580488380589/" target="_blank" rel="noopener noreferrer" className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg">
               <span className="sr-only">Facebook</span>
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
             </a>
-
-            {/* YouTube */}
-            <a 
-              href="https://www.youtube.com/@DublinProptech" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"
-            >
+            <a href="https://www.youtube.com/@DublinProptech" target="_blank" rel="noopener noreferrer" className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg">
               <span className="sr-only">YouTube</span>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path>
-                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-              </svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
             </a>
           </div>
         </FadeUp>

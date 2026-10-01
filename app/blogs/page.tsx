@@ -1,11 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllBlogs } from "../lib/blogs";
+import { pageMeta } from "@/app/lib/seo";
 
-export const metadata = {
-  title: "Insights & Articles | Dublin PropTech",
-  description: "Read our latest expert guides on property snagging, premium flooring, and new build tips in Dublin.",
-};
+export const metadata = pageMeta({
+  title: "Snagging & Flooring Guides for Irish Homeowners",
+  description: "Expert guides on new build snagging, flooring choices and move-in tips for homeowners in Dublin and across Ireland.",
+  path: "/blogs",
+});
 
 export default async function BlogIndexPage() {
   const blogs = await getAllBlogs();

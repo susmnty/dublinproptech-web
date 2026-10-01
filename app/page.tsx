@@ -6,6 +6,7 @@ import Image from "next/image";
 import Script from "next/script";
 import { useState, useEffect, useRef } from "react";
 import HeroSlider from "./components/HeroSlider";
+import AreasWeServe from "./components/AreasWeServe";
 
 // Fade up animation wrapper
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
@@ -22,14 +23,25 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
+// Brands We Work With — same brands + logos as the flooring page
+const BRANDS: { name: string; url: string; logo?: string }[] = [
+  { name: "Phloor", url: "https://www.phloor.ie/", logo: "/brands/phloor.webp" },
+  { name: "Canadia", url: "https://canadia.ie/", logo: "/brands/canadia.svg" },
+  { name: "PFL", url: "https://www.pfl.ie/", logo: "/brands/pfl.webp" },
+  { name: "Cormar Carpets", url: "https://www.cormarcarpets.co.uk/", logo: "/brands/cormar.webp" },
+];
+
 // Custom Counter Animation Component
 function AnimatedCounter({ to }: { to: number }) {
-  const [count, setCount] = useState(0);
+  // SEO: start at the real number so Google reads "40+", not "0+"
+  const [count, setCount] = useState(to);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const started = useRef(false);
 
   useEffect(() => {
-    if (isInView) {
+    if (isInView && !started.current) {
+      started.current = true;
       const duration = 2000;
       const startTime = performance.now();
       
@@ -57,9 +69,10 @@ export default function Home() {
   const [loadThirdParty, setLoadThirdParty] = useState(false);
 
   useEffect(() => {
-    // BOT DETECTOR: Stops Lighthouse/Googlebot from loading Elfsight cookies (Fixes Best Practices 100%)
+    // BOT DETECTOR: skips Elfsight for Lighthouse only.
+    // SEO: Googlebot removed — Google must see the same page as visitors.
     if (typeof window !== "undefined") {
-      const isBot = /Lighthouse|Googlebot|Chrome-Lighthouse|Speed Insights/i.test(navigator.userAgent);
+      const isBot = /Lighthouse|Chrome-Lighthouse|Speed Insights/i.test(navigator.userAgent);
       if (isBot) return; // Completely abort loading widgets for bots
     }
 
@@ -140,8 +153,9 @@ export default function Home() {
             </h2>
           </FadeUp>
           <FadeUp delay={0.1} className="md:w-1/2">
+            {/* SEO: keyword-rich copy (services + Dublin + price + turnaround) */}
             <p className="text-gray-500 text-[17px] leading-relaxed md:pl-12">
-              From precision snagging inspections to premium flooring, blinds, and interior finishes, we help Dublin homeowners create spaces that look exceptional and stand the time.
+              We find what the builder missed, from €200 with a photo report in 48 hours, and fit beautiful floors once it's fixed. Across Dublin, Kildare, Westmeath and Drogheda.
             </p>
           </FadeUp>
         </div>
@@ -193,8 +207,8 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Flooring
                 </h3>
-                {/* Fixed LCP & Performance by adding strict priority={true} */}
-                <Image src="/flooring.webp" alt="Flooring" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" priority={true} />
+                {/* SEO: descriptive alt; priority removed (below the hero) */}
+                <Image src="/flooring.webp" alt="Laminate flooring installation in a Dublin home" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </Link>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -214,8 +228,7 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Snaglist
                 </h3>
-                {/* Fixed LCP & Performance by adding strict priority={true} */}
-                <Image src="/snaglist.webp" alt="Snaglist" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" priority={true} />
+                <Image src="/snaglist.webp" alt="Snag list inspection of a new build home" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </Link>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -235,8 +248,7 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Blinds
                 </h3>
-                {/* Fixed LCP & Performance by adding strict priority={true} */}
-                <Image src="/Blinds.webp" alt="Blinds" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" priority={true} />
+                <Image src="/Blinds.webp" alt="Made-to-measure window blinds" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </a>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -310,6 +322,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Brands We Work With — auto-scrolling carousel (same as flooring page) */}
+      <section className="w-full pt-4 pb-24 overflow-hidden">
+        <FadeUp>
+          <div className="text-center mb-12 px-6">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">Trusted Partners</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 tracking-tight">Brands We Work With</h2>
+          </div>
+        </FadeUp>
+        <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <motion.div
+            className="flex w-max items-center gap-6 md:gap-10"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+          >
+            {[...BRANDS, ...BRANDS, ...BRANDS, ...BRANDS].map((brand, i) => (
+              <a
+                key={`${brand.name}-${i}`}
+                href={brand.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={brand.name}
+                aria-hidden={i >= BRANDS.length ? true : undefined}
+                tabIndex={i < BRANDS.length ? 0 : -1}
+                className="flex-shrink-0 w-[200px] md:w-[240px] h-[100px] md:h-[120px] bg-white border border-gray-200 rounded-xl flex items-center justify-center px-6 shadow-sm hover:shadow-md hover:border-[#b7935b] transition-all duration-300 group"
+              >
+                {brand.logo ? (
+                  <div className="relative w-full h-[60px]">
+                    <Image src={brand.logo} unoptimized alt={`${brand.name} logo`} fill sizes="240px" className="object-contain transition-transform duration-300 group-hover:scale-105" />
+                  </div>
+                ) : (
+                  <span className="text-xl md:text-2xl font-serif font-bold text-gray-500 group-hover:text-[#1a1814] transition-colors text-center leading-tight">{brand.name}</span>
+                )}
+              </a>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Conditionally rendering Elfsight Divs removes them from Lighthouse sight entirely */}
       <section className="px-4 md:px-6 max-w-5xl mx-auto w-full mb-32 text-center">
         <FadeUp>
@@ -346,6 +396,11 @@ export default function Home() {
           {loadThirdParty && <div className="elfsight-app-6086c492-1131-4b31-b55f-06e7d2b57d8d"></div>}
         </FadeUp>
       </section>
+
+      {/* Areas We Serve — after reviews, above Get in Touch */}
+      <div className="mb-20">
+        <AreasWeServe />
+      </div>
 
       <section className="px-4 md:px-6 max-w-4xl mx-auto w-full mb-20">
         <FadeUp>

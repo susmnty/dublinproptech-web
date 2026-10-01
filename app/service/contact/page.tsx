@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import AreasWeServe from "../../components/AreasWeServe";
 
 // Reusable animation wrapper
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
@@ -30,6 +31,17 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState<Submitted | null>(null);
   const frontRef = useRef<HTMLDivElement>(null);
   const backRef = useRef<HTMLDivElement>(null);
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+
+  // Arriving from "Areas We Serve" (?area=Kildare or ?area=Galway&request=1): pre-fill the message
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const area = params.get("area");
+    if (!area || !messageRef.current || messageRef.current.value) return;
+    messageRef.current.value = params.get("request")
+      ? `Hi, I'm based in ${area}. Do you cover this area? I'm interested in: `
+      : `Hi, I'd like to book a service in ${area}. I'm interested in: `;
+  }, []);
 
   // Hide the face that is turned away from keyboard & screen-reader users
   useEffect(() => {
@@ -91,7 +103,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="w-full bg-[#f2efe8] text-gray-900 selection:bg-[#b7935b] selection:text-white pt-16 pb-24">
+    <main className="w-full bg-[#f2efe8] text-gray-900 selection:bg-[#b7935b] selection:text-white pt-16">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
@@ -128,7 +140,7 @@ export default function ContactPage() {
           </div>
 
           {/* Right Column: The Form */}
-          <div className="w-full lg:w-7/12">
+          <div id="enquiry" className="w-full lg:w-7/12 scroll-mt-24">
             <FadeUp delay={0.3} className="[perspective:1600px]">
               <motion.div
                 className="grid [transform-style:preserve-3d]"
@@ -192,6 +204,7 @@ export default function ContactPage() {
                 <div className="flex flex-col gap-2 group">
                   <label htmlFor="message" className="text-xs font-bold text-gray-500 uppercase tracking-widest group-focus-within:text-[#b7935b] transition-colors">How can we help?</label>
                   <textarea 
+                    ref={messageRef}
                     id="message" 
                     name="message" 
                     rows={5} 
@@ -234,7 +247,7 @@ export default function ContactPage() {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-3 bg-[#25D366] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#1ebe5b] transition-colors rounded-full shadow-md"
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.94.95-3.48-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.23-9.43 9.44-9.43 2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.67c0 5.2-4.23 9.43-9.44 9.43m8.03-17.46A11.28 11.28 0 0 0 12.05.72C5.8.72.7 5.8.7 12.05c0 2 .52 3.95 1.52 5.67L.6 23.28l5.7-1.5a11.3 11.3 0 0 0 5.74 1.46h.01c6.25 0 11.34-5.09 11.34-11.34 0-3.03-1.18-5.88-3.32-8.02" /></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.570.94.95-3.48-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.23-9.43 9.44-9.43 2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.67c0 5.2-4.23 9.43-9.44 9.43m8.03-17.46A11.28 11.28 0 0 0 12.05.72C5.8.72.7 5.8.7 12.05c0 2 .52 3.95 1.52 5.67L.6 23.28l5.7-1.5a11.3 11.3 0 0 0 5.74 1.46h.01c6.25 0 11.34-5.09 11.34-11.34 0-3.03-1.18-5.88-3.32-8.02" /></svg>
                     WhatsApp Us
                   </a>
                   <a
@@ -260,6 +273,11 @@ export default function ContactPage() {
           </div>
 
         </div>
+      </div>
+
+      {/* Areas We Serve */}
+      <div className="mt-24">
+        <AreasWeServe />
       </div>
     </main>
   );

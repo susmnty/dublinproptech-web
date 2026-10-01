@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import AreasWeServe from "../../components/AreasWeServe";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -417,6 +418,8 @@ export default function SnaglistPage() {
           </div>
 
         </div>
+
+          <AreasWeServe />
       </section>
 
     </main>
