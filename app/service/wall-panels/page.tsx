@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import Catalogue from "../flooring/catalogue";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -73,6 +74,18 @@ export default function WallPanelsPage() {
             <p className="text-sm text-gray-500">Faster than traditional tiling</p>
           </FadeUp>
         </div>
+      </section>
+
+      {/* Wall panel range (search + filters + product pop-up) */}
+      <section id="panel-range" className="px-4 md:px-6 max-w-[1400px] mx-auto w-full mb-32 scroll-mt-20">
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">Our Range</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 tracking-tight">Wall Panel Range</h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Fluted slat panels and felt-backed acoustic panels for media walls, bedrooms and home offices. Filter by style and colour.</p>
+          </div>
+        </FadeUp>
+        <Catalogue type="panel" />
       </section>
 
       {/* Feature Split */}

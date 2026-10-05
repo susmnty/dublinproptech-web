@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import Catalogue from "../flooring/catalogue";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -18,7 +19,7 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-export default function TilesPage() {
+export default function LvtPage() {
   return (
     <main className="w-full bg-[#f0ede6] text-gray-900 selection:bg-[#b7935b] selection:text-white pb-0 overflow-x-hidden">
       
@@ -30,13 +31,14 @@ export default function TilesPage() {
         
         <FadeUp delay={0.1}>
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 leading-[1.1] mb-8 tracking-tight">
-            Luxury Tiles. <br />
+            Luxury Vinyl. <br />
+            <span className="block text-2xl md:text-3xl mt-4 font-sans font-medium text-gray-600">LVT &amp; SPC Flooring Supply &amp; Fitting in Dublin</span>
           </h1>
         </FadeUp>
         
         <FadeUp delay={0.2}>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            From large-format porcelain to advanced engineering of LVT & core SPC.
+            Waterproof rigid-core SPC with built-in underlay. <br /> Wide plank, classic plank &amp; herringbone, made for busy homes.
           </p>
         </FadeUp>
         
@@ -75,6 +77,17 @@ export default function TilesPage() {
         </div>
       </section>
 
+      {/* LVT / SPC range (search + filters + product pop-up) */}
+      <section id="lvt-range" className="px-4 md:px-6 max-w-[1400px] mx-auto w-full mb-32 scroll-mt-20">
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">Our Range</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 tracking-tight">Luxury Vinyl Range</h2>
+          </div>
+        </FadeUp>
+        <Catalogue type="lvt" />
+      </section>
+
       {/* Feature Split: LVT vs SPC */}
       <section className="px-4 md:px-6 max-w-[1400px] mx-auto w-full mb-32">
         <FadeUp>
@@ -106,7 +119,7 @@ export default function TilesPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/tiles-prep.webp" alt="Tile and LVT Fitting" fill className="object-cover" />
+              <Image src="/tiles-prep.webp" alt="LVT and SPC Flooring Fitting" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -117,24 +130,12 @@ export default function TilesPage() {
         <FadeUp>
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Our Formats</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Explore high-end ceramics, porcelains, and luxury vinyl click systems.</p>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Two types of luxury vinyl click flooring, each suited to different subfloors and rooms.</p>
           </div>
         </FadeUp>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
           
-          {/* Porcelain Tiles */}
-          <FadeUp delay={0.1}>
-            <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">
-              <Image src="/porcelain-tiles.webp" alt="Porcelain Tiles" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-8 md:p-10">
-                <h3 className="text-3xl font-serif font-bold text-white mb-2">Porcelain</h3>
-                <p className="text-gray-200 text-sm mb-6 max-w-sm">Denser and more durable than standard ceramic. The ultimate choice for high-traffic hallways and open-plan kitchen diners.</p>
-                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
-              </div>
-            </div>
-          </FadeUp>
-
           {/* LVT */}
           <FadeUp delay={0.2}>
             <div className="group relative h-[450px] overflow-hidden rounded-xl bg-gray-200">

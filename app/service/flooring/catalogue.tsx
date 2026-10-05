@@ -1,6 +1,6 @@
 "use client";
 
-// Shared product catalogue for the Laminate and Carpets pages:
+// Shared product catalogue for the Laminate, Carpets, Tiles, Stairs, Wall Panels and LVT pages:
 // product data, search + filters, product cards and the info pop-up.
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,26 +9,28 @@ import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
 import { EMBEDDED_IMAGES } from "./images";
 
-// ===== PASTE YOUR PRODUCT DATA HERE =====
-// (from "// ---------------- PRODUCT DATA & SPECS" down to the end of tarkettSpecs "};")
+// ---------------- PRODUCT DATA & SPECS ---------------- //
 
 // Colour swatch dots used in the COLOUR filter rows
 const COLOUR_DOT: Record<string, string> = {
   White: '#ece9e2', Grey: '#9a9a98', Natural: '#d9c3a0', Honey: '#c48f4e', Brown: '#8a5f3c', Dark: '#34302c',
   Beige: '#c9b596', Green: '#5f8a63', Charcoal: '#2f2c2b', Blue: '#3a566b', Yellow: '#b39640', Orange: '#b9713f', Red: '#8f3f33', Pink: '#d29d83',
-  Assorted: 'linear-gradient(135deg,#c9b596,#5f8a63,#2f5876)'
+  Assorted: 'linear-gradient(135deg,#c9b596,#5f8a63,#2f5876)',
+  Cream: '#e3d9c6', Taupe: '#a39482', Wood: '#a77b52'
 };
 const LAMINATE_COLOURS = ['White', 'Grey', 'Natural', 'Honey', 'Brown', 'Dark'];
+const PANEL_COLOURS = ['White', 'Natural', 'Honey', 'Brown', 'Grey', 'Blue'];
+const TILE_COLOURS = ['White', 'Cream', 'Taupe', 'Grey', 'Black', 'Blue', 'Green', 'Pink', 'Wood'];
 const CARPET_COLOURS = ['Beige', 'Brown', 'Grey', 'Charcoal', 'Blue', 'Green', 'Yellow', 'Orange', 'Red', 'Pink', 'Assorted'];
 
 // Colour is derived from the product name (edit any product's colour here if a shade is wrong)
 const getLaminateColour = (name: string) => {
   const n = name.toLowerCase();
-  if (/smoked|tobacco|walnut|dark|black/.test(n)) return 'Dark';
-  if (/white|marble/.test(n)) return 'White';
-  if (/grey|taupe|platinum|palladium/.test(n)) return 'Grey';
-  if (/honey/.test(n)) return 'Honey';
-  if (/beige|light|natural/.test(n)) return 'Natural';
+  if (/smoked|tobacco|walnut|dark|black|graphite|bronze/.test(n)) return 'Dark';
+  if (/white|marble|snow|ivory/.test(n)) return 'White';
+  if (/grey|taupe|platinum|palladium|silver/.test(n)) return 'Grey';
+  if (/honey|gold|sunshine/.test(n)) return 'Honey';
+  if (/beige|light|natural|cream|moon|sand|dune/.test(n)) return 'Natural';
   return 'Brown';
 };
 
@@ -59,7 +61,39 @@ const laminateRaw = [
   { id: 'l_h_1', category: 'Herringbone', name: 'Kittila Oak Herringbone', thickness: '12mm', rating: 'AC5', dimensions: '90 x 450mm', image: '/flooring/herringbone/kittila-herringbone.webp', desc: 'Combines the appearance of traditional herringbone parquet with the practicality of laminate.' },
   { id: 'l_h_2', category: 'Herringbone', name: 'Icelandic Oak Herringbone', thickness: '12mm', rating: 'AC5', dimensions: '90 x 450mm', image: '/flooring/herringbone/icelandic-herringbone.webp', desc: 'Combines the appearance of traditional herringbone parquet with the practicality of laminate.' },
   { id: 'l_h_3', category: 'Herringbone', name: 'Palladium Grey Herringbone', thickness: '12mm', rating: 'AC5', dimensions: '90 x 450mm', image: '/flooring/herringbone/palladium-herringbone.webp', desc: 'Combines the appearance of traditional herringbone parquet with the practicality of laminate.' },
-  { id: 'l_h_4', category: 'Herringbone', name: 'Smoked Cathedral Herringbone', thickness: '12mm', rating: 'AC5', dimensions: '90 x 450mm', image: '/flooring/herringbone/smoked-cathedral.webp', desc: 'Combines the appearance of traditional herringbone parquet with the practicality of laminate.' }
+  { id: 'l_h_4', category: 'Herringbone', name: 'Smoked Cathedral Herringbone', thickness: '12mm', rating: 'AC5', dimensions: '90 x 450mm', image: '/flooring/herringbone/smoked-cathedral.webp', desc: 'Combines the appearance of traditional herringbone parquet with the practicality of laminate.' },
+
+  // Wide Plank 14mm (oversized planks)
+  { id: 'l_sko_1', category: 'Wide Plank 14mm', name: 'Moon Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '2025mm x 244mm', image: '/flooring/swiss-krono/origin-moon.webp', desc: 'Crisp light French oak in oversized 14mm planks with synchronised pore structure. Water resistant.' },
+  { id: 'l_sko_2', category: 'Wide Plank 14mm', name: 'Snow Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '2025mm x 244mm', image: '/flooring/swiss-krono/origin-snow.webp', desc: 'Bright white-washed oak in extra-long, extra-wide planks. Water resistant.' },
+  { id: 'l_sko_3', category: 'Wide Plank 14mm', name: 'Dune Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '2025mm x 244mm', image: '/flooring/swiss-krono/origin-dune.webp', desc: 'Soft sandy oak tone with an authentic rustic real-wood feel.' },
+  { id: 'l_sko_4', category: 'Wide Plank 14mm', name: 'Rock Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '2025mm x 244mm', image: '/flooring/swiss-krono/origin-rock.webp', desc: 'Rustic French oak with 4-sided bevel and 5G click installation.' },
+  { id: 'l_sko_5', category: 'Wide Plank 14mm', name: 'Beach Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '2025mm x 244mm', image: '/flooring/swiss-krono/origin-beach.webp', desc: 'The look and feel of a valuable hardwood floor, scratch and impact resistant.' },
+  { id: 'l_sko_6', category: 'Wide Plank 14mm', name: 'Terra Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '2025mm x 244mm', image: '/flooring/swiss-krono/origin-terra.webp', desc: 'Warm rustic oak. Water resistant and suitable for damp rooms.' },
+  { id: 'l_sko_7', category: 'Wide Plank 14mm', name: 'Sunshine Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '2025mm x 244mm', image: '/flooring/swiss-krono/origin-sunshine.webp', desc: 'Golden warm oak tones that brighten large open-plan spaces.' },
+
+  // Premium 14mm
+  { id: 'l_ske_1', category: 'Premium 14mm', name: 'Gold Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '1380mm x 193mm', image: '/flooring/swiss-krono/evolution-gold.webp', desc: 'Honey-toned French oak with embossed-in-register texture. Water resistant, 5G click.' },
+  { id: 'l_ske_2', category: 'Premium 14mm', name: 'Ivory Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '1380mm x 193mm', image: '/flooring/swiss-krono/evolution-ivory.webp', desc: 'Light ivory oak with perfectly matched decor and surface structure.' },
+  { id: 'l_ske_3', category: 'Premium 14mm', name: 'Sandstone Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '1380mm x 193mm', image: '/flooring/swiss-krono/evolution-sandstone.webp', desc: 'Natural sandy oak, antistatic and anti-bacterial, suitable for kitchens.' },
+  { id: 'l_ske_4', category: 'Premium 14mm', name: 'Graphite Oak', thickness: '14mm', rating: 'AC5 / Class 33', dimensions: '1380mm x 193mm', image: '/flooring/swiss-krono/evolution-graphite.webp', desc: 'Deep graphite oak for bold, modern interiors and commercial spaces.' },
+
+  // Long Plank 12mm
+  { id: 'l_km_1', category: 'Long Plank 12mm', name: 'Everest Oak White', thickness: '12mm', rating: 'AC5 / Class 33', dimensions: '1845mm x 188mm', image: '/flooring/kronotex/everest-oak-white.webp', desc: 'White oak with registered embossed finish, 4V bevel and 5G click. 30-year residential warranty.' },
+  { id: 'l_km_2', category: 'Long Plank 12mm', name: 'Mountain Oak Beige', thickness: '12mm', rating: 'AC5 / Class 33', dimensions: '1845mm x 188mm', image: '/flooring/kronotex/mountain-oak-beige.webp', desc: 'Light sandy oak with visible grain and moisture-protected core.' },
+  { id: 'l_km_3', category: 'Long Plank 12mm', name: 'Highland Oak Silver', thickness: '12mm', rating: 'AC5 / Class 33', dimensions: '1845mm x 188mm', image: '/flooring/kronotex/highland-oak-silver.webp', desc: 'Silver-grey oak, suitable for water-based underfloor heating.' },
+  { id: 'l_km_4', category: 'Long Plank 12mm', name: 'Macro Oak Grey', thickness: '12mm', rating: 'AC5 / Class 33', dimensions: '1845mm x 188mm', image: '/flooring/kronotex/macro-oak-grey.webp', desc: 'Grey oak with registered embossed surface, built for heavy traffic.' },
+  { id: 'l_km_5', category: 'Long Plank 12mm', name: 'Macro Oak Brown', thickness: '12mm', rating: 'AC5 / Class 33', dimensions: '1845mm x 188mm', image: '/flooring/kronotex/macro-oak-brown.webp', desc: 'Rich rustic brown oak, water resistant, ideal for kitchens and hallways.' },
+  { id: 'l_km_6', category: 'Long Plank 12mm', name: 'Everest Oak Bronze', thickness: '12mm', rating: 'AC5 / Class 33', dimensions: '1845mm x 188mm', image: '/flooring/kronotex/everest-oak-bronze.webp', desc: 'Deep-toned oak with warm copper undertones for statement rooms.' },
+
+  // Classic 8mm
+  { id: 'l_eg_1', category: 'Classic 8mm', name: 'Asgil Light Oak', thickness: '8mm', rating: 'AC4 / Class 32', dimensions: '1292mm x 193mm', image: '/flooring/egger/asgil-light-oak.webp', desc: 'Warm natural oak with 4V bevel, click system and 20-year guarantee.' },
+  { id: 'l_eg_2', category: 'Classic 8mm', name: 'Natural Soria Oak', thickness: '8mm', rating: 'AC4 / Class 32', dimensions: '1292mm x 193mm', image: '/flooring/egger/natural-soria-oak.webp', desc: 'Natural pore surface, antibacterial and suitable for underfloor heating.' },
+  { id: 'l_eg_3', category: 'Classic 8mm', name: 'Parquet Oak Dark', thickness: '8mm', rating: 'AC4 / Class 32', dimensions: '1292mm x 193mm', image: '/flooring/egger/parquet-oak-dark.webp', desc: 'Dark oak, 100% PVC-free HDF core, easy-care melamine surface.' },
+  { id: 'l_eg_4', category: 'Classic 8mm', name: 'Moor Acacia', thickness: '8mm', rating: 'AC4 / Class 32', dimensions: '1292mm x 193mm', image: '/flooring/egger/moor-acacia.webp', desc: 'Characterful acacia decor, European-made with 20-year guarantee.' },
+  { id: 'l_eg_5', category: 'Classic 8mm', name: 'Natural North Oak Water Resistant', thickness: '8mm', rating: 'AC4 / Class 32', dimensions: '1292mm x 193mm', image: '/flooring/egger/natural-north-oak.webp', desc: 'Moisture-resistant laminate for kitchens, bathrooms and entrances.' },
+  { id: 'l_eg_6', category: 'Classic 8mm', name: 'Grey Soria Oak Water Resistant', thickness: '8mm', rating: 'AC4 / Class 32', dimensions: '1292mm x 193mm', image: '/flooring/egger/grey-soria-oak.webp', desc: 'Moisture-resistant grey oak, steam-cleaner safe.' },
+  { id: 'l_eg_7', category: 'Classic 8mm', name: 'Cream Hamilton Oak Extra Wide', thickness: '8mm', rating: 'AC4 / Class 32', dimensions: '1292mm x 327mm', image: '/flooring/egger/cream-hamilton-oak.webp', desc: 'Extra-wide planks for a spacious, modern look.' },
 ];
 
 const laminateCollections = laminateRaw.map(item => ({ ...item, colour: getLaminateColour(item.name) }));
@@ -121,6 +155,125 @@ const carpetCollections = [
   { id: 'c4', category: 'Luxury Carpets', colour: 'Assorted', name: 'Riva', pile: 'Deep Pile', thickness: '4m Width', weight: '53oz', image: '/carpets/luxury-carpets/riva.webp', desc: 'Ultra-deep and plush finish engineered for absolute comfort.' }
 ];
 
+// Tiles (sourced from our distributor's range). Size, finish and use shown in the pop-up.
+const tileCollections = [
+  // Marble-Effect
+  { id: 't_m_1', category: 'Marble-Effect', colour: 'Blue', name: 'Marmo Azul', size: '120 x 60cm', material: 'Porcelain', finish: 'Gloss', use: 'Floor & Wall', image: '/tiles/marble/marmo-azul.webp', desc: 'Deep blue marble-effect porcelain with soft white veining. 10mm thick, gloss finish for a striking feature floor or wall.' },
+  { id: 't_m_2', category: 'Marble-Effect', colour: 'White', name: 'Bianco Statuario', size: '160 x 80cm', material: 'Porcelain', finish: 'Gloss', use: 'Floor & Wall', image: '/tiles/marble/bianco-statuario.webp', desc: 'Classic white Statuario marble look with bold grey veining in an extra-large 160x80cm format. 10mm thick, gloss finish.' },
+  { id: 't_m_3', category: 'Marble-Effect', colour: 'Grey', name: 'Dexter Dove', size: '160 x 80cm', material: 'Porcelain', finish: 'Gloss', use: 'Floor & Wall', image: '/tiles/marble/dexter-dove.webp', desc: 'Soft dove-grey marble effect in an extra-large slab format with fewer grout lines. 10mm thick, gloss finish.' },
+  { id: 't_m_4', category: 'Marble-Effect', colour: 'Grey', name: 'Statuario Smoke', size: '100 x 100cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/marble/statuario-smoke.webp', desc: 'Smoky grey Statuario marble effect in a large 100x100cm square. 10mm thick, matt finish for a calm, modern look.' },
+  { id: 't_m_5', category: 'Marble-Effect', colour: 'Grey', name: 'Versilia Smoke', size: '100 x 100cm', material: 'Porcelain', finish: 'Gloss', use: 'Floor & Wall', image: '/tiles/marble/versilia-smoke.webp', desc: 'Dark smoke-grey marble with light veining in a large square format. 10mm thick, gloss finish.' },
+  // Concrete-Effect
+  { id: 't_c_1', category: 'Concrete-Effect', colour: 'White', name: 'Arena White', size: '100 x 100cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/concrete/arena-white.webp', desc: 'Clean white concrete-effect porcelain in a large 100x100cm format. Matt finish, suitable for floors and walls.' },
+  { id: 't_c_2', category: 'Concrete-Effect', colour: 'Grey', name: 'Arena Grey', size: '100 x 100cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/concrete/arena-grey.webp', desc: 'Minimalist grey concrete-effect porcelain, perfect for modern interiors. Matt finish, suitable for floors and walls.' },
+  { id: 't_c_3', category: 'Concrete-Effect', colour: 'Grey', name: 'Dextor Smoke', size: '100 x 100cm', material: 'Porcelain', finish: 'Satin Matt', use: 'Floor & Wall', image: '/tiles/concrete/dextor-smoke.webp', desc: 'Smoky mid-grey concrete look in a large square format with a soft satin-matt sheen.' },
+  { id: 't_c_4', category: 'Concrete-Effect', colour: 'Grey', name: 'Breton Grey', size: '100 x 100cm', material: 'Porcelain', finish: 'Satin Matt', use: 'Floor & Wall', image: '/tiles/concrete/breton-grey.webp', desc: 'Warm grey concrete effect with subtle texture, satin-matt finish in a 100x100cm format.' },
+  { id: 't_c_5', category: 'Concrete-Effect', colour: 'Grey', name: 'Dom Gris', size: '80 x 80cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/concrete/dom-gris.webp', desc: 'Urban grey concrete-effect porcelain in an 80x80cm square. Matt finish, hard-wearing for busy rooms.' },
+  { id: 't_c_6', category: 'Concrete-Effect', colour: 'Grey', name: 'Lunar Ash', size: '120 x 60cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/concrete/lunar-ash.webp', desc: 'Ash-grey concrete effect in a large 120x60cm rectangle. Matt finish for kitchens, hallways and open-plan spaces.' },
+  { id: 't_c_7', category: 'Concrete-Effect', colour: 'Grey', name: 'Lunar Silver', size: '120 x 60cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/concrete/lunar-silver.webp', desc: 'Light silver-grey concrete effect in a 120x60cm format. Matt finish with a clean, contemporary look.' },
+  { id: 't_c_8', category: 'Concrete-Effect', colour: 'White', name: 'Manhattan Bianco', size: '60 x 60cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/concrete/manhattan-bianco.webp', desc: 'Soft off-white concrete-effect porcelain in a versatile 60x60cm size. Matt finish.' },
+  // Wood-Effect
+  { id: 't_w_1', category: 'Wood-Effect', colour: 'Taupe', name: 'Moneo Taupe', size: '120 x 20cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/wood/moneo-taupe.webp', desc: 'Taupe wood-effect porcelain plank. The look of timber with the water resistance of tile, ideal over underfloor heating.' },
+  { id: 't_w_2', category: 'Wood-Effect', colour: 'Wood', name: 'Kael Roble', size: '120 x 23cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/wood/kael-roble.webp', desc: 'Warm oak (roble) wood-effect porcelain plank in a 120x23cm format. Matt finish, perfect for kitchens and hallways.' },
+  { id: 't_w_3', category: 'Wood-Effect', colour: 'Wood', name: 'Origen Natural', size: '120 x 23cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/wood/origen-natural.webp', desc: 'Natural light-oak wood effect in a long porcelain plank. Matt finish, easy to clean and scratch resistant.' },
+  { id: 't_w_4', category: 'Wood-Effect', colour: 'White', name: 'IWood White', size: '90 x 15cm', material: 'Porcelain', finish: 'Matt', use: 'Floor & Wall', image: '/tiles/wood/iwood-white.webp', desc: 'White-washed wood-effect porcelain in a slim 90x15cm plank. Matt finish for a bright Scandi look.' },
+  // Wall & Metro
+  { id: 't_mt_1', category: 'Wall & Metro', colour: 'White', name: 'Metro XL White', size: '30 x 10cm', material: 'Ceramic', finish: 'Gloss', use: 'Wall', image: '/tiles/metro/metro-xl-white.webp', desc: 'Bright white flat metro wall tile, 300x100x8mm. Gloss finish, easy to clean, perfect for kitchens, bathrooms or feature walls.' },
+  { id: 't_mt_2', category: 'Wall & Metro', colour: 'Black', name: 'Metro Polar Noir', size: '30 x 10cm', material: 'Ceramic', finish: 'Gloss', use: 'Wall', image: '/tiles/metro/metro-polar-noir.webp', desc: 'Black gloss ceramic metro wall tile in a 30x10cm format. A bold, modern splashback choice.' },
+  { id: 't_mt_3', category: 'Wall & Metro', colour: 'Green', name: 'Metro Alma Verde', size: '30 x 10cm', material: 'Porcelain', finish: 'Gloss', use: 'Wall', image: '/tiles/metro/metro-alma-verde.webp', desc: 'Rich green gloss metro wall tile with a hand-made, glazed character. 30x10cm.' },
+  { id: 't_mt_4', category: 'Wall & Metro', colour: 'Blue', name: 'Soldeu Blue', size: '30 x 7.5cm', material: 'Ceramic', finish: 'Textured Gloss', use: 'Wall', image: '/tiles/metro/soldeu-blue.webp', desc: 'Blue textured-gloss ceramic metro wall tile in a slim 30x7.5cm format with an artisan, uneven surface.' },
+  { id: 't_mt_5', category: 'Wall & Metro', colour: 'Pink', name: 'Soldeu Pink', size: '30 x 7.5cm', material: 'Ceramic', finish: 'Textured Gloss', use: 'Wall', image: '/tiles/metro/soldeu-pink.webp', desc: 'Soft pink textured-gloss ceramic metro wall tile, 30x7.5cm. Adds warmth to bathrooms and kitchens.' },
+  { id: 't_mt_6', category: 'Wall & Metro', colour: 'Grey', name: 'Iceberg Grey', size: '22.5 x 7.5cm', material: 'Ceramic', finish: 'Gloss', use: 'Wall', image: '/tiles/metro/iceberg-grey.webp', desc: 'Light grey gloss ceramic metro wall tile in a 22.5x7.5cm size.' },
+  { id: 't_mt_7', category: 'Wall & Metro', colour: 'White', name: 'Mini Metro White Bevelled', size: '15 x 7.5cm', material: 'Ceramic', finish: 'Gloss', use: 'Wall', image: '/tiles/metro/mini-metro-white-bevelled.webp', desc: 'Classic small white bevelled metro wall tile, 15x7.5cm. Gloss finish, a timeless splashback.' },
+  // Outdoor
+  { id: 't_o_1', category: 'Outdoor', colour: 'Grey', name: 'Kandla Grey', size: '120 x 60cm', material: 'Porcelain', finish: 'Matt', use: 'Outdoor', image: '/tiles/outdoor/kandla-grey.webp', desc: 'Grey sandstone-effect outdoor porcelain, 1200x600x20mm. Matt finish for patios and garden paths.' },
+  { id: 't_o_2', category: 'Outdoor', colour: 'Grey', name: 'Howth Grey', size: '120 x 60cm', material: 'Porcelain', finish: 'Matt', use: 'Outdoor', image: '/tiles/outdoor/howth-grey.webp', desc: 'Grey limestone-effect outdoor porcelain, 1200x600x20mm. Matt, frost-resistant and easy to maintain.' },
+  { id: 't_o_3', category: 'Outdoor', colour: 'Taupe', name: 'Berlin Taupe', size: '120 x 60cm', material: 'Porcelain', finish: 'Matt', use: 'Outdoor', image: '/tiles/outdoor/berlin-taupe.webp', desc: 'Warm taupe limestone-effect outdoor porcelain, 1200x600x20mm. Matt finish.' },
+  { id: 't_o_4', category: 'Outdoor', colour: 'Wood', name: 'Riverwood Pearl', size: '120 x 30cm', material: 'Porcelain', finish: 'Matt', use: 'Outdoor', image: '/tiles/outdoor/riverwood-pearl.webp', desc: 'Pearl-toned wood-effect outdoor porcelain plank, 1200x300x20mm. The decking look with no rot or splinters.' },
+  { id: 't_o_5', category: 'Outdoor', colour: 'Black', name: 'Black Terrazzo', size: '60 x 60cm', material: 'Porcelain', finish: 'Matt', use: 'Outdoor', image: '/tiles/outdoor/black-terrazzo.webp', desc: 'Black terrazzo-effect outdoor porcelain, 600x600x20mm. Matt finish for a bold patio.' },
+  { id: 't_o_6', category: 'Outdoor', colour: 'Cream', name: 'Laguna Cream', size: '60 x 60cm', material: 'Porcelain', finish: 'Matt', use: 'Outdoor', image: '/tiles/outdoor/laguna-cream.webp', desc: 'Light cream marble-effect outdoor porcelain, 600x600x20mm. Matt finish, ideal for bright patios.' },
+];
+
+// Stair cladding (treads, risers and kits). Size shown as thickness x width x length.
+const stairCollections = [
+  // Laminate 8mm
+  { id: 's_l_1_1', category: 'Laminate 8mm', colour: 'Natural', name: 'Light Oak Single Tread & Riser', size: '8 x 340 x 1000mm', piece: 'Single Tread & Riser', range: 'Laminate', image: '/stairs/laminate/light-oak-single-tread-and-riser.webp', desc: 'Pack of 1 tread + 1 riser. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_1_2', category: 'Laminate 8mm', colour: 'Natural', name: 'Light Oak Bullnose Tread & Riser', size: '8 x 340 x 1200mm', piece: 'Bullnose Tread & Riser', range: 'Laminate', image: '/stairs/laminate/light-oak-bullnose-tread-and-riser.webp', desc: 'Pack of 1 bullnose tread + 1 riser, for the rounded bottom step. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_1_3', category: 'Laminate 8mm', colour: 'Natural', name: 'Light Oak Quattro Treads & Risers', size: '8 x 340 x 1000mm', piece: 'Multi-Pack (4 Steps)', range: 'Laminate', image: '/stairs/laminate/light-oak-quattro-treads-and-risers.webp', desc: 'Value pack of 4 treads + 4 risers. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_1_4', category: 'Laminate 8mm', colour: 'Natural', name: 'Light Oak Double Winder Tread & Riser', size: '8 x 690 x 1200mm', piece: 'Winder Tread & Riser', range: 'Laminate', image: '/stairs/laminate/light-oak-double-winder-tread-and-riser.webp', desc: 'Extra-deep 690mm tread for turning (winder) steps. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_2_1', category: 'Laminate 8mm', colour: 'Honey', name: 'Honey Oak Single Tread & Riser', size: '8 x 340 x 1000mm', piece: 'Single Tread & Riser', range: 'Laminate', image: '/stairs/laminate/honey-oak-single-tread-and-riser.webp', desc: 'Pack of 1 tread + 1 riser. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_2_2', category: 'Laminate 8mm', colour: 'Honey', name: 'Honey Oak Bullnose Tread & Riser', size: '8 x 340 x 1200mm', piece: 'Bullnose Tread & Riser', range: 'Laminate', image: '/stairs/laminate/honey-oak-bullnose-tread-and-riser.webp', desc: 'Pack of 1 bullnose tread + 1 riser, for the rounded bottom step. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_2_3', category: 'Laminate 8mm', colour: 'Honey', name: 'Honey Oak Quattro Treads & Risers', size: '8 x 340 x 1000mm', piece: 'Multi-Pack (4 Steps)', range: 'Laminate', image: '/stairs/laminate/honey-oak-quattro-treads-and-risers.webp', desc: 'Value pack of 4 treads + 4 risers. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_2_4', category: 'Laminate 8mm', colour: 'Honey', name: 'Honey Oak Double Winder Tread & Riser', size: '8 x 690 x 1200mm', piece: 'Winder Tread & Riser', range: 'Laminate', image: '/stairs/laminate/honey-oak-double-winder-tread-and-riser.webp', desc: 'Extra-deep 690mm tread for turning (winder) steps. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_3_1', category: 'Laminate 8mm', colour: 'Brown', name: 'Wild Oak Single Tread & Riser', size: '8 x 340 x 1000mm', piece: 'Single Tread & Riser', range: 'Laminate', image: '/stairs/laminate/wild-oak-single-tread-and-riser.webp', desc: 'Pack of 1 tread + 1 riser. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_3_2', category: 'Laminate 8mm', colour: 'Brown', name: 'Wild Oak Bullnose Tread & Riser', size: '8 x 340 x 1200mm', piece: 'Bullnose Tread & Riser', range: 'Laminate', image: '/stairs/laminate/wild-oak-bullnose-tread-and-riser.webp', desc: 'Pack of 1 bullnose tread + 1 riser, for the rounded bottom step. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_3_3', category: 'Laminate 8mm', colour: 'Brown', name: 'Wild Oak Quattro Treads & Risers', size: '8 x 340 x 1000mm', piece: 'Multi-Pack (4 Steps)', range: 'Laminate', image: '/stairs/laminate/wild-oak-quattro-treads-and-risers.webp', desc: 'Value pack of 4 treads + 4 risers. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_3_4', category: 'Laminate 8mm', colour: 'Brown', name: 'Wild Oak Double Winder Tread & Riser', size: '8 x 690 x 1200mm', piece: 'Winder Tread & Riser', range: 'Laminate', image: '/stairs/laminate/wild-oak-double-winder-tread-and-riser.webp', desc: 'Extra-deep 690mm tread for turning (winder) steps. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_4_1', category: 'Laminate 8mm', colour: 'Dark', name: 'Milani Dark Oak Single Tread & Riser', size: '8 x 340 x 1000mm', piece: 'Single Tread & Riser', range: 'Laminate', image: '/stairs/laminate/milani-dark-oak-single-tread-and-riser.webp', desc: 'Pack of 1 tread + 1 riser. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_4_2', category: 'Laminate 8mm', colour: 'Dark', name: 'Milani Dark Oak Bullnose Tread & Riser', size: '8 x 340 x 1200mm', piece: 'Bullnose Tread & Riser', range: 'Laminate', image: '/stairs/laminate/milani-dark-oak-bullnose-tread-and-riser.webp', desc: 'Pack of 1 bullnose tread + 1 riser, for the rounded bottom step. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_4_3', category: 'Laminate 8mm', colour: 'Dark', name: 'Milani Dark Oak Quattro Treads & Risers', size: '8 x 340 x 1000mm', piece: 'Multi-Pack (4 Steps)', range: 'Laminate', image: '/stairs/laminate/milani-dark-oak-quattro-treads-and-risers.webp', desc: 'Value pack of 4 treads + 4 risers. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_4_4', category: 'Laminate 8mm', colour: 'Dark', name: 'Milani Dark Oak Double Winder Tread & Riser', size: '8 x 690 x 1200mm', piece: 'Winder Tread & Riser', range: 'Laminate', image: '/stairs/laminate/milani-dark-oak-double-winder-tread-and-riser.webp', desc: 'Extra-deep 690mm tread for turning (winder) steps. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_5_1', category: 'Laminate 8mm', colour: 'Grey', name: 'Lizzy Oak Grey Single Tread & Riser', size: '8 x 340 x 1000mm', piece: 'Single Tread & Riser', range: 'Laminate', image: '/stairs/laminate/lizzy-oak-grey-single-tread-and-riser.webp', desc: 'Pack of 1 tread + 1 riser. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_5_2', category: 'Laminate 8mm', colour: 'Grey', name: 'Lizzy Oak Grey Bullnose Tread & Riser', size: '8 x 340 x 1200mm', piece: 'Bullnose Tread & Riser', range: 'Laminate', image: '/stairs/laminate/lizzy-oak-grey-bullnose-tread-and-riser.webp', desc: 'Pack of 1 bullnose tread + 1 riser, for the rounded bottom step. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_5_3', category: 'Laminate 8mm', colour: 'Grey', name: 'Lizzy Oak Grey Quattro Treads & Risers', size: '8 x 340 x 1000mm', piece: 'Multi-Pack (4 Steps)', range: 'Laminate', image: '/stairs/laminate/lizzy-oak-grey-quattro-treads-and-risers.webp', desc: 'Value pack of 4 treads + 4 risers. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_5_4', category: 'Laminate 8mm', colour: 'Grey', name: 'Lizzy Oak Grey Double Winder Tread & Riser', size: '8 x 690 x 1200mm', piece: 'Winder Tread & Riser', range: 'Laminate', image: '/stairs/laminate/lizzy-oak-grey-double-winder-tread-and-riser.webp', desc: 'Extra-deep 690mm tread for turning (winder) steps. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_6_1', category: 'Laminate 8mm', colour: 'Natural', name: 'Roicha Oak Beige Single Tread & Riser', size: '8 x 340 x 1000mm', piece: 'Single Tread & Riser', range: 'Laminate', image: '/stairs/laminate/roicha-oak-beige-single-tread-and-riser.webp', desc: 'Pack of 1 tread + 1 riser. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_6_2', category: 'Laminate 8mm', colour: 'Natural', name: 'Roicha Oak Beige Bullnose Tread & Riser', size: '8 x 340 x 1200mm', piece: 'Bullnose Tread & Riser', range: 'Laminate', image: '/stairs/laminate/roicha-oak-beige-bullnose-tread-and-riser.webp', desc: 'Pack of 1 bullnose tread + 1 riser, for the rounded bottom step. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_6_3', category: 'Laminate 8mm', colour: 'Natural', name: 'Roicha Oak Beige Quattro Treads & Risers', size: '8 x 340 x 1000mm', piece: 'Multi-Pack (4 Steps)', range: 'Laminate', image: '/stairs/laminate/roicha-oak-beige-quattro-treads-and-risers.webp', desc: 'Value pack of 4 treads + 4 risers. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  { id: 's_l_6_4', category: 'Laminate 8mm', colour: 'Natural', name: 'Roicha Oak Beige Double Winder Tread & Riser', size: '8 x 690 x 1200mm', piece: 'Winder Tread & Riser', range: 'Laminate', image: '/stairs/laminate/roicha-oak-beige-double-winder-tread-and-riser.webp', desc: 'Extra-deep 690mm tread for turning (winder) steps. Laminate stair cladding, 8mm thick. Reversible riser in matching decor or white. Resistant to stains, impacts and scratches, UV-protected and suitable for underfloor heating. Glue-down installation with a 40mm drop. Matching stair nose, top-step transition, infill panels and flat profiles available.' },
+  // Engineered Oak 14mm
+  { id: 's_e_1_1', category: 'Engineered Oak 14mm', colour: 'White', name: 'Mountain Chalk Bullnose Stair Tread', size: '14 x 300 x 1200mm', piece: 'Bullnose Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-chalk-bullnose-stair-tread.webp', desc: 'Rounded bullnose tread for the bottom or feature step. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_1_2', category: 'Engineered Oak 14mm', colour: 'White', name: 'Mountain Chalk Stair Tread', size: '14 x 115 x 945mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-chalk-stair-tread.webp', desc: 'Nosing tread piece used with matching floor planks to clad each step. Packs of 2. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_1_3', category: 'Engineered Oak 14mm', colour: 'White', name: 'Mountain Chalk Long Stair Tread', size: '14 x 115 x 1900mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-chalk-long-stair-tread.webp', desc: 'Extra-long 1900mm nosing tread for wide staircases. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_2_1', category: 'Engineered Oak 14mm', colour: 'Grey', name: 'Mountain Mist Bullnose Stair Tread', size: '14 x 300 x 1200mm', piece: 'Bullnose Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-mist-bullnose-stair-tread.webp', desc: 'Rounded bullnose tread for the bottom or feature step. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_2_2', category: 'Engineered Oak 14mm', colour: 'Grey', name: 'Mountain Mist Stair Tread', size: '14 x 115 x 945mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-mist-stair-tread.webp', desc: 'Nosing tread piece used with matching floor planks to clad each step. Packs of 2. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_2_3', category: 'Engineered Oak 14mm', colour: 'Grey', name: 'Mountain Mist Long Stair Tread', size: '14 x 115 x 1900mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-mist-long-stair-tread.webp', desc: 'Extra-long 1900mm nosing tread for wide staircases. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_3_1', category: 'Engineered Oak 14mm', colour: 'Honey', name: 'Mountain Rustic Oak Bullnose Stair Tread', size: '14 x 300 x 1200mm', piece: 'Bullnose Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-rustic-oak-bullnose-stair-tread.webp', desc: 'Rounded bullnose tread for the bottom or feature step. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_3_2', category: 'Engineered Oak 14mm', colour: 'Honey', name: 'Mountain Rustic Oak Stair Tread', size: '14 x 115 x 945mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-rustic-oak-stair-tread.webp', desc: 'Nosing tread piece used with matching floor planks to clad each step. Packs of 2. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_3_3', category: 'Engineered Oak 14mm', colour: 'Honey', name: 'Mountain Rustic Oak Long Stair Tread', size: '14 x 115 x 1900mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-rustic-oak-long-stair-tread.webp', desc: 'Extra-long 1900mm nosing tread for wide staircases. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_4_1', category: 'Engineered Oak 14mm', colour: 'Brown', name: 'Mountain Ridge Bullnose Stair Tread', size: '14 x 300 x 1200mm', piece: 'Bullnose Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-ridge-bullnose-stair-tread.webp', desc: 'Rounded bullnose tread for the bottom or feature step. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_4_2', category: 'Engineered Oak 14mm', colour: 'Brown', name: 'Mountain Ridge Stair Tread', size: '14 x 115 x 945mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-ridge-stair-tread.webp', desc: 'Nosing tread piece used with matching floor planks to clad each step. Packs of 2. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_4_3', category: 'Engineered Oak 14mm', colour: 'Brown', name: 'Mountain Ridge Long Stair Tread', size: '14 x 115 x 1900mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-ridge-long-stair-tread.webp', desc: 'Extra-long 1900mm nosing tread for wide staircases. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_5_1', category: 'Engineered Oak 14mm', colour: 'Dark', name: 'Mountain Deep Smoked Bullnose Stair Tread', size: '14 x 300 x 1200mm', piece: 'Bullnose Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-deep-smoked-bullnose-stair-tread.webp', desc: 'Rounded bullnose tread for the bottom or feature step. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_5_2', category: 'Engineered Oak 14mm', colour: 'Dark', name: 'Mountain Deep Smoked Stair Tread', size: '14 x 115 x 945mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-deep-smoked-stair-tread.webp', desc: 'Nosing tread piece used with matching floor planks to clad each step. Packs of 2. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+  { id: 's_e_5_3', category: 'Engineered Oak 14mm', colour: 'Dark', name: 'Mountain Deep Smoked Long Stair Tread', size: '14 x 115 x 1900mm', piece: 'Stair Tread', range: 'Engineered Oak', image: '/stairs/engineered/mountain-deep-smoked-long-stair-tread.webp', desc: 'Extra-long 1900mm nosing tread for wide staircases. Engineered oak with a 3mm real-wood top layer and brushed matt lacquered finish that shows natural grain and knots. Glue-down installation with a 60mm drop. Matches the same range of floor planks, herringbone and chevron.' },
+];
+
+// Wall panels (fluted MDF and acoustic slat panels). Size shown as thickness x width x height.
+const panelCollections = [
+  { id: 'w_1', category: 'Slat Panels', colour: 'Brown', name: 'Walnut Narrow Slat Panel', size: '12 x 122 x 2400mm', panel: 'Slat Panel (Narrow)', finish: 'Wood-effect PVC', image: '/wall-panels/walnut-narrow-slat-panel.webp', desc: 'Warm walnut tone with narrow fluting for a refined, linear look. MDF panel with a wood-effect PVC finish, 2400mm tall so one length covers a standard wall. Fixes with glue or screws. Not suitable for bathrooms.' },
+  { id: 'w_2', category: 'Slat Panels', colour: 'Honey', name: 'Medium Oak Narrow Slat Panel', size: '12 x 122 x 2400mm', panel: 'Slat Panel (Narrow)', finish: 'Wood-effect PVC', image: '/wall-panels/medium-oak-narrow-slat-panel.webp', desc: 'Mid-tone oak with narrow fluting, great behind TVs and beds. MDF panel with a wood-effect PVC finish, 2400mm tall so one length covers a standard wall. Fixes with glue or screws. Not suitable for bathrooms.' },
+  { id: 'w_3', category: 'Slat Panels', colour: 'Grey', name: 'Anthracite Grey Slat Panel', size: '12 x 122 x 2400mm', panel: 'Slat Panel (Medium)', finish: 'Wood-effect PVC', image: '/wall-panels/anthracite-grey-slat-panel.webp', desc: 'Deep anthracite grey for bold, modern feature walls. MDF panel with a wood-effect PVC finish, 2400mm tall so one length covers a standard wall. Fixes with glue or screws. Not suitable for bathrooms.' },
+  { id: 'w_4', category: 'Slat Panels', colour: 'Blue', name: 'Blue Textured Slat Panel', size: '12 x 122 x 2400mm', panel: 'Slat Panel (Medium)', finish: 'Wood-effect PVC', image: '/wall-panels/blue-textured-slat-panel.webp', desc: 'Rich blue textured finish for a striking statement wall. MDF panel with a wood-effect PVC finish, 2400mm tall so one length covers a standard wall. Fixes with glue or screws. Not suitable for bathrooms.' },
+  { id: 'w_5', category: 'Slat Panels', colour: 'White', name: 'White Textured Slat Panel', size: '12 x 122 x 2400mm', panel: 'Slat Panel (Medium)', finish: 'Wood-effect PVC', image: '/wall-panels/white-textured-slat-panel.webp', desc: 'Fresh white textured finish that brightens a room while adding depth. MDF panel with a wood-effect PVC finish, 2400mm tall so one length covers a standard wall. Fixes with glue or screws. Not suitable for bathrooms.' },
+  { id: 'w_6', category: 'Acoustic Panels', colour: 'Natural', name: 'Oak Veneer Acoustic Panel', size: '21 x 600 x 2400mm', panel: 'Acoustic Slat Panel', finish: 'Oak-look veneer on black felt', image: '/wall-panels/oak-veneer-acoustic-panel.webp', desc: 'Classic oak slats on black felt, ideal for living rooms, home offices and studios. Real-look slats on an MDF core over a polyester felt backing that cuts echo and noise. NRC 0.3 fixed directly to the wall, up to NRC 0.8 on battens with a rockwool-filled gap. Fixes with glue or screws; matching end profiles available.' },
+  { id: 'w_7', category: 'Acoustic Panels', colour: 'Brown', name: 'Dark Walnut Acoustic Panel', size: '21 x 600 x 2400mm', panel: 'Acoustic Slat Panel', finish: 'Walnut-look veneer on black felt', image: '/wall-panels/dark-walnut-acoustic-panel.webp', desc: 'Rich dark walnut slats on black felt for a luxurious, sound-softening feature wall. Real-look slats on an MDF core over a polyester felt backing that cuts echo and noise. NRC 0.3 fixed directly to the wall, up to NRC 0.8 on battens with a rockwool-filled gap. Fixes with glue or screws; matching end profiles available.' },
+];
+
+// LVT / SPC rigid-core vinyl. Size shown as thickness (core + pad) x width x length.
+const lvtCollections = [
+  // Wide Plank 6mm
+  { id: 'v_w_1', category: 'Wide Plank 6mm', colour: 'Dark', name: 'Coastal Drift Oak', size: '5+1 x 229 x 1219mm', format: 'Plank', usage: 'Class 34', image: '/lvt/plank/coastal-drift-oak.webp', desc: 'Dark brown oak in an extra-wide 229mm plank. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  { id: 'v_w_2', category: 'Wide Plank 6mm', colour: 'Natural', name: 'Harbour Mist Oak', size: '5+1 x 229 x 1219mm', format: 'Plank', usage: 'Class 34', image: '/lvt/plank/harbour-mist-oak.webp', desc: 'Neutral beige oak in an extra-wide 229mm plank. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  { id: 'v_w_3', category: 'Wide Plank 6mm', colour: 'Brown', name: 'Lagoon Sand Oak', size: '5+1 x 229 x 1219mm', format: 'Plank', usage: 'Class 34', image: '/lvt/plank/lagoon-sand-oak.webp', desc: 'Warm brown oak in an extra-wide 229mm plank. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  { id: 'v_w_4', category: 'Wide Plank 6mm', colour: 'Brown', name: 'Riptide Oak', size: '5+1 x 229 x 1219mm', format: 'Plank', usage: 'Class 34', image: '/lvt/plank/riptide-oak.webp', desc: 'Warm mid-brown oak in an extra-wide 229mm plank. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  { id: 'v_w_5', category: 'Wide Plank 6mm', colour: 'Grey', name: 'Silver Stream Oak', size: '5+1 x 229 x 1219mm', format: 'Plank', usage: 'Class 34', image: '/lvt/plank/silver-stream-oak.webp', desc: 'Silver-grey oak in an extra-wide 229mm plank. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  // Herringbone 6mm
+  { id: 'v_h_1', category: 'Herringbone 6mm', colour: 'Dark', name: 'Coastal Drift Oak Herringbone', size: '5+1 x 153 x 600mm', format: 'Herringbone', usage: 'Class 34', image: '/lvt/herringbone/coastal-drift-oak-herringbone.webp', desc: 'Dark brown oak laid in a classic herringbone pattern. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  { id: 'v_h_2', category: 'Herringbone 6mm', colour: 'Natural', name: 'Harbour Mist Oak Herringbone', size: '5+1 x 153 x 600mm', format: 'Herringbone', usage: 'Class 34', image: '/lvt/herringbone/harbour-mist-oak-herringbone.webp', desc: 'Neutral beige oak herringbone for a bright, elegant room. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  { id: 'v_h_3', category: 'Herringbone 6mm', colour: 'Brown', name: 'Lagoon Sand Oak Herringbone', size: '5+1 x 153 x 600mm', format: 'Herringbone', usage: 'Class 34', image: '/lvt/herringbone/lagoon-sand-oak-herringbone.webp', desc: 'Warm brown oak herringbone. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  { id: 'v_h_4', category: 'Herringbone 6mm', colour: 'Brown', name: 'Riptide Oak Herringbone', size: '5+1 x 153 x 600mm', format: 'Herringbone', usage: 'Class 34', image: '/lvt/herringbone/riptide-oak-herringbone.webp', desc: 'Warm mid-brown oak herringbone. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  { id: 'v_h_5', category: 'Herringbone 6mm', colour: 'Grey', name: 'Silver Stream Oak Herringbone', size: '5+1 x 153 x 600mm', format: 'Herringbone', usage: 'Class 34', image: '/lvt/herringbone/silver-stream-oak-herringbone.webp', desc: 'Silver-grey oak herringbone for a modern look. Rigid SPC core with integrated underlay, so no separate underlay is needed. Waterproof core, suitable for bathrooms and kitchens. Usage class 34 for heavy domestic and commercial traffic. Hickory scrape finish, scratch and slip resistant, anti-bacterial, pet and kid friendly. Floating click installation. 30-year domestic guarantee.' },
+  // Classic Plank 6mm
+  { id: 'v_r_1', category: 'Classic Plank 6mm', colour: 'Brown', name: 'Scandipure', size: '5+1 x 192 x 1210mm', format: 'Plank', usage: 'Class 34', image: '/lvt/plank/scandipure.webp', desc: 'Warm brown oak with a subtle Scandinavian-style woodgrain. Rigid SPC core with integrated underlay pad. Waterproof and dimensionally stable, suitable for underfloor heating. Usage class 34. Hickory scrape soft-touch finish, scratch resistant and stain proof, with 4-sided V-groove and click-fit installation. 30-year domestic guarantee.' },
+  { id: 'v_r_2', category: 'Classic Plank 6mm', colour: 'Dark', name: 'Bourbon Cask', size: '5+1 x 192 x 1210mm', format: 'Plank', usage: 'Class 34', image: '/lvt/plank/bourbon-cask.webp', desc: 'Rich dark brown oak with a warm tone. Rigid SPC core with integrated underlay pad. Waterproof and dimensionally stable, suitable for underfloor heating. Usage class 34. Hickory scrape soft-touch finish, scratch resistant and stain proof, with 4-sided V-groove and click-fit installation. 30-year domestic guarantee.' },
+  { id: 'v_r_3', category: 'Classic Plank 6mm', colour: 'Brown', name: 'Barista', size: '5+1 x 192 x 1210mm', format: 'Plank', usage: 'Class 34', image: '/lvt/plank/barista.webp', desc: 'Earthy brown tones with detailed woodgrain. Rigid SPC core with integrated underlay pad. Waterproof and dimensionally stable, suitable for underfloor heating. Usage class 34. Hickory scrape soft-touch finish, scratch resistant and stain proof, with 4-sided V-groove and click-fit installation. 30-year domestic guarantee.' },
+  { id: 'v_r_4', category: 'Classic Plank 6mm', colour: 'White', name: 'Airflow', size: '5+1 x 192 x 1210mm', format: 'Plank', usage: 'Class 34', image: '/lvt/plank/airflow.webp', desc: 'Light white-washed oak that brightens any space. Rigid SPC core with integrated underlay pad. Waterproof and dimensionally stable, suitable for underfloor heating. Usage class 34. Hickory scrape soft-touch finish, scratch resistant and stain proof, with 4-sided V-groove and click-fit installation. 30-year domestic guarantee.' },
+  // Essential 5mm
+  { id: 'v_e_1', category: 'Essential 5mm', colour: 'Grey', name: 'Orchid Oak', size: '4+1 x 192 x 1280mm', format: 'Plank', usage: 'Class 32', image: '/lvt/plank/orchid-oak.webp', desc: 'Soft light-grey oak with a clean plank design. Rigid SPC core with integrated underlay pad. Water resistant, suitable for bathrooms, and suitable for underfloor heating. Usage class 32 for domestic use. A great-value waterproof floor for any room.' },
+  { id: 'v_e_2', category: 'Essential 5mm', colour: 'Natural', name: 'Malt Tree', size: '4+1 x 192 x 1280mm', format: 'Plank', usage: 'Class 32', image: '/lvt/plank/malt-tree.webp', desc: 'Warm beige wood look. Rigid SPC core with integrated underlay pad. Water resistant, suitable for bathrooms, and suitable for underfloor heating. Usage class 32 for domestic use. A great-value waterproof floor for any room.' },
+];
+
 // Shown inside the product info modal (Tarkett DESSO Essence Elements collections)
 const tarkettSpecs: Record<string, { overview: string[]; tech: string[] }> = {
   'Essence Pure': {
@@ -140,15 +293,15 @@ const tarkettSpecs: Record<string, { overview: string[]; tech: string[] }> = {
 // Images come from images.ts (embedded). Paths not found there load from /public.
 const img = (path: string): string => EMBEDDED_IMAGES[path] ?? path;
 
-type Product = (typeof laminateCollections)[number] | (typeof carpetCollections)[number];
-type Kind = 'laminate' | 'carpet';
+type Product = (typeof laminateCollections)[number] | (typeof carpetCollections)[number] | (typeof tileCollections)[number] | (typeof stairCollections)[number] | (typeof panelCollections)[number] | (typeof lvtCollections)[number];
+type Kind = 'laminate' | 'carpet' | 'tile' | 'stair' | 'panel' | 'lvt';
 
 const CONFIG = {
   laminate: {
     items: laminateCollections as Product[],
-    search: 'Search a range or colour - try "Oak", "Grey", "Herringbone"...',
+    search: 'Search a range or colour - try "Oak", "Grey", "Wide Plank", "14mm"...',
     filters: [
-      { key: 'category', label: 'COLLECTION', options: ['White / Grey', 'Browns', 'Herringbone', '12mm Story'] },
+      { key: 'category', label: 'COLLECTION', options: ['White / Grey', 'Browns', 'Herringbone', '12mm Story', 'Wide Plank 14mm', 'Premium 14mm', 'Long Plank 12mm', 'Classic 8mm'] },
       { key: 'colour', label: 'COLOUR', options: LAMINATE_COLOURS, dots: true },
       { key: 'thickness', label: 'THICKNESS', options: ['8mm', '10mm', '12mm', '14mm'] },
     ],
@@ -162,11 +315,60 @@ const CONFIG = {
       { key: 'pile', label: 'PILE STRUCTURE', options: ['Deep Pile', 'Loop Pile', 'Structured Loop'] },
     ],
   },
+  tile: {
+    items: tileCollections as Product[],
+    search: 'Search a tile or colour - try "Marble", "Grey", "Metro", "120 x 60"...',
+    filters: [
+      { key: 'category', label: 'STYLE', options: ['Marble-Effect', 'Concrete-Effect', 'Wood-Effect', 'Wall & Metro', 'Outdoor'] },
+      { key: 'colour', label: 'COLOUR', options: TILE_COLOURS, dots: true },
+      { key: 'finish', label: 'FINISH', options: ['Matt', 'Satin Matt', 'Gloss', 'Textured Gloss'] },
+      { key: 'use', label: 'SUITABLE FOR', options: ['Floor & Wall', 'Wall', 'Outdoor'] },
+    ],
+  },
+  stair: {
+    items: stairCollections as Product[],
+    search: 'Search a colour or piece - try "Oak", "Bullnose", "Grey", "Winder"...',
+    filters: [
+      { key: 'category', label: 'RANGE', options: ['Laminate 8mm', 'Engineered Oak 14mm'] },
+      { key: 'colour', label: 'COLOUR', options: LAMINATE_COLOURS, dots: true },
+      { key: 'piece', label: 'TYPE', options: ['Single Tread & Riser', 'Bullnose Tread & Riser', 'Multi-Pack (4 Steps)', 'Winder Tread & Riser', 'Bullnose Tread', 'Stair Tread'] },
+    ],
+  },
+  panel: {
+    items: panelCollections as Product[],
+    search: 'Search a colour or style - try "Oak", "Acoustic", "Grey", "Walnut"...',
+    filters: [
+      { key: 'category', label: 'STYLE', options: ['Slat Panels', 'Acoustic Panels'] },
+      { key: 'colour', label: 'COLOUR', options: PANEL_COLOURS, dots: true },
+    ],
+  },
+  lvt: {
+    items: lvtCollections as Product[],
+    search: 'Search a colour or style - try "Oak", "Herringbone", "Grey", "Wide"...',
+    filters: [
+      { key: 'category', label: 'RANGE', options: ['Wide Plank 6mm', 'Herringbone 6mm', 'Classic Plank 6mm', 'Essential 5mm'] },
+      { key: 'colour', label: 'COLOUR', options: LAMINATE_COLOURS, dots: true },
+      { key: 'format', label: 'FORMAT', options: ['Plank', 'Herringbone'] },
+    ],
+  },
 } as const;
 
 const field = (item: Product, key: string) => String((item as Record<string, unknown>)[key] ?? '');
 
 // ---------------- UI COMPONENTS ---------------- //
+
+// Product photo with a styled fallback tile if the image file is missing
+function ProductImage({ src, alt, sizes, className, priority = false }: { src: string, alt: string, sizes: string, className: string, priority?: boolean }) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div className="absolute inset-0 bg-gradient-to-br from-[#d9c3a0] via-[#b7935b] to-[#6b4a2e] flex items-center justify-center">
+        <span className="text-white/80 text-[11px] uppercase tracking-widest font-bold">Image coming soon</span>
+      </div>
+    );
+  }
+  return <Image src={src} alt={alt} fill sizes={sizes} className={className} priority={priority} onError={() => setFailed(true)} />;
+}
 
 function FilterPill({ label, count, isActive, onClick, dot }: { label: string, count?: number, isActive: boolean, onClick: () => void, dot?: string }) {
   return (
@@ -209,10 +411,10 @@ function ProductCard({ item, onClick, priority = false }: { item: Product, onCli
       onClick={onClick}
       className="relative h-[420px] w-full rounded-xl overflow-hidden cursor-pointer group shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-200 bg-gray-100"
     >
-      <Image
+      <ProductImage
+        key={item.image}
         src={img(item.image)}
         alt={item.name}
-        fill
         sizes="(max-width: 768px) 100vw, 33vw"
         className="object-cover transition-transform duration-700 group-hover:scale-105"
         priority={priority}
@@ -250,7 +452,7 @@ export default function Catalogue({ type }: { type: Kind }) {
   const filtered = useMemo(() => {
     const term = search.toLowerCase();
     return items.filter(item =>
-      `${item.name} ${item.category} ${item.colour} ${field(item, 'pile')}`.toLowerCase().includes(term) &&
+      `${item.name} ${item.category} ${item.colour} ${field(item, 'pile')} ${field(item, 'size')} ${item.desc}`.toLowerCase().includes(term) &&
       filters.every(f => !active[f.key] || active[f.key] === 'All' || field(item, f.key) === active[f.key])
     );
   }, [items, filters, search, active]);
@@ -274,7 +476,7 @@ export default function Catalogue({ type }: { type: Kind }) {
               </button>
 
               <div className="w-full md:w-1/2 relative h-[250px] md:h-auto bg-gray-100 flex-shrink-0">
-                <Image src={img(selected.image)} alt={selected.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+                <ProductImage key={selected.image} src={img(selected.image)} alt={selected.name} sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
               </div>
 
               <div className="w-full md:w-1/2 min-h-0 p-6 md:px-12 md:pt-8 md:pb-10 flex flex-col overflow-y-auto">
@@ -289,6 +491,34 @@ export default function Catalogue({ type }: { type: Kind }) {
                       <Spec label="Rating" value={field(selected, 'rating')} />
                       <Spec label="Colour" value={selected.colour} />
                       <Spec label="Dimensions" value={field(selected, 'dimensions')} />
+                    </>
+                  ) : type === 'lvt' ? (
+                    <>
+                      <Spec label="Format" value={field(selected, 'format')} />
+                      <Spec label="Colour" value={selected.colour} />
+                      <Spec label="Size (T x W x L)" value={field(selected, 'size')} />
+                      <Spec label="Usage Class" value={field(selected, 'usage')} />
+                    </>
+                  ) : type === 'panel' ? (
+                    <>
+                      <Spec label="Type" value={field(selected, 'panel')} />
+                      <Spec label="Colour" value={selected.colour} />
+                      <Spec label="Size (T x W x H)" value={field(selected, 'size')} />
+                      <Spec label="Finish" value={field(selected, 'finish')} />
+                    </>
+                  ) : type === 'stair' ? (
+                    <>
+                      <Spec label="Range" value={field(selected, 'range')} />
+                      <Spec label="Type" value={field(selected, 'piece')} />
+                      <Spec label="Colour" value={selected.colour} />
+                      <Spec label="Size (T x W x L)" value={field(selected, 'size')} />
+                    </>
+                  ) : type === 'tile' ? (
+                    <>
+                      <Spec label="Size" value={field(selected, 'size')} />
+                      <Spec label="Finish" value={field(selected, 'finish')} />
+                      <Spec label="Material" value={field(selected, 'material')} />
+                      <Spec label="Suitable For" value={field(selected, 'use')} />
                     </>
                   ) : (
                     <>

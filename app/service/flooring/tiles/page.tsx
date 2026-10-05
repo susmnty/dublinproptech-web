@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import AreasWeServe from "../../../components/AreasWeServe";
+import Catalogue from "../catalogue";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -23,13 +24,6 @@ const TILE_TYPES = [
   { name: "Porcelain", image: "/porcelain-tiles.webp", text: "Dense, hard-wearing and almost non-porous. The best choice for kitchens, hallways and open-plan living areas that see heavy daily use." },
   { name: "Large-Format", image: "/flooring.webp", text: "Bigger tiles mean fewer grout lines and a calm, seamless look. Ideal for modern homes and making smaller rooms feel larger." },
   { name: "Ceramic", image: "/tiles-prep.webp", text: "A great-value option with a huge choice of colours, patterns and finishes. Perfect for bathrooms, utility rooms and lighter-traffic areas." },
-];
-
-const ROOMS = [
-  { title: "Kitchens", text: "Stands up to spills, heat and heavy traffic, and wipes clean in seconds." },
-  { title: "Bathrooms & En-suites", text: "Fully waterproof once grouted and sealed, with tanking where it's needed." },
-  { title: "Hallways", text: "Handles wet shoes, grit and constant footfall without wearing." },
-  { title: "Underfloor Heating", text: "Tile is one of the best conductors of heat, so rooms warm up faster." },
 ];
 
 const STEPS = [
@@ -93,6 +87,18 @@ export default function TilesPage() {
         </FadeUp>
       </section>
 
+      {/* Tile range (search + filters + product pop-up) */}
+      <section id="tile-range" className="px-4 md:px-6 max-w-[1400px] mx-auto w-full mb-24">
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">Our Range</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 tracking-tight">Browse Our Tiles</h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Marble, concrete and wood-effect porcelain, metro wall tiles and 20mm outdoor porcelain. Filter by style, colour, finish and where you want to use them.</p>
+          </div>
+        </FadeUp>
+        <Catalogue type="tile" />
+      </section>
+
       {/* Tile types */}
       <section className="px-4 md:px-6 max-w-[1400px] mx-auto w-full mb-24">
         <FadeUp>
@@ -113,23 +119,6 @@ export default function TilesPage() {
               </div>
             </FadeUp>
           ))}
-        </div>
-      </section>
-
-      {/* Where tiles work best */}
-      <section className="border-y border-gray-200 bg-white py-20 mb-0">
-        <div className="max-w-7xl mx-auto px-6">
-          <FadeUp>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 text-center mb-12 tracking-tight">Where Tiles Work Best</h2>
-          </FadeUp>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {ROOMS.map((r, i) => (
-              <FadeUp key={r.title} delay={0.1 * i} className="border-t-2 border-[#b7935b] pt-6">
-                <h3 className="font-serif text-xl font-bold text-gray-900 mb-2">{r.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{r.text}</p>
-              </FadeUp>
-            ))}
-          </div>
         </div>
       </section>
 

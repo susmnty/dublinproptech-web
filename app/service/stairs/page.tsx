@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import Catalogue from "../flooring/catalogue";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -75,83 +76,16 @@ export default function StairsPage() {
         </div>
       </section>
 
-      {/* Feature Split: The Snagging Advantage */}
-      <section className="px-4 md:px-6 max-w-[1400px] mx-auto w-full mb-32">
+      {/* Stair cladding range (search + filters + product pop-up) */}
+      <section id="stair-range" className="px-4 md:px-6 max-w-[1400px] mx-auto w-full mb-32 scroll-mt-20">
         <FadeUp>
-          <div className="flex flex-col md:flex-row-reverse w-full overflow-hidden bg-white border border-gray-200 rounded-2xl shadow-sm">
-            <div className="w-full md:w-1/2 p-12 md:p-20 flex flex-col justify-center">
-              <span className="text-[#b7935b] font-bold tracking-widest uppercase text-sm mb-4 block">The Snagging Advantage</span>
-              <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 leading-tight">Fixing the foundations first.</h2>
-              
-              <div className="mt-8 space-y-6">
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  Staircases in new builds are notorious for loose treads and squeaky risers. Before we install any aesthetic cladding or carpets, our snagging background ensures we secure the structural integrity of your stairs.
-                </p>
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-3 text-gray-800 font-medium">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mt-1 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Screwing and securing loose MDF or plywood treads.</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-gray-800 font-medium">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mt-1 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Precision-cut treads and risers for a gap-free finish.</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-gray-800 font-medium">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mt-1 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Integrating seamlessly with upstairs and downstairs flooring.</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/stair-solutions.webp" alt="Stair Installation Preparation" fill className="object-cover" />
-            </div>
+          <div className="text-center mb-12">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">Our Range</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 tracking-tight">Stair Cladding Range</h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">8mm laminate tread &amp; riser kits and 14mm engineered oak treads, in shades that match our flooring. Filter by range, colour and step type.</p>
           </div>
         </FadeUp>
-      </section>
-
-      {/* Massive Image-Driven Collections Grid - ADJUSTED FOR 2 COLUMNS */}
-      <section className="px-4 md:px-6 max-w-5xl mx-auto w-full mb-32">
-        <FadeUp>
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Stair Solutions</h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Explore tailored cladding and classic runners.</p>
-          </div>
-        </FadeUp>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          
-          {/* Stair Cladding */}
-          <FadeUp delay={0.1}>
-            <div className="group relative h-[500px] overflow-hidden rounded-2xl bg-gray-200 shadow-sm">
-              <Image src="/stair-cladding.webp" alt="Stair Cladding" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-10">
-                <div className="flex gap-2 mb-3">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-gray-900 bg-white px-3 py-1 rounded-full">Seamless Flow</span>
-                </div>
-                <h3 className="text-3xl font-serif font-bold text-white mb-3">Stair Cladding</h3>
-                <p className="text-gray-200 text-sm md:text-base mb-6 leading-relaxed">Clad your existing stairs in premium Engineered Wood, Laminate, or LVT to perfectly match your hallway flooring.</p>
-                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
-              </div>
-            </div>
-          </FadeUp>
-
-          {/* Carpet Runners */}
-          <FadeUp delay={0.2}>
-            <div className="group relative h-[500px] overflow-hidden rounded-2xl bg-gray-200 shadow-sm">
-              <Image src="/carpets-runners.webp" alt="Carpet Runners" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-10">
-                <div className="flex gap-2 mb-3">
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-white bg-[#b7935b] px-3 py-1 rounded-full">Classic Elegance</span>
-                </div>
-                <h3 className="text-3xl font-serif font-bold text-white mb-3">Carpet Runners</h3>
-                <p className="text-gray-200 text-sm md:text-base mb-6 leading-relaxed">Bespoke carpet runners with taped or whipped edges, finished with high-end brass, chrome, or matte black stair rods.</p>
-                <Link href="/service/contact" className="text-[#b7935b] font-bold uppercase tracking-widest text-xs hover:text-white transition-colors">Inquire Now &rarr;</Link>
-              </div>
-            </div>
-          </FadeUp>
-
-        </div>
+        <Catalogue type="stair" />
       </section>
 
       {/* The Standard / Testimonial Section */}

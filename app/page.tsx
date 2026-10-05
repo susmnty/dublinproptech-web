@@ -29,6 +29,9 @@ const BRANDS: { name: string; url: string; logo?: string }[] = [
   { name: "Canadia", url: "https://canadia.ie/", logo: "/brands/canadia.svg" },
   { name: "PFL", url: "https://www.pfl.ie/", logo: "/brands/pfl.webp" },
   { name: "Cormar Carpets", url: "https://www.cormarcarpets.co.uk/", logo: "/brands/cormar.webp" },
+  { name: 'Swiss Krono', url: 'https://www.swisskrono.com/global-en/', logo: '/brands/swiss-krono-logo.svg' },
+  { name: 'Egger', url: 'https://www.egger.com/', logo: '/brands/egger.svg' },
+  { name: 'Tile Merchant', url: 'https://www.tilemerchant.ie/', logo: '/brands/tile-merchant-logo.svg' }
 ];
 
 // Custom Counter Animation Component
