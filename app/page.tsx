@@ -294,7 +294,7 @@ export default function Home() {
               </svg>
             </div>
             <h3 className="text-xl font-serif font-bold text-gray-900 mb-4">Expert Team</h3>
-            <p className="text-gray-600 text-[15px] leading-relaxed">Expert guidance and skilled craftsmanship you can completely trust.</p>
+            <p className="text-gray-600 text-[15px] leading-relaxed">Expert guidance and skilled craftsmanship you can trust.</p>
           </FadeUp>
 
           <FadeUp delay={0.3} className="flex flex-col items-center px-4 md:px-8">
