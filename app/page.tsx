@@ -27,8 +27,10 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 const BRANDS: { name: string; url: string; logo?: string }[] = [
   { name: "Canadia", url: "https://canadia.ie/", logo: "/brands/canadia.svg" },
   { name: "Cormar Carpets", url: "https://www.cormarcarpets.co.uk/", logo: "/brands/cormar.webp" },
+  { name: 'Tilex', url: 'https://tilex.ie/', logo: '/brands/tilex.webp' },
   { name: 'Swiss Krono', url: 'https://www.swisskrono.com/global-en/', logo: '/brands/swiss-krono-logo.svg' },
   { name: 'Egger', url: 'https://www.egger.com/', logo: '/brands/egger.svg' },
+  { name: 'Lux Blinds', url: 'https://www.luxblinds.ie/', logo: '/brands/luxblinds-logo.webp' },
   { name: 'Tile Merchant', url: 'https://www.tilemerchant.ie/', logo: '/brands/tile-merchant-logo.svg' }
 ];
 

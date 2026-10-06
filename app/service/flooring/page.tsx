@@ -31,6 +31,7 @@ const heroImages = [
 // Brands carousel — add a logo path (e.g. '/brands/phloor.webp') to show the logo instead of the name
 const BRANDS: { name: string; url: string; logo?: string }[] = [
   { name: 'Canadia', url: 'https://canadia.ie/', logo: '/brands/canadia.svg' },
+  { name: 'Tilex', url: 'https://tilex.ie/', logo: '/brands/tilex.webp' },
   { name: 'Cormar Carpets', url: 'https://www.cormarcarpets.co.uk/', logo: '/brands/cormar.webp' },
   { name: 'Swiss Krono', url: 'https://www.swisskrono.com/global-en/', logo: '/brands/swiss-krono-logo.svg' },
   { name: 'Egger', url: 'https://www.egger.com/', logo: '/brands/egger.svg' },
