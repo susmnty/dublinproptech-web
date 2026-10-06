@@ -30,8 +30,9 @@ const heroImages = [
 
 // Brands carousel — add a logo path (e.g. '/brands/phloor.webp') to show the logo instead of the name
 const BRANDS: { name: string; url: string; logo?: string }[] = [
+  { name: 'Phloor', url: 'https://www.phloor.ie/', logo: '/brands/phloor.webp' },
   { name: 'Canadia', url: 'https://canadia.ie/', logo: '/brands/canadia.svg' },
-  { name: 'Tilex', url: 'https://tilex.ie/', logo: '/brands/tilex.webp' },
+  { name: 'PFL', url: 'https://www.pfl.ie/', logo: '/brands/pfl.webp' },
   { name: 'Cormar Carpets', url: 'https://www.cormarcarpets.co.uk/', logo: '/brands/cormar.webp' },
   { name: 'Swiss Krono', url: 'https://www.swisskrono.com/global-en/', logo: '/brands/swiss-krono-logo.svg' },
   { name: 'Egger', url: 'https://www.egger.com/', logo: '/brands/egger.svg' },
@@ -40,12 +41,12 @@ const BRANDS: { name: string; url: string; logo?: string }[] = [
 
 // The 6 category blocks (3 on top, 3 below). Change an image or link here.
 const CATEGORIES = [
-  { name: 'Laminate', sub: 'AC4 & AC5 rated · 8mm to 14mm', href: '/service/flooring/laminate', image: '/flooring/evolution.webp' },
-  { name: 'Carpets', sub: 'Luxury carpets & DESSO carpet tiles', href: '/service/flooring/carpets', image: '/carpets/luxury-carpets/riva.webp' },
-  { name: 'Tiles', sub: 'Porcelain & ceramic, supplied and fitted', href: '/service/flooring/tiles', image: '/tiles-prep.webp' },
-  { name: 'LVT', sub: 'Waterproof luxury vinyl & SPC', href: '/service/lvt', image: '/lvt-cat.webp' },
-  { name: 'Stair Solutions', sub: 'Stair cladding & carpet runners', href: '/service/stairs', image: '/stair-solutions.webp' },
-  { name: 'Wall Panels', sub: 'Acoustic slat & waterproof panels', href: '/service/wall-panels', image: '/wall-panels-cat.webp' },
+  { name: 'Laminate', sub: 'AC4 & AC5 rated · 8mm to 14mm', href: '/service/flooring/laminate', image: '/categories/laminate.webp' },
+  { name: 'Carpets', sub: 'Luxury carpets & DESSO carpet tiles', href: '/service/flooring/carpets', image: '/categories/carpets.webp' },
+  { name: 'Tiles', sub: 'Porcelain & ceramic, supplied and fitted', href: '/service/flooring/tiles', image: '/categories/tiles.webp' },
+  { name: 'LVT', sub: 'Waterproof luxury vinyl & SPC', href: '/service/lvt', image: '/categories/lvt.webp' },
+  { name: 'Stair Solutions', sub: 'Stair cladding & carpet runners', href: '/service/stairs', image: '/categories/stairs.webp' },
+  { name: 'Wall Panels', sub: 'Acoustic slat & waterproof panels', href: '/service/wall-panels', image: '/categories/wall-panels.webp' },
 ];
 
 // ---------------- BROCHURES ---------------- //
@@ -57,7 +58,7 @@ const CATEGORIES = [
 //    "pages" is optional. Delete a line to remove that brochure.
 const BROCHURES: { title: string; category: string; pdf: string; photo?: string; cover?: string; pages?: string }[] = [
   { title: 'Laminate Collection', category: 'Laminate', pdf: '/brochures/laminate-brochure.pdf', photo: '/flooring/evolution.webp', pages: '24 pages' },
-  { title: 'Carpet Tiles Collection', category: 'Carpets', pdf: '/brochures/carpet-brochure.pdf', photo: '/carpets/luxury-carpets/riva.webp', pages: '6 pages' },
+  { title: 'Carpet Tiles Collection', category: 'Carpets', pdf: '/brochures/carpet-brochure.pdf', photo: '/carpets/luxury-carpets/riva.webp', pages: '12 pages' },
   // { title: 'Tiles Collection', category: 'Tiles', pdf: '/brochures/tiles-brochure.pdf', photo: '/tiles-prep.webp', pages: '16 pages' },
 ];
 
@@ -372,9 +373,6 @@ export default function FlooringPage() {
         </div>
       </section>
 
-      {/* Brochures — read online or download */}
-      <BrochuresSection />
-
       {/* The Process */}
       <section className="bg-[#1a1814] text-white py-24 mb-0">
         <div className="max-w-7xl mx-auto px-6 text-center">
@@ -388,6 +386,11 @@ export default function FlooringPage() {
           <FadeUp delay={0.4} className="mt-20"><Link href="/service/contact" className="inline-block bg-[#b7935b] text-white px-12 py-5 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg">Book a Consultation</Link></FadeUp>
         </div>
       </section>
+
+      {/* Brochures — read online or download */}
+      <div className="pt-24">
+        <BrochuresSection />
+      </div>
 
       {/* The Standard / Testimonial Section */}
       <section className="bg-[#483b27] w-full">

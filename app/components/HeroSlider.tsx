@@ -19,11 +19,15 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
+// HERO BACKGROUND IMAGES
+// Put your new images in:  public/hero/
+// The file names below must match your files exactly (lowercase, .webp).
+// To add or remove a slide, add or delete a line.
 const slides = [
-  { src: "/snaglist.webp", alt: "Snagging inspector checking a new build home in Dublin" },
-  { src: "/flooring.webp", alt: "Premium laminate flooring fitted in a Dublin home" },
-  { src: "/Blinds.webp", alt: "Made-to-measure window blinds in a living room" },
-  { src: "/wall-panels-prep.webp", alt: "Acoustic slat wall panel installation" },
+  { src: "/hero/hero-snaglist.webp", alt: "Snagging inspector checking a new build home in Dublin" },
+  { src: "/hero/hero-flooring.webp", alt: "Oak herringbone flooring fitted in a Dublin living room" },
+  { src: "/hero/hero-blinds.webp", alt: "Made-to-measure window blinds in a modern living room" },
+  { src: "/hero/hero-wall-panels.webp", alt: "Walnut acoustic slat wall panel feature wall" },
 ];
 
 export default function HeroSlider() {
@@ -56,20 +60,22 @@ export default function HeroSlider() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-black/40 z-10" />
+      {/* Dark gradient so white text is always clear on any photo */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/55 via-black/40 to-black/60" />
+      <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.35)_0%,transparent_70%)]" />
 
       <div className="relative z-20 text-center flex flex-col items-center px-6 pt-16 pb-10 max-w-5xl mx-auto">
-        <span className="text-sm font-bold tracking-widest uppercase text-white/80 mb-6 block drop-shadow-md">
+        <span className="text-sm font-bold tracking-widest uppercase text-white/90 mb-6 block drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
           Crafting Perfection · New Build Specialist
         </span>
 
         {/* H1 with keyword + location, not inside FadeUp so it's visible on first paint */}
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-8 text-white drop-shadow-lg max-w-4xl">
+        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-8 text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.55)] max-w-4xl">
           Snagging Inspections &amp; Premium Flooring in Dublin
         </h1>
 
         <FadeUp delay={0.2}>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl font-medium leading-relaxed mb-10 drop-shadow-md">
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl font-medium leading-relaxed mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
             Expert snagging. Premium finishes. Flawless spaces.
           </p>
         </FadeUp>
