@@ -7,7 +7,7 @@ export const metadata: Metadata = pageMeta({
   description:
     "Flooring supply & installation in Dublin. AC5 laminate, herringbone and DESSO carpet tiles with expert subfloor prep and a flawless finish. Get a free quote.",
   path: "/service/flooring",
-  image: "/flooring.webp",
+  image: "/flooring.webp?v=2",
 });
 
 export default function FlooringLayout({ children }: { children: React.ReactNode }) {

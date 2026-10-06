@@ -22,10 +22,10 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 // Background images for the slider
 const heroImages = [
-  "/snaglist.webp",
-  "/flooring.webp",
-  "/Blinds.webp",
-  "/wall-panels-prep.webp"
+  "/snaglist.webp?v=2",
+  "/flooring.webp?v=2",
+  "/Blinds.webp?v=2",
+  "/wall-panels-prep.webp?v=2"
 ];
 
 // Brands carousel — add a logo path (e.g. '/brands/phloor.webp') to show the logo instead of the name

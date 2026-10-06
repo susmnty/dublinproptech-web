@@ -7,7 +7,7 @@ export const metadata: Metadata = pageMeta({
   description:
     "Professional snagging inspections in Dublin from €200. 300+ point check, thermal imaging and a developer-ready photo report within 48 hours. Book your inspection today.",
   path: "/service/snaglist",
-  image: "/snaglist.webp",
+  image: "/snaglist.webp?v=2",
 });
 
 const jsonLd = {

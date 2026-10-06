@@ -211,7 +211,7 @@ export default function Home() {
                   Flooring
                 </h3>
                 {/* SEO: descriptive alt; priority removed (below the hero) */}
-                <Image src="/flooring.webp" alt="Laminate flooring installation in a Dublin home" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src="/flooring.webp?v=2" alt="Laminate flooring installation in a Dublin home" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </Link>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -231,7 +231,7 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Snaglist
                 </h3>
-                <Image src="/snaglist.webp" alt="Snag list inspection of a new build home" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src="/snaglist.webp?v=2" alt="Snag list inspection of a new build home" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </Link>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">
@@ -251,7 +251,7 @@ export default function Home() {
                 <h3 className="absolute bottom-5 left-5 z-20 text-white text-4xl md:text-5xl font-serif font-bold tracking-wide transition-transform duration-300 group-hover:-translate-y-1">
                   Blinds
                 </h3>
-                <Image src="/Blinds.webp" alt="Made-to-measure window blinds" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src="/Blinds.webp?v=2" alt="Made-to-measure window blinds" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
               </a>
               <div className="flex flex-col flex-grow px-2">
                 <p className="text-gray-600 text-[15px] leading-relaxed mb-8">

@@ -22,7 +22,7 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 const TILE_TYPES = [
   { name: "Porcelain", image: "/porcelain-tiles.webp", text: "Dense, hard-wearing and almost non-porous. The best choice for kitchens, hallways and open-plan living areas that see heavy daily use." },
-  { name: "Large-Format", image: "/flooring.webp", text: "Bigger tiles mean fewer grout lines and a calm, seamless look. Ideal for modern homes and making smaller rooms feel larger." },
+  { name: "Large-Format", image: "/flooring.webp?v=2", text: "Bigger tiles mean fewer grout lines and a calm, seamless look. Ideal for modern homes and making smaller rooms feel larger." },
   { name: "Ceramic", image: "/tiles-prep.webp", text: "A great-value option with a huge choice of colours, patterns and finishes. Perfect for bathrooms, utility rooms and lighter-traffic areas." },
 ];
 
@@ -81,7 +81,7 @@ export default function TilesPage() {
               </ul>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/flooring.webp" alt="Large-format floor tiles fitted in a Dublin home" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+              <Image src="/flooring.webp?v=2" alt="Large-format floor tiles fitted in a Dublin home" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
             </div>
           </div>
         </FadeUp>

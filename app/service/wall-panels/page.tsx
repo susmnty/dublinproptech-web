@@ -117,7 +117,7 @@ export default function WallPanelsPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/wall-panels-prep.webp" alt="Wall Panel Installation" fill className="object-cover" />
+              <Image src="/wall-panels-prep.webp?v=2" alt="Wall Panel Installation" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
