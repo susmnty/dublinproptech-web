@@ -4,6 +4,19 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Catalogue from "../flooring/catalogue";
+import ServiceFAQ, { type Faq } from "../../components/ServiceFAQ";
+import AreasWeServe from "../../components/AreasWeServe";
+
+// FAQ: shown on the page and sent to Google as FAQ schema
+const FAQS: Faq[] = [
+  { q: "What is stair cladding?", a: "Stair cladding covers your existing staircase with new treads, risers and nosings, so you get the look of a brand-new wood staircase without replacing the structure. It's faster, cleaner and costs far less than a full replacement." },
+  { q: "Can you clad stairs to match my new floor?", a: "Yes. Our laminate tread and riser kits and engineered oak treads come in shades that match our flooring ranges, so your hallway, stairs and landing flow as one." },
+  { q: "Laminate or engineered oak stair treads: which is better?", a: "Laminate kits are very hard-wearing and great value, which suits busy family homes. Engineered oak treads are real timber, so they feel warmer underfoot and give the most premium finish." },
+  { q: "Do you fix squeaky stairs before cladding?", a: "Yes. We check every step and fix squeaks and loose treads first, so your newly clad staircase is solid and quiet." },
+  { q: "Can you fit a carpet runner on wooden stairs?", a: "Yes. We fit bespoke carpet runners over clad or existing wooden stairs, which adds grip, softens noise and gives a classic look." },
+  { q: "How long does stair cladding take?", a: "A standard straight staircase usually takes one to two days. Stairs with winders, a bullnose step or a landing can take a little longer." },
+  { q: "Can you clad stairs with winders or a bullnose step?", a: "Yes. Our range includes treads for winder steps and bottom bullnose steps, and we cut custom nosings for a seamless edge." },
+];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -31,13 +44,13 @@ export default function StairsPage() {
         
         <FadeUp delay={0.1}>
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 leading-[1.1] mb-8 tracking-tight">
-            Staircase <br /> Transformations.
+            Stair Cladding <br /> Dublin.
           </h1>
         </FadeUp>
         
         <FadeUp delay={0.2}>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            We specialize in premium stair cladding, luxury carpet runners, custom nosing, and seamless transitions from hallway to landing.
+            Transform your staircase with oak or laminate stair cladding, luxury carpet runners, custom nosing and seamless transitions from hallway to landing.
           </p>
         </FadeUp>
         
@@ -109,6 +122,11 @@ export default function StairsPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <ServiceFAQ title="Stair Cladding FAQs" faqs={FAQS} />
+
+      {/* Areas We Serve */}
+      <AreasWeServe />
     </main>
   );
 }

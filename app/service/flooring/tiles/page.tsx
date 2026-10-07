@@ -5,6 +5,17 @@ import Link from "next/link";
 import Image from "next/image";
 import AreasWeServe from "../../../components/AreasWeServe";
 import Catalogue from "../catalogue";
+import ServiceFAQ, { type Faq } from "../../../components/ServiceFAQ";
+
+// FAQ: shown on the page and sent to Google as FAQ schema
+const FAQS: Faq[] = [
+  { q: "Porcelain or ceramic floor tiles: what's the difference?", a: "Porcelain is denser, harder and almost non-porous, so it's the best choice for kitchens, hallways and busy areas. Ceramic is lighter and great value, and it suits bathrooms and lower-traffic rooms." },
+  { q: "Can floor tiles go on underfloor heating?", a: "Yes. Porcelain and ceramic tiles are among the best floors for underfloor heating because they conduct heat well and stay stable." },
+  { q: "Do you waterproof bathrooms before tiling?", a: "Yes. Wet areas such as showers and wet rooms get a waterproof tanking membrane before any tile goes down, so water can't reach the subfloor or walls." },
+  { q: "Why does the subfloor need levelling before tiling?", a: "Large-format tiles need a flat base, otherwise edges can sit at different heights (lippage) or crack later. We level the subfloor first so every tile sits flat." },
+  { q: "Do you supply outdoor porcelain tiles?", a: "Yes. We supply and fit 20mm outdoor porcelain for patios and garden paths, as well as indoor floor and wall tiles." },
+  { q: "How long does it take to tile a floor?", a: "A typical kitchen or bathroom floor takes one to three days, including preparation, tiling and grouting. The adhesive and grout need time to cure before the floor takes full traffic." },
+];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -159,6 +170,9 @@ export default function TilesPage() {
           </div>
         </div>
       </section>
+      {/* FAQ */}
+      <ServiceFAQ title="Floor Tile FAQs" faqs={FAQS} />
+
 
       {/* Areas We Serve */}
       <AreasWeServe />

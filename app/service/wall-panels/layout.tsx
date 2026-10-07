@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { pageMeta, JsonLd, serviceJsonLd } from "@/app/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Wall Panels Dublin – Acoustic Slat & SPC Shower Panels",
-  description: "Acoustic slatted wood feature walls and 100% waterproof SPC shower panels installed in Dublin. Zero grout, mould-free, faster than tiling. Get a free quote.",
+  title: "Wall Panels Dublin – Slat & Acoustic Feature Walls",
+  description: "Slat wall panels and acoustic wood panels supplied and fitted in Dublin. Feature walls for living rooms, bedrooms and home offices in oak, walnut, white and grey. Free quote.",
   path: "/service/wall-panels",
   image: "/wall-panels-prep.webp?v=2",
 });

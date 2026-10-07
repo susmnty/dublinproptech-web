@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import AreasWeServe from "../../components/AreasWeServe";
+import ServiceFAQ, { type Faq } from "../../components/ServiceFAQ";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -19,6 +20,16 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
     </motion.div>
   );
 }
+
+// FAQ: shown on the page and sent to Google as FAQ schema
+const FAQS: Faq[] = [
+  { q: "Which type of flooring is best for my home?", a: "It depends on the room. Laminate and engineered wood suit living rooms, bedrooms and hallways. Waterproof LVT and SPC or porcelain tiles are best for kitchens, bathrooms and utility rooms. Carpet adds comfort to bedrooms and stairs. We'll recommend the right floor for each room during a free survey." },
+  { q: "Do you supply and fit flooring?", a: "Yes. We supply and fit laminate, engineered wood, herringbone, LVT and SPC, floor tiles, carpets and carpet tiles, plus stair cladding and wall panels, across Dublin and nearby counties." },
+  { q: "Do you offer a free survey and quote?", a: "Yes. We measure your rooms, check moisture levels and assess the subfloor, then send you a fixed quote for supply, preparation and fitting." },
+  { q: "What is the best flooring for a kitchen?", a: "For kitchens we usually recommend waterproof SPC or LVT, or porcelain tiles. They handle spills and heavy use better than laminate or wood." },
+  { q: "Which flooring works with underfloor heating?", a: "Engineered wood, LVT and SPC, porcelain and ceramic tiles, and most of our laminate range all work with underfloor heating when fitted on the right underlay or adhesive." },
+  { q: "Why is subfloor preparation so important?", a: "A flat, dry, solid subfloor stops new flooring from moving, squeaking, gapping or cracking. We repair, level and prime the subfloor before fitting, which is why our floors last." },
+];
 
 // Background images for the slider
 const heroImages = [
@@ -408,6 +419,9 @@ export default function FlooringPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <ServiceFAQ title="Flooring FAQs" faqs={FAQS} />
 
       {/* Areas We Serve */}
       <AreasWeServe />

@@ -3,6 +3,18 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import ServiceFAQ, { type Faq } from "../../../components/ServiceFAQ";
+import AreasWeServe from "../../../components/AreasWeServe";
+
+// FAQ: shown on the page and sent to Google as FAQ schema
+const FAQS: Faq[] = [
+  { q: "What is the difference between herringbone and chevron flooring?", a: "Herringbone uses rectangular blocks laid in a staggered zig-zag. Chevron blocks are cut at an angle so the ends meet in a clean, continuous V shape. Herringbone feels classic; chevron looks sharper and more contemporary." },
+  { q: "Do you fit herringbone in laminate and engineered wood?", a: "Yes. We supply and fit herringbone and chevron in both premium laminate and real engineered wood, so you can choose the look and budget that suits your home." },
+  { q: "Does herringbone flooring cost more to fit?", a: "Herringbone takes more time to fit than standard planks because every block is laid individually from a centre line, with more cuts at the edges. We include all of this in a fixed quote after a free survey." },
+  { q: "Which rooms suit herringbone flooring?", a: "Herringbone looks best in hallways, living rooms, dining rooms and open-plan spaces, where the pattern has room to flow. It also makes narrow rooms feel wider." },
+  { q: "Can herringbone go on underfloor heating?", a: "Yes. Engineered wood and suitable laminate herringbone both work with underfloor heating when fitted on the correct underlay or adhesive." },
+  { q: "How long does herringbone installation take?", a: "Herringbone takes longer than plank flooring. An average room usually takes one to two days, depending on the size and how much the subfloor needs levelling." },
+];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -73,6 +85,11 @@ export default function HerringbonePage() {
           </div>
         </FadeUp>
       </section>
+      {/* FAQ */}
+      <ServiceFAQ title="Herringbone Flooring FAQs" faqs={FAQS} />
+
+      {/* Areas We Serve */}
+      <AreasWeServe />
     </main>
   );
 }

@@ -4,6 +4,18 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Catalogue from "../flooring/catalogue";
+import ServiceFAQ, { type Faq } from "../../components/ServiceFAQ";
+import AreasWeServe from "../../components/AreasWeServe";
+
+// FAQ: shown on the page and sent to Google as FAQ schema
+const FAQS: Faq[] = [
+  { q: "What is LVT flooring?", a: "LVT (luxury vinyl tile) is a hard-wearing vinyl floor printed with a realistic wood or stone look. It's warm, quiet underfoot and water resistant, which makes it popular for kitchens, bathrooms and busy family homes." },
+  { q: "What is the difference between LVT and SPC?", a: "SPC is a type of luxury vinyl with a rigid stone-plastic core. It's waterproof, very stable and comes with a built-in underlay, so it's ideal for bathrooms, kitchens and rooms with temperature changes." },
+  { q: "Is LVT flooring waterproof?", a: "Our SPC rigid-core range has a waterproof core, so it's suitable for bathrooms, en-suites and kitchens. We seal the edges correctly during fitting so water can't get underneath." },
+  { q: "Can LVT go on underfloor heating?", a: "Yes. LVT and SPC both work well with underfloor heating, and they warm up quickly. We'll confirm the right product for your system during the survey." },
+  { q: "Does LVT need a level subfloor?", a: "Yes. Vinyl is thin, so bumps in the subfloor can show through. We check and level the subfloor before fitting so your new floor is flat and lasts." },
+  { q: "LVT or laminate for a kitchen?", a: "For kitchens and bathrooms we usually recommend LVT or SPC because they handle spills and moisture better than laminate. Laminate is a great choice for living rooms, bedrooms and hallways." },
+];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -190,6 +202,11 @@ export default function LvtPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <ServiceFAQ title="LVT & SPC Flooring FAQs" faqs={FAQS} />
+
+      {/* Areas We Serve */}
+      <AreasWeServe />
     </main>
   );
 }

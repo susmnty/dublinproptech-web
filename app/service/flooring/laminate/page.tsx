@@ -5,6 +5,18 @@ import Link from "next/link";
 import Image from "next/image";
 import Catalogue from "../catalogue";
 import AreasWeServe from "../../../components/AreasWeServe";
+import ServiceFAQ, { type Faq } from "../../../components/ServiceFAQ";
+
+// FAQ: shown on the page and sent to Google as FAQ schema
+const FAQS: Faq[] = [
+  { q: "How much does laminate flooring installation cost in Dublin?", a: "Every job is priced after a free survey. The cost depends on the laminate you choose, the size of the room, how much subfloor preparation is needed, and the underlay, skirting and trims. Request a free quote and we'll send you a fixed price for supply and fitting." },
+  { q: "What is the difference between AC4 and AC5 laminate?", a: "The AC rating shows how well the surface resists wear. AC4 suits every room in a busy family home. AC5 is the toughest grade, built for commercial traffic, so it's ideal for hallways, kitchens and homes with pets and children." },
+  { q: "Should I choose 8mm, 12mm or 14mm laminate?", a: "Thicker boards feel more solid underfoot, sound quieter and handle small subfloor dips better. 8mm is a good value option for bedrooms, 12mm is the most popular choice for living areas, and 14mm wide planks give the most premium look and feel." },
+  { q: "Can laminate flooring go in a kitchen or bathroom?", a: "Water-resistant laminate works well in kitchens, utility rooms and hallways. For bathrooms and wet rooms we recommend waterproof LVT or SPC flooring instead, because standing water can still damage laminate over time." },
+  { q: "Can you fit laminate over underfloor heating?", a: "Yes. Most of our laminate range is suitable for underfloor heating when it's fitted on the correct underlay and the heating stays within the manufacturer's temperature limits. We'll confirm the right board and underlay during the survey." },
+  { q: "How long does it take to fit laminate flooring?", a: "A typical room is usually fitted in a day. A full ground floor normally takes two to three days, depending on how much levelling and preparation the subfloor needs." },
+  { q: "Do you supply and fit skirting, beading and thresholds?", a: "Yes. We supply and fit matching skirting boards, beading and door thresholds so your laminate floor is fully finished, with no gaps or loose edges." },
+];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -101,6 +113,9 @@ export default function LaminatePage() {
           </div>
         </div>
       </section>
+      {/* FAQ */}
+      <ServiceFAQ title="Laminate Flooring FAQs" faqs={FAQS} />
+
 
       {/* Areas We Serve */}
       <AreasWeServe />

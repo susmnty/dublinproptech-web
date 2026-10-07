@@ -5,6 +5,16 @@ import Link from "next/link";
 import Image from "next/image";
 import Catalogue from "../catalogue";
 import AreasWeServe from "../../../components/AreasWeServe";
+import ServiceFAQ, { type Faq } from "../../../components/ServiceFAQ";
+
+// FAQ: shown on the page and sent to Google as FAQ schema
+const FAQS: Faq[] = [
+  { q: "Do you supply and fit carpets in Dublin?", a: "Yes. We supply and fit luxury carpets and carpet tiles across Dublin and the surrounding counties, from bedrooms and stairs to home offices." },
+  { q: "Carpet or carpet tiles: which is better?", a: "Broadloom carpet gives a soft, seamless finish for bedrooms, living rooms and stairs. Carpet tiles are hard-wearing and easy to replace one at a time, which makes them ideal for home offices and busy areas." },
+  { q: "Do you fit underlay with new carpet?", a: "Yes. A good underlay makes your carpet feel softer, last longer and keeps rooms warmer and quieter. We fit the right underlay and grippers for each room." },
+  { q: "Can you fit carpet on stairs?", a: "Yes. We fit full stair carpets and carpet runners. For a modern look we also offer stair cladding in wood, laminate or LVT." },
+  { q: "How long does carpet fitting take?", a: "Most rooms are fitted in a few hours, and a full house can usually be done in a day or two." },
+];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -101,6 +111,9 @@ export default function CarpetsPage() {
           </div>
         </div>
       </section>
+      {/* FAQ */}
+      <ServiceFAQ title="Carpet Fitting FAQs" faqs={FAQS} />
+
 
       {/* Areas We Serve */}
       <AreasWeServe />

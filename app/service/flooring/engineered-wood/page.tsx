@@ -3,6 +3,18 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import ServiceFAQ, { type Faq } from "../../../components/ServiceFAQ";
+import AreasWeServe from "../../../components/AreasWeServe";
+
+// FAQ: shown on the page and sent to Google as FAQ schema
+const FAQS: Faq[] = [
+  { q: "What is engineered wood flooring?", a: "Engineered wood flooring has a top layer of real timber bonded to a stable multi-ply core. You get the look, feel and natural grain of solid wood, with much better stability." },
+  { q: "Is engineered wood better than solid wood?", a: "For most modern homes, yes. The cross-ply core greatly reduces the swelling, shrinking and warping that solid wood can suffer with changes in heat and humidity, which makes it a safer choice for Irish homes and new builds." },
+  { q: "Can engineered wood go on underfloor heating?", a: "Yes. Engineered wood is one of the best real-wood options for underfloor heating because the multi-ply core stays stable as the floor warms and cools. We check the system and the subfloor during the survey." },
+  { q: "Can engineered wood flooring be sanded and refinished?", a: "Yes, if the real-wood top layer is thick enough. Boards with a thicker wear layer can be sanded and refinished, which lets the floor last for decades." },
+  { q: "Engineered wood or laminate: which should I choose?", a: "Engineered wood is real timber, so it feels warmer and adds value to your home. Laminate is more scratch resistant and costs less. We can bring samples of both so you can compare them in your own light." },
+  { q: "How is engineered wood flooring installed?", a: "Depending on your subfloor, we fit it as a floating click floor or glue it down. Before we start, we check moisture levels and level the subfloor so the finished floor stays flat and quiet." },
+];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -72,6 +84,11 @@ export default function EngineeredWoodPage() {
           </div>
         </FadeUp>
       </section>
+      {/* FAQ */}
+      <ServiceFAQ title="Engineered Wood Flooring FAQs" faqs={FAQS} />
+
+      {/* Areas We Serve */}
+      <AreasWeServe />
     </main>
   );
 }

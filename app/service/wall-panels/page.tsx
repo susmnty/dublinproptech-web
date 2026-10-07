@@ -4,6 +4,18 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import Catalogue from "../flooring/catalogue";
+import ServiceFAQ, { type Faq } from "../../components/ServiceFAQ";
+import AreasWeServe from "../../components/AreasWeServe";
+
+// FAQ: shown on the page and sent to Google as FAQ schema
+const FAQS: Faq[] = [
+  { q: "What are slat wall panels?", a: "Slat wall panels are vertical fluted or slatted panels that add texture and warmth to a wall. They're a quick way to create a feature wall behind a TV, a bed or a desk." },
+  { q: "Do acoustic wall panels really reduce noise?", a: "Yes. Acoustic panels have slats on a felt backing that absorbs sound, which cuts echo in living rooms, home offices and studios. Fitting them on battens with insulation behind improves the effect further." },
+  { q: "How are wall panels installed?", a: "Panels are fixed with adhesive or screws, or onto battens for the best acoustic performance. We cut neatly around sockets, switches and corners and finish the edges with matching end profiles." },
+  { q: "Can slat wall panels go in a bathroom?", a: "Our slat and acoustic panels have an MDF core, so they're not suitable for showers or wet areas. They work best in living rooms, bedrooms, hallways and home offices. For bathrooms, ask us about waterproof panel options." },
+  { q: "How long does it take to fit a feature wall?", a: "A single feature wall is usually fitted in a day, including cutting around sockets and finishing the edges." },
+  { q: "Which colours are available?", a: "We fit panels in oak, walnut, white, grey, anthracite and blue finishes. Browse the range above and filter by colour to see every option." },
+];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -145,6 +157,11 @@ export default function WallPanelsPage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <ServiceFAQ title="Wall Panel FAQs" faqs={FAQS} />
+
+      {/* Areas We Serve */}
+      <AreasWeServe />
     </main>
   );
 }
