@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import AreasWeServe from "../../components/AreasWeServe";
+import { JsonLd } from "../../lib/seo";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -28,6 +29,44 @@ const heroImages = [
   "/wall-panels-prep.webp?v=2"
 ]
 
+// FAQ: shown on the page AND sent to Google as FAQ schema (keep both in sync automatically)
+const FAQS = [
+  {
+    q: "What is a snag list?",
+    a: "A snag list is a written report of every defect in a newly built home, from paint and plaster marks to doors, windows, plumbing and electrics. Your developer uses it to fix the issues before or soon after you move in.",
+  },
+  {
+    q: "How much does a snag list inspection cost in Dublin?",
+    a: "Our home inspections are fixed price: €200 for a 1 or 2-bed property, €250 for a 3-bed and €300 for a 4-bed. A re-inspection to check the developer has fixed everything costs €150.",
+  },
+  {
+    q: "When should I book my new build snagging inspection?",
+    a: "Book as soon as you have a completion or handover date. The best time is just before you close, so the developer can fix defects before you move in. We can also inspect after you get the keys.",
+  },
+  {
+    q: "How long does a home inspection take?",
+    a: "Our home inspector spends 3 to 5 hours on site checking over 300 points inside and out. You receive a photographic, developer-ready report within 48 hours.",
+  },
+  {
+    q: "Do you inspect apartments and duplexes as well as houses?",
+    a: "Yes. We carry out snag list and home inspections on new build houses, apartments and duplexes across Dublin, Kildare, Wicklow and Meath.",
+  },
+  {
+    q: "What is included in the snag report?",
+    a: "Every defect is photographed, grouped room by room and explained in clear building terms, with thermal imaging and moisture readings included. You can forward it straight to your builder's customer care team.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function SnaglistPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -50,7 +89,7 @@ export default function SnaglistPage() {
           <motion.img
             key={currentIndex}
             src={heroImages[currentIndex]}
-            alt={`Snagging Service Background ${currentIndex + 1}`}
+            alt="Home inspector carrying out a snag list inspection in Dublin"
             className="absolute inset-0 w-full h-full object-cover"
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -70,14 +109,14 @@ export default function SnaglistPage() {
           
           <FadeUp delay={0.1}>
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-8 tracking-tight drop-shadow-lg">
-              Meticulous <br /> Snagging Inspections.
+              Snag List &amp; <br /> Home Inspections Dublin.
             </h1>
           </FadeUp>
           
           <FadeUp delay={0.2}>
             <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-medium leading-relaxed mb-10 drop-shadow-md">
-              Uncompromising detail, delivered exactly on time.<br />
-              We uncover over 100 hidden issues with our rigorous snagging report so your new home is flawlessly finished.
+              Independent home inspector for new build houses and apartments.<br />
+              We uncover over 100 hidden issues with our rigorous snag list report so your new home is flawlessly finished.
             </p>
           </FadeUp>
           
@@ -194,7 +233,7 @@ export default function SnaglistPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/snagging-inspection.webp" alt="Professional Snagging Inspection" fill className="object-cover" />
+              <Image src="/snagging-inspection.webp" alt="Home inspector checking a new build home in Dublin" fill className="object-cover" />
             </div>
           </div>
         </FadeUp>
@@ -204,8 +243,8 @@ export default function SnaglistPage() {
       <section className="px-6 max-w-7xl mx-auto w-full mb-32">
         <FadeUp>
           <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Our Services</h2>
-            <p className="text-gray-600 text-lg">Transparent, fixed pricing based on your property size.</p>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Snag List Prices</h2>
+            <p className="text-gray-600 text-lg">Transparent, fixed home inspection pricing based on your property size.</p>
           </div>
         </FadeUp>
 
@@ -265,7 +304,7 @@ export default function SnaglistPage() {
       <section className="px-6 max-w-7xl mx-auto w-full mb-32">
         <FadeUp>
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Comprehensive Inspection</h2>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight">What Our Home Inspection Covers</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">We examine your property inside and out, checking against strict building tolerances and quality standards.</p>
           </div>
         </FadeUp>
@@ -345,7 +384,7 @@ export default function SnaglistPage() {
           <div className="w-full md:w-1/2">
             <FadeUp delay={0.2} className="relative w-full aspect-[4/3] shadow-2xl rounded-xl overflow-hidden bg-[#1a1814]">
               {/* Added priority tag to prevent LCP warnings */}
-              <Image src="/report-mockup.webp" alt="Sample Snagging Report" fill className="object-cover opacity-90" priority />
+              <Image src="/report-mockup.webp" alt="Sample snag list report from a Dublin home inspection" fill className="object-cover opacity-90" priority />
             </FadeUp>
           </div>
         </div>
@@ -418,9 +457,36 @@ export default function SnaglistPage() {
           </div>
 
         </div>
-
-          <AreasWeServe />
       </section>
+
+      {/* FAQ */}
+      <section className="px-6 max-w-4xl mx-auto w-full py-24">
+        <JsonLd data={faqJsonLd} />
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">Good to Know</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 tracking-tight">Snag List &amp; Home Inspection FAQs</h2>
+          </div>
+        </FadeUp>
+        <div className="space-y-4">
+          {FAQS.map((f, i) => (
+            <FadeUp key={f.q} delay={0.05 * i}>
+              <details className="group bg-white border border-gray-200 rounded-xl shadow-sm open:shadow-md transition-shadow">
+                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none p-6 md:p-7 [&::-webkit-details-marker]:hidden">
+                  <h3 className="text-lg md:text-xl font-serif font-bold text-gray-900">{f.q}</h3>
+                  <span className="flex-shrink-0 w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center text-[#b7935b] transition-transform duration-300 group-open:rotate-45">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+                  </span>
+                </summary>
+                <p className="px-6 md:px-7 pb-6 md:pb-7 -mt-2 text-gray-600 leading-relaxed">{f.a}</p>
+              </details>
+            </FadeUp>
+          ))}
+        </div>
+      </section>
+
+      {/* Areas We Serve */}
+      <AreasWeServe />
 
     </main>
   );

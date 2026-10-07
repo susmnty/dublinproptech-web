@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { pageMeta, JsonLd, SITE_URL, BUSINESS_ID } from "@/app/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Snagging Inspections Dublin | From €200 | Dublin PropTech",
+  title: "Snag List & Home Inspector Dublin | From €200 | Dublin PropTech",
   absoluteTitle: true,
   description:
-    "Professional snagging inspections in Dublin from €200. 300+ point check, thermal imaging and a developer-ready photo report within 48 hours. Book your inspection today.",
+    "Independent home inspector in Dublin. New build snag lists, house, apartment and rental property inspections from €200. 300+ point check, thermal imaging and a photo report in 48 hours.",
   path: "/service/snaglist",
   image: "/snaglist.webp?v=2",
 });
@@ -13,9 +13,10 @@ export const metadata: Metadata = pageMeta({
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Snagging Inspection",
-  serviceType: "New home snagging inspection",
-  url: `${SITE_URL}/service/snaglist`,
+  name: "Snag List & Home Inspection",
+  alternateName: ["Snagging Inspection", "Home Inspection", "New Build Snag List"],
+  serviceType: "Home inspection and new build snagging",
+  url: `${SITE_URL}/service/snaglist/`,
   provider: { "@id": BUSINESS_ID },
   areaServed: ["Dublin", "Kildare", "Wicklow", "Meath"].map((name) => ({
     "@type": "AdministrativeArea",
