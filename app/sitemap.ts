@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogUrls: MetadataRoute.Sitemap = blogs
     .filter((blog: any) => blog.slug && blog.slug !== blog.id)
     .map((blog: any) => ({
-      url: `${baseUrl}/blogs/${blog.slug}`,
+      url: `${baseUrl}/blogs/${blog.slug}/`,
       lastModified: blog.date ? new Date(blog.date) : undefined,
       changeFrequency: "monthly",
       priority: 0.6,
@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   const staticUrls: MetadataRoute.Sitemap = routes.map(({ path, priority, freq }) => ({
-    url: `${baseUrl}${path}`,
+    url: `${baseUrl}${path}/`,
     changeFrequency: freq,
     priority,
   }));

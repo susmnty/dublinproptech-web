@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Old /blog/ links -> real /blogs/ pages
+RewriteRule ^blog/(.*)$ /blogs/$1 [R=301,L]
+
+# Images: browsers re-check after 1 day
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|jpg|jpeg|png|svg|gif|avif)$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+</IfModule>
