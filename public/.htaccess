@@ -1,9 +1,54 @@
 RewriteEngine On
 
-# Old /blog/ links -> real /blogs/ pages
-RewriteRule ^blog/(.*)$ /blogs/$1 [R=301,L]
+# ------------------------------------------------------------
+# 1. OLD LINKS THAT HAVE A NEW PAGE -> 301 redirect
+# ------------------------------------------------------------
 
-# Images: browsers re-check after 1 day
+# Old /blog/ posts -> /blogs/
+RewriteRule ^blog/(.*)$ /blogs/$1 [R=301,L]
+RewriteRule ^blog-archieve/?$ /blogs/ [R=301,L]
+RewriteRule ^what-is-a-snag-list-in-dublin-and-why-is-it-important-for-new-homes/?$ /service/snaglist/ [R=301,L]
+
+# Capital letters -> lowercase pages
+RewriteRule ^Service/(.*)$ /service/$1 [R=301,L]
+RewriteRule ^Reviews/?$ /reviews/ [R=301,L]
+
+# Old service pages
+RewriteRule ^(lvt|product-category/spc)/?$ /service/lvt/ [R=301,L]
+RewriteRule ^carpets/?$ /service/flooring/carpets/ [R=301,L]
+RewriteRule ^laminate-flooring/?$ /service/flooring/laminate/ [R=301,L]
+RewriteRule ^tile-flooring/?$ /service/flooring/tiles/ [R=301,L]
+RewriteRule ^(underlay|product-category/samples|home-renovation)/?$ /service/flooring/ [R=301,L]
+RewriteRule ^(pricing|faq)/?$ /service/snaglist/ [R=301,L]
+RewriteRule ^contact(-[0-9]+)?/?$ /service/contact/ [R=301,L]
+RewriteRule ^about-us/?$ / [R=301,L]
+
+# Old laminate product pages (…-oak-details, …oakdetails, …hickorydetails, …-deatils)
+RewriteRule ^[a-z-]+-?(oak|hickory)-?(details|deatils)/?$ /service/flooring/laminate/ [R=301,L]
+
+# ------------------------------------------------------------
+# 2. OLD WORDPRESS / SPAM PAGES WITH NO REPLACEMENT -> 410 Gone
+# ------------------------------------------------------------
+
+# WordPress system files & folders (wp-admin, wp-content, wp-json, wp-login.php …)
+RewriteRule ^wp- - [G,L]
+RewriteRule ^(xmlrpc\.php|feed|comments/feed)/?$ - [G,L]
+
+# WordPress links like /?page_id=123 and /?wc-ajax=…
+RewriteCond %{QUERY_STRING} (^|&)(page_id|wc-ajax)= [NC]
+RewriteRule ^$ - [G,L]
+
+# Old pages not on the new site
+RewriteRule ^(404-3|seo|fsp|peace-commissioner|digital-hub|mortgage|tradesmen|documents(-[0-9]+)?|boutique|grass|resources|directory|digital-agency|website-development|community-offer|share-your-images-be-featured|events)/?$ - [G,L]
+RewriteRule ^elementor-[a-z0-9-]+/?$ - [G,L]
+RewriteRule ^(how-to-increase-your-roi-through-scientific-sem|timeless-vs-trend-driven-design-finding-the-right-balance)/?$ - [G,L]
+
+# Spam pages from the old hacked site
+RewriteRule ^(real-money-play-nonetheless-unlocks-money-winnings|wand-types-are-classics-since-theyre-so-easy-to-hold-and|from-the-critiques-this-one-could-be-quite-explosive-and|panellists-tried-every-velocity-setting-and-vibration-sample|today-with-several-iterations-available-the-product)/?$ - [G,L]
+
+# ------------------------------------------------------------
+# 3. IMAGES: browsers re-check after 1 day
+# ------------------------------------------------------------
 <IfModule mod_headers.c>
   <FilesMatch "\.(webp|jpg|jpeg|png|svg|gif|avif)$">
     Header set Cache-Control "public, max-age=86400"
