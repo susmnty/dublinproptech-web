@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main # Or 'master' if that is your primary branch
+  workflow_dispatch:        # "Run workflow" button in GitHub Actions
+  schedule:
+    - cron: "0 5 * * *"     # rebuilds every day at about 6am Irish time (picks up new Notion posts)
 
 jobs:
   build-and-deploy:
