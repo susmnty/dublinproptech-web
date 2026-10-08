@@ -293,9 +293,9 @@ export default function FlooringPage() {
         </AnimatePresence>
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 pt-36 md:pt-32 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
-          <FadeUp><span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block drop-shadow-md">The Foundation of Beautiful Homes</span></FadeUp>
-          <FadeUp delay={0.1}><h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-8 tracking-tight drop-shadow-lg">Premium Flooring<span className="block text-2xl md:text-3xl mt-4 font-sans font-medium text-gray-200">Flooring Supply &amp; Fitting in Dublin</span></h1></FadeUp>
-          <FadeUp delay={0.2}><p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-medium leading-relaxed mb-10 drop-shadow-md">Elevate your space with architectural Herringbone, authentic Engineered Wood, and ultra-durable AC5 Laminates.</p></FadeUp>
+          <FadeUp><span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block drop-shadow-md">Supplied · Prepared · Fitted</span></FadeUp>
+          <FadeUp delay={0.1}><h1 className="text-4xl md:text-6xl font-serif font-bold text-white leading-[1.1] mb-6 tracking-tight drop-shadow-lg">Flooring Dublin<span className="block text-xl md:text-2xl mt-4 font-sans font-medium text-gray-200">Laminate, LVT, Tiles &amp; Carpets, Supplied &amp; Fitted</span></h1></FadeUp>
+          <FadeUp delay={0.2}><p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-medium leading-relaxed mb-10 drop-shadow-md">Free survey, expert subfloor prep and a flawless finish.</p></FadeUp>
           <FadeUp delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/service/contact" className="inline-block bg-[#b7935b] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg text-center">Request a Quote</Link>
@@ -303,8 +303,8 @@ export default function FlooringPage() {
             </div>
           </FadeUp>
 
-          {/* Social media icons (same as home & snaglist) */}
-          <FadeUp delay={0.4} className="mt-12">
+          {/* Social media icons (same fade-in as home) */}
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.6 }} className="mt-12">
             <div className="flex justify-center gap-6 relative z-20">
               <a href="https://www.instagram.com/dublinproptech/" target="_blank" rel="noopener noreferrer" className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg">
                 <span className="sr-only">Instagram</span>
@@ -319,7 +319,7 @@ export default function FlooringPage() {
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
               </a>
             </div>
-          </FadeUp>
+          </motion.div>
         </div>
       </section>
 

@@ -104,19 +104,19 @@ export default function SnaglistPage() {
         {/* Hero Content (Floating on top) */}
         <div className="relative z-20 pt-36 md:pt-32 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
           <FadeUp>
-            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block drop-shadow-md">Protect Your Investment</span>
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block drop-shadow-md">Independent Home Inspector · Dublin</span>
           </FadeUp>
           
           <FadeUp delay={0.1}>
-            <h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-8 tracking-tight drop-shadow-lg">
-              Snag List &amp; <br /> Home Inspections Dublin.
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white leading-[1.1] mb-6 tracking-tight drop-shadow-lg">
+              Snag List Dublin
+              <span className="block text-xl md:text-2xl mt-4 font-sans font-medium text-gray-200">New Build Home Inspections from €200</span>
             </h1>
           </FadeUp>
           
           <FadeUp delay={0.2}>
             <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-medium leading-relaxed mb-10 drop-shadow-md">
-              Independent home inspector for new build houses and apartments.<br />
-              We uncover over 100 hidden issues with our rigorous snag list report so your new home is flawlessly finished.
+              300+ point check, thermal imaging and a photo report in 48 hours.
             </p>
           </FadeUp>
           
@@ -132,7 +132,7 @@ export default function SnaglistPage() {
           </FadeUp>
 
           {/* NEW: Circular Social Media Icons directly under the buttons */}
-          <FadeUp delay={0.4} className="mt-12">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.6 }} className="mt-12">
             <div className="flex justify-center gap-6 relative z-20">
               {/* Instagram */}
               <a 
@@ -173,7 +173,7 @@ export default function SnaglistPage() {
                 </svg>
               </a>
             </div>
-          </FadeUp>
+          </motion.div>
 
         </div>
       </section>
