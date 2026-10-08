@@ -162,7 +162,7 @@ export default function SnaglistPage() {
 
               {/* YouTube */}
               <a 
-                href="#" 
+                href="https://www.youtube.com/@DublinProptech" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"

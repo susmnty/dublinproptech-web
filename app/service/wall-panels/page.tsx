@@ -12,7 +12,7 @@ const FAQS: Faq[] = [
   { q: "What are slat wall panels?", a: "Slat wall panels are vertical fluted or slatted panels that add texture and warmth to a wall. They're a quick way to create a feature wall behind a TV, a bed or a desk." },
   { q: "Do acoustic wall panels really reduce noise?", a: "Yes. Acoustic panels have slats on a felt backing that absorbs sound, which cuts echo in living rooms, home offices and studios. Fitting them on battens with insulation behind improves the effect further." },
   { q: "How are wall panels installed?", a: "Panels are fixed with adhesive or screws, or onto battens for the best acoustic performance. We cut neatly around sockets, switches and corners and finish the edges with matching end profiles." },
-  { q: "Can slat wall panels go in a bathroom?", a: "Our slat and acoustic panels have an MDF core, so they're not suitable for showers or wet areas. They work best in living rooms, bedrooms, hallways and home offices. For bathrooms, ask us about waterproof panel options." },
+  { q: "Can slat wall panels go in a bathroom?", a: "Our slat and acoustic panels have an MDF core, so they're not suitable for showers or wet areas. They work best in living rooms, bedrooms, hallways and home offices." },
   { q: "How long does it take to fit a feature wall?", a: "A single feature wall is usually fitted in a day, including cutting around sockets and finishing the edges." },
   { q: "Which colours are available?", a: "We fit panels in oak, walnut, white, grey, anthracite and blue finishes. Browse the range above and filter by colour to see every option." },
 ];
@@ -43,13 +43,13 @@ export default function WallPanelsPage() {
         
         <FadeUp delay={0.1}>
           <h1 className="text-5xl md:text-7xl font-serif font-bold text-gray-900 leading-[1.1] mb-8 tracking-tight">
-            Feature Walls <br /> & Waterproof Panels.
+            Feature Walls <br /> & Acoustic Panels.
           </h1>
         </FadeUp>
         
         <FadeUp delay={0.2}>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            From acoustic slatted wood that transforms your living room, to 100% waterproof, seamless SPC panels that replace bathroom tiles.
+            Fluted slat panels and felt-backed acoustic panels that add warmth, texture and a quieter feel to living rooms, bedrooms and home offices.
           </p>
         </FadeUp>
         
@@ -67,13 +67,13 @@ export default function WallPanelsPage() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <FadeUp delay={0.1} className="flex flex-col items-center">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-            <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">100% Waterproof</h4>
-            <p className="text-sm text-gray-500">Perfect for shower enclosures</p>
+            <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">2400mm Tall Panels</h4>
+            <p className="text-sm text-gray-500">Floor to ceiling in one length</p>
           </FadeUp>
           <FadeUp delay={0.2} className="flex flex-col items-center">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Zero Grout</h4>
-            <p className="text-sm text-gray-500">Mold-free and easy to clean</p>
+            <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Wood-Effect Finishes</h4>
+            <p className="text-sm text-gray-500">Oak, walnut, white &amp; grey</p>
           </FadeUp>
           <FadeUp delay={0.3} className="flex flex-col items-center">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
@@ -83,7 +83,7 @@ export default function WallPanelsPage() {
           <FadeUp delay={0.4} className="flex flex-col items-center">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><polyline points="20 6 9 17 4 12"></polyline></svg>
             <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Rapid Install</h4>
-            <p className="text-sm text-gray-500">Faster than traditional tiling</p>
+            <p className="text-sm text-gray-500">Most walls fitted in a day</p>
           </FadeUp>
         </div>
       </section>
@@ -110,7 +110,7 @@ export default function WallPanelsPage() {
               
               <div className="mt-8 space-y-6">
                 <p className="text-gray-600 leading-relaxed text-lg">
-                  Whether you are looking to build a modern media wall behind your television, or replace outdated bathroom tiles with sleek, marble-effect SPC panels, we offer flawless installation.
+                  Whether you want a modern media wall behind your TV, a statement wall behind your bed or a quieter home office, our slat and acoustic panels give any room instant character, with flawless installation.
                 </p>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3 text-gray-800 font-medium">
@@ -119,7 +119,7 @@ export default function WallPanelsPage() {
                   </li>
                   <li className="flex items-start gap-3 text-gray-800 font-medium">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mt-1 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Large-format SPC panels for showers and wet rooms.</span>
+                    <span>Fluted slat panels for bedrooms, hallways and feature walls.</span>
                   </li>
                   <li className="flex items-start gap-3 text-gray-800 font-medium">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mt-1 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
