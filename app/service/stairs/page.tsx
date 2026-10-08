@@ -10,12 +10,12 @@ import AreasWeServe from "../../components/AreasWeServe";
 // FAQ: shown on the page and sent to Google as FAQ schema
 const FAQS: Faq[] = [
   { q: "What is stair cladding?", a: "Stair cladding covers your existing staircase with new treads, risers and nosings, so you get the look of a brand-new wood staircase without replacing the structure. It's faster, cleaner and costs far less than a full replacement." },
-  { q: "Can you clad stairs to match my new floor?", a: "Yes. Our laminate tread and riser kits and engineered oak treads come in shades that match our flooring ranges, so your hallway, stairs and landing flow as one." },
+  { q: "Can you clad stairs to match my new floor?", a: "Yes. Our laminate stair cladding and engineered oak treads come in shades that match our flooring ranges, so your hallway, stairs and landing flow as one." },
   { q: "Laminate or engineered oak stair treads: which is better?", a: "Laminate kits are very hard-wearing and great value, which suits busy family homes. Engineered oak treads are real timber, so they feel warmer underfoot and give the most premium finish." },
   { q: "Do you fix squeaky stairs before cladding?", a: "Yes. We check every step and fix squeaks and loose treads first, so your newly clad staircase is solid and quiet." },
   { q: "Can you fit a carpet runner on wooden stairs?", a: "Yes. We fit bespoke carpet runners over clad or existing wooden stairs, which adds grip, softens noise and gives a classic look." },
   { q: "How long does stair cladding take?", a: "A standard straight staircase usually takes one to two days. Stairs with winders, a bullnose step or a landing can take a little longer." },
-  { q: "Can you clad stairs with winders or a bullnose step?", a: "Yes. Our range includes treads for winder steps and bottom bullnose steps, and we cut custom nosings for a seamless edge." },
+  { q: "Can you clad stairs with winders or a bullnose step?", a: "Yes. XXL double treads (610mm deep) cover winder steps and deep bottom steps, side covers finish open-sided stairs, and we cut custom nosings for a seamless edge." },
 ];
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
@@ -95,7 +95,7 @@ export default function StairsPage() {
           <div className="text-center mb-12">
             <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">Our Range</span>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 tracking-tight">Stair Cladding Range</h2>
-            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">8mm laminate tread &amp; riser kits and 14mm engineered oak treads, in shades that match our flooring. Filter by range, colour and step type.</p>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Laminate tread-over-tread cladding (fitted over your existing stairs) in 14 decors, plus 14mm engineered oak treads. Filter by range, colour and part.</p>
           </div>
         </FadeUp>
         <Catalogue type="stair" />
