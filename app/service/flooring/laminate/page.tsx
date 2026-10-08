@@ -10,7 +10,7 @@ import ServiceFAQ, { type Faq } from "../../../components/ServiceFAQ";
 // FAQ: shown on the page and sent to Google as FAQ schema
 const FAQS: Faq[] = [
   { q: "How much does laminate flooring installation cost in Dublin?", a: "Every job is priced after a free survey. The cost depends on the laminate you choose, the size of the room, how much subfloor preparation is needed, and the underlay, skirting and trims. Request a free quote and we'll send you a fixed price for supply and fitting." },
-  { q: "What is the difference between AC4 and AC5 laminate?", a: "The AC rating shows how well the surface resists wear. AC4 suits every room in a busy family home. AC5 is the toughest grade, built for commercial traffic, so it's ideal for hallways, kitchens and homes with pets and children." },
+  { q: "What does AC5 rated laminate mean?", a: "The AC rating shows how well the surface resists wear. AC5 is the toughest grade, built for commercial traffic, and it's the only grade we supply, so your floor stands up to hallways, kitchens, pets and children." },
   { q: "Should I choose 8mm, 12mm or 14mm laminate?", a: "Thicker boards feel more solid underfoot, sound quieter and handle small subfloor dips better. 8mm is a good value option for bedrooms, 12mm is the most popular choice for living areas, and 14mm wide planks give the most premium look and feel." },
   { q: "Can laminate flooring go in a kitchen or bathroom?", a: "Water-resistant laminate works well in kitchens, utility rooms and hallways. For bathrooms and wet rooms we recommend waterproof LVT or SPC flooring instead, because standing water can still damage laminate over time." },
   { q: "Can you fit laminate over underfloor heating?", a: "Yes. Most of our laminate range is suitable for underfloor heating when it's fitted on the correct underlay and the heating stays within the manufacturer's temperature limits. We'll confirm the right board and underlay during the survey." },
@@ -53,7 +53,7 @@ export default function LaminatePage() {
         </FadeUp>
         <FadeUp delay={0.2}>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-            AC4 and AC5 rated laminate from 8mm to 14mm, including herringbone and the waterproof 12mm Story range. Search by colour, collection or thickness below.
+            AC5 rated laminate from 8mm to 14mm, including herringbone and the waterproof 12mm Story range. Search by colour, collection or thickness below.
           </p>
         </FadeUp>
         <FadeUp delay={0.3}>
@@ -67,7 +67,7 @@ export default function LaminatePage() {
       {/* Trust Banner */}
       <section className="border-y border-gray-200 bg-white py-12 mb-16">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <FadeUp delay={0.1} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">AC4 & AC5 Rated</h4><p className="text-sm text-gray-500">Commercial grade durability</p></FadeUp>
+          <FadeUp delay={0.1} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">AC5 Rated</h4><p className="text-sm text-gray-500">Commercial grade durability</p></FadeUp>
           <FadeUp delay={0.2} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Splash Resistant</h4><p className="text-sm text-gray-500">Waterproof 12mm Story range</p></FadeUp>
           <FadeUp delay={0.3} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">UFH Compatible</h4><p className="text-sm text-gray-500">For underfloor heating</p></FadeUp>
           <FadeUp delay={0.4} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><polyline points="20 6 9 17 4 12"></polyline></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Supplied & Fitted</h4><p className="text-sm text-gray-500">Skirting, trims & thresholds</p></FadeUp>
