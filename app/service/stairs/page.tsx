@@ -7,6 +7,17 @@ import Catalogue from "../flooring/catalogue";
 import ServiceFAQ, { type Faq } from "../../components/ServiceFAQ";
 import AreasWeServe from "../../components/AreasWeServe";
 
+// Laminate cladding system parts (numbers match the diagram)
+const SYSTEM_PARTS = [
+  { t: "Tread", d: "56mm tread with a built-in rounded nose, up to 1300mm wide. Fits straight over your existing step." },
+  { t: "Riser", d: "8mm panel that sits upright on the step below. Match your treads or choose white." },
+  { t: "Side Cover", d: "Finishes the open side of the staircase so every step looks solid." },
+  { t: "Finishing Block", d: "Fixed on the open side under each tread to support and neaten the side covers." },
+  { t: "Stair Nose + Aluminium Profile", d: "A safe, clean transition from the top step onto the landing floor." },
+  { t: "Stair Landing", d: "Landing panels in the same decor, so the landing matches the stairs." },
+  { t: "XXL Double Tread", d: "610mm deep, for winder steps, a deep bottom step or a small landing." },
+];
+
 // FAQ: shown on the page and sent to Google as FAQ schema
 const FAQS: Faq[] = [
   { q: "What is stair cladding?", a: "Stair cladding covers your existing staircase with new treads, risers and nosings, so you get the look of a brand-new wood staircase without replacing the structure. It's faster, cleaner and costs far less than a full replacement." },
@@ -85,6 +96,35 @@ export default function StairsPage() {
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
             <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Anti-Slip Profiles</h4>
             <p className="text-sm text-gray-500">Safe and durable designs</p>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* Laminate cladding system: how the parts fit together */}
+      <section className="px-4 md:px-6 max-w-7xl mx-auto w-full mb-24">
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">Laminate Cladding System</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 tracking-tight">How It Fits Together</h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">Fitted over your existing stairs with no rip-out. Every part comes in the same decor, so the whole staircase matches.</p>
+          </div>
+        </FadeUp>
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+          <FadeUp className="relative w-full aspect-square rounded-3xl overflow-hidden bg-[#f4f2ee] shadow-sm border border-gray-200">
+            <Image src="/stairs/laminate-system-diagram.webp" alt="Laminate stair cladding system parts: tread, riser, side cover, finishing block, stair nose, landing and XXL double tread" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+          </FadeUp>
+          <FadeUp delay={0.1}>
+            <ol className="space-y-5">
+              {SYSTEM_PARTS.map((p, i) => (
+                <li key={p.t} className="flex gap-4">
+                  <span className="shrink-0 w-9 h-9 rounded-full bg-[#b7935b] text-white font-bold flex items-center justify-center shadow-sm">{i + 1}</span>
+                  <div>
+                    <h3 className="font-serif font-bold text-lg text-gray-900">{p.t}</h3>
+                    <p className="text-gray-600 text-sm md:text-base leading-relaxed">{p.d}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </FadeUp>
         </div>
       </section>
