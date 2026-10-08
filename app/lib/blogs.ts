@@ -1,3 +1,20 @@
+// Notion-uploaded images expire after ~1 hour, so the build saves a copy in /public/blog-images/
+// (see scripts/notion-images.mjs). This returns the saved copy's path; links you pasted are used as they are.
+export function notionImageExt(url: string): string {
+  try {
+    const m = new URL(url).pathname.toLowerCase().match(/\.(jpe?g|png|webp|gif|avif|svg)$/);
+    return m ? m[0] : ".jpg";
+  } catch {
+    return ".jpg";
+  }
+}
+
+function coverFor(page: any): string {
+  if (page.cover?.type === "external") return page.cover.external.url;
+  if (page.cover?.type === "file") return `/blog-images/${page.id}-cover${notionImageExt(page.cover.file.url)}`;
+  return "/flooring.webp?v=2";
+}
+
 export async function getRecentBlogs() {
   const apiKey = process.env.NOTION_API_KEY;
   const databaseId = process.env.NOTION_DATABASE_ID;
@@ -31,7 +48,7 @@ export async function getRecentBlogs() {
       title: page.properties.Name?.title[0]?.plain_text || "Untitled",
       slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
       date: page.properties.Date?.date?.start || "",
-      coverImage: page.cover?.external?.url || page.cover?.file?.url || "/flooring.webp?v=2", 
+      coverImage: coverFor(page), 
       description: page.properties.Description?.rich_text[0]?.plain_text || "",
     }));
   } catch (error) {
@@ -72,7 +89,7 @@ export async function getAllBlogs() {
       title: page.properties.Name?.title[0]?.plain_text || "Untitled",
       slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
       date: page.properties.Date?.date?.start || "",
-      coverImage: page.cover?.external?.url || page.cover?.file?.url || "/flooring.webp?v=2", 
+      coverImage: coverFor(page), 
       description: page.properties.Description?.rich_text[0]?.plain_text || "",
     }));
   } catch (error) {
@@ -124,7 +141,7 @@ export async function getBlogPost(slug: string) {
     return {
       title: page.properties.Name?.title[0]?.plain_text || "Untitled",
       date: page.properties.Date?.date?.start || "",
-      coverImage: page.cover?.external?.url || page.cover?.file?.url || "/flooring.webp?v=2",
+      coverImage: coverFor(page),
       description: page.properties.Description?.rich_text[0]?.plain_text || "",
       contentBlocks: blocksData.results || [],
     };

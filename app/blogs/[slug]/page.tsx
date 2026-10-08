@@ -1,4 +1,4 @@
-import { getBlogPost, getAllBlogs } from "@/app/lib/blogs";
+import { getBlogPost, getAllBlogs, notionImageExt } from "@/app/lib/blogs";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -50,6 +50,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
+  // Show the cover at the top only if the post has its own cover (not the default site image)
+  const hasCover = !post.coverImage.startsWith("/flooring.webp");
+
   const articleLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -80,6 +83,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           {post.title}
         </h1>
         <p className="text-xl text-gray-600 leading-relaxed font-medium">{post.description}</p>
+        {hasCover && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={post.coverImage} alt={post.title} className="mt-10 w-full aspect-[16/9] object-cover rounded-2xl" />
+        )}
       </header>
 
       <article className="max-w-3xl mx-auto px-6 prose prose-lg prose-stone text-gray-700 leading-relaxed space-y-6">
@@ -112,6 +119,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           }
           if (type === "numbered_list_item") {
             return <li key={id} className="list-decimal ml-6 text-gray-700"><RichText items={block.numbered_list_item.rich_text} /></li>;
+          }
+
+          // Images inside the post (uploaded to Notion, or pasted as a link)
+          if (type === "image") {
+            const img = block.image;
+            const src = img.type === "external" ? img.external.url : `/blog-images/${id}${notionImageExt(img.file.url)}`;
+            const caption = (img.caption || []).map((t: any) => t.plain_text).join("");
+            return (
+              <figure key={id} className="my-10">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt={caption || post.title} loading="lazy" className="w-full rounded-2xl" />
+                {caption && <figcaption className="text-sm text-gray-500 text-center mt-3">{caption}</figcaption>}
+              </figure>
+            );
           }
 
           return null;
