@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import AreasWeServe from "../../components/AreasWeServe";
+import { submitEnquiry } from "../../lib/hubspot";
 
 // Reusable animation wrapper
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
@@ -76,15 +77,9 @@ export default function ContactPage() {
     };
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const ok = await submitEnquiry(payload);
 
-      if (response.ok) {
+      if (ok) {
         setStatus("Message Sent!");
         setSubmitted(payload);   // keep details for the WhatsApp message
         form.reset();

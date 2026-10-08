@@ -220,7 +220,7 @@ export default function BlindsPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/blinds-detail.webp" alt="Blinds Close Up Detail" fill className="object-cover" unoptimized priority />
+              <Image src="/wooden-blinds.webp" alt="Blinds Close Up Detail" fill className="object-cover" unoptimized priority />
             </div>
           </div>
         </FadeUp>

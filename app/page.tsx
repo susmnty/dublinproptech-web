@@ -7,6 +7,7 @@ import Script from "next/script";
 import { useState, useEffect, useRef } from "react";
 import HeroSlider from "./components/HeroSlider";
 import AreasWeServe from "./components/AreasWeServe";
+import { submitEnquiry } from "./lib/hubspot";
 
 // Fade up animation wrapper
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
@@ -109,23 +110,17 @@ export default function Home() {
     const formData = new FormData(form);
 
     const payload = {
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      email: formData.get("email"),
-      phone: formData.get("phone") || "",
-      message: formData.get("message"),
+      firstName: String(formData.get("firstName") || ""),
+      lastName: String(formData.get("lastName") || ""),
+      email: String(formData.get("email") || ""),
+      phone: String(formData.get("phone") || ""),
+      message: String(formData.get("message") || ""),
     };
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const ok = await submitEnquiry(payload);
 
-      if (response.ok) {
+      if (ok) {
         setStatus("Message Sent!");
         form.reset();
       } else {

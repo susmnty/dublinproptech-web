@@ -6,6 +6,7 @@ import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { SERVICE_AREAS } from "@/app/lib/seo";
+import { submitEnquiry } from "@/app/lib/hubspot";
 
 const CONTACT = "/service/contact";
 const hrefFor = (area: string) => `${CONTACT}?area=${encodeURIComponent(area)}#enquiry`;
@@ -46,7 +47,7 @@ const field =
   "w-full bg-transparent border-b-2 border-gray-200 py-3 text-gray-900 font-medium focus:outline-none focus:border-[#b7935b] transition-colors";
 const labelCls = "text-xs font-bold text-gray-500 uppercase tracking-widest";
 
-// Pop-up request form for locations not on the list. Sends through the same /api/contact as the contact page.
+// Pop-up request form for locations not on the list. Sends straight to HubSpot, same as the contact page.
 function RequestModal({ area, onClose }: { area: string; onClose: () => void }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [firstName, setFirstName] = useState("");
@@ -73,18 +74,14 @@ function RequestModal({ area, onClose }: { area: string; onClose: () => void }) 
     setFirstName(first);
     setStatus("sending");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: first,
-          lastName: rest.join(" ") || "-",
-          email: String(f.get("email") || ""),
-          phone: String(f.get("phone") || ""),
-          message: `NEW AREA REQUEST\nLocation: ${location}\nService: ${service}${note ? `\nDetails: ${note}` : ""}`,
-        }),
+      const ok = await submitEnquiry({
+        firstName: first,
+        lastName: rest.join(" ") || "-",
+        email: String(f.get("email") || ""),
+        phone: String(f.get("phone") || ""),
+        message: `NEW AREA REQUEST\nLocation: ${location}\nService: ${service}${note ? `\nDetails: ${note}` : ""}`,
       });
-      setStatus(res.ok ? "sent" : "error");
+      setStatus(ok ? "sent" : "error");
     } catch {
       setStatus("error");
     }
