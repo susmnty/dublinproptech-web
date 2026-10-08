@@ -39,7 +39,7 @@ export default function HeroSlider() {
   }, []);
 
   return (
-    <div className="relative w-full min-h-[75vh] md:min-h-[85vh] overflow-hidden bg-[#1a1814] flex flex-col items-center justify-center">
+    <div className="relative w-full min-h-[100svh] overflow-hidden bg-[#1a1814] flex flex-col items-center justify-center">
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.div
           key={currentIndex}
@@ -64,7 +64,7 @@ export default function HeroSlider() {
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/55 via-black/40 to-black/60" />
       <div className="absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.35)_0%,transparent_70%)]" />
 
-      <div className="relative z-20 text-center flex flex-col items-center px-6 pt-16 pb-10 max-w-5xl mx-auto">
+      <div className="relative z-20 text-center flex flex-col items-center px-6 pt-36 md:pt-32 pb-10 max-w-5xl mx-auto">
         <span className="text-sm font-bold tracking-widest uppercase text-white/90 mb-6 block drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)]">
           Crafting Perfection · New Build Specialist
         </span>

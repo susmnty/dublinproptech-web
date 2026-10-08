@@ -287,12 +287,12 @@ export default function FlooringPage() {
     <main className="w-full bg-[#f0ede6] text-gray-900 selection:bg-[#b7935b] selection:text-white pb-0 overflow-x-hidden relative">
 
       {/* Hero Section */}
-      <section className="relative w-full min-h-[65vh] md:min-h-[75vh] flex flex-col items-center justify-center overflow-hidden bg-[#1a1814]">
+      <section className="relative w-full min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-[#1a1814]">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.img key={currentIndex} src={heroImages[currentIndex]} alt="Premium flooring fitted in a Dublin home" className="absolute inset-0 w-full h-full object-cover" initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 3, ease: "easeInOut" }} />
         </AnimatePresence>
         <div className="absolute inset-0 bg-black/50 z-10" />
-        <div className="relative z-20 pt-24 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
+        <div className="relative z-20 pt-36 md:pt-32 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
           <FadeUp><span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block drop-shadow-md">The Foundation of Beautiful Homes</span></FadeUp>
           <FadeUp delay={0.1}><h1 className="text-5xl md:text-7xl font-serif font-bold text-white leading-[1.1] mb-8 tracking-tight drop-shadow-lg">Premium Flooring<span className="block text-2xl md:text-3xl mt-4 font-sans font-medium text-gray-200">Flooring Supply &amp; Fitting in Dublin</span></h1></FadeUp>
           <FadeUp delay={0.2}><p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-medium leading-relaxed mb-10 drop-shadow-md">Elevate your space with architectural Herringbone, authentic Engineered Wood, and ultra-durable AC5 Laminates.</p></FadeUp>

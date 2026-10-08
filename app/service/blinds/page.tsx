@@ -42,7 +42,7 @@ export default function BlindsPage() {
     <main className="w-full bg-[#f0ede6] text-gray-900 selection:bg-[#b7935b] selection:text-white pb-0 overflow-x-hidden -mb-16">
       
       {/* Hero Section with Integrated Slider */}
-      <section className="relative w-full min-h-[65vh] md:min-h-[75vh] flex flex-col items-center justify-center overflow-hidden bg-[#1a1814]">
+      <section className="relative w-full min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-[#1a1814]">
         
         {/* Background Sliding Images */}
         <AnimatePresence mode="popLayout">
@@ -62,7 +62,7 @@ export default function BlindsPage() {
         <div className="absolute inset-0 bg-black/50 z-10" />
 
         {/* Hero Content (Floating on top) */}
-        <div className="relative z-20 pt-24 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
+        <div className="relative z-20 pt-36 md:pt-40 pb-20 px-6 max-w-6xl mx-auto w-full flex flex-col items-center text-center">
           <FadeUp>
             <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-6 block drop-shadow-md">Made to Measure Excellence</span>
           </FadeUp>
