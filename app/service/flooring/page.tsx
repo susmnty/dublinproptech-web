@@ -50,7 +50,7 @@ const BRANDS: { name: string; url: string; logo?: string }[] = [
 
 // The 6 category blocks (3 on top, 3 below). Change an image or link here.
 const CATEGORIES = [
-  { name: 'Laminate', sub: 'AC4 & AC5 rated · 8mm to 14mm', href: '/service/flooring/laminate', image: '/categories/laminate.webp' },
+  { name: 'Laminate', sub: 'AC5 rated · 8mm to 14mm', href: '/service/flooring/laminate', image: '/categories/laminate.webp' },
   { name: 'Carpets', sub: 'Luxury carpets & DESSO carpet tiles', href: '/service/flooring/carpets', image: '/categories/carpets.webp' },
   { name: 'Tiles', sub: 'Porcelain & ceramic, supplied and fitted', href: '/service/flooring/tiles', image: '/categories/tiles.webp' },
   { name: 'LVT', sub: 'Waterproof luxury vinyl & SPC', href: '/service/lvt', image: '/categories/lvt.webp' },
@@ -326,7 +326,7 @@ export default function FlooringPage() {
       {/* Trust Banner */}
       <section className="border-t border-gray-200 bg-white pt-12 pb-6">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <FadeUp delay={0.1} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">AC4 & AC5 Rated</h4><p className="text-sm text-gray-500">Commercial grade durability</p></FadeUp>
+          <FadeUp delay={0.1} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">AC5 Rated</h4><p className="text-sm text-gray-500">Commercial grade durability</p></FadeUp>
           <FadeUp delay={0.2} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Splash Resistant</h4><p className="text-sm text-gray-500">SPC & Aquastop options</p></FadeUp>
           <FadeUp delay={0.3} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">UFH Compatible</h4><p className="text-sm text-gray-500">For underfloor heating</p></FadeUp>
           <FadeUp delay={0.4} className="flex flex-col items-center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><polyline points="20 6 9 17 4 12"></polyline></svg><h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Flawless Finish</h4><p className="text-sm text-gray-500">Expert installation</p></FadeUp>
