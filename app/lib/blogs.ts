@@ -1,3 +1,18 @@
+// A post goes live only when it's ticked Published AND its Date is today or earlier.
+// (Checked at each build — the daily 6am Irish rebuild picks up posts dated that day.)
+function liveFilter() {
+  return [
+    { property: "Published", checkbox: { equals: true } },
+    { property: "Date", date: { on_or_before: new Date().toISOString().slice(0, 10) } },
+  ];
+}
+
+// Short summary: reads "Description", or "Excerpt" if the property is named that in Notion.
+function descriptionFor(page: any): string {
+  const p = page.properties.Description ?? page.properties.Excerpt;
+  return p?.rich_text?.[0]?.plain_text || "";
+}
+
 // Notion-uploaded images expire after ~1 hour, so the build saves a copy in /public/blog-images/
 // (see scripts/notion-images.mjs). This returns the saved copy's path; links you pasted are used as they are.
 export function notionImageExt(url: string): string {
@@ -30,10 +45,7 @@ export async function getRecentBlogs() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        filter: {
-          property: "Published",
-          checkbox: { equals: true },
-        },
+        filter: { and: liveFilter() },
         sorts: [{ property: "Date", direction: "descending" }],
         page_size: 3,
       }),
@@ -48,15 +60,15 @@ export async function getRecentBlogs() {
       title: page.properties.Name?.title[0]?.plain_text || "Untitled",
       slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
       date: page.properties.Date?.date?.start || "",
-      coverImage: coverFor(page), 
-      description: page.properties.Description?.rich_text[0]?.plain_text || "",
+      coverImage: coverFor(page),
+      description: descriptionFor(page),
     }));
   } catch (error) {
     return [];
   }
 }
 
-// Fetch ALL published blogs for the /blog page
+// Fetch ALL live blogs for the /blog page
 export async function getAllBlogs() {
   const apiKey = process.env.NOTION_API_KEY;
   const databaseId = process.env.NOTION_DATABASE_ID;
@@ -72,10 +84,7 @@ export async function getAllBlogs() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        filter: {
-          property: "Published",
-          checkbox: { equals: true },
-        },
+        filter: { and: liveFilter() },
         sorts: [{ property: "Date", direction: "descending" }],
       }),
       next: { revalidate: 60 }
@@ -89,8 +98,8 @@ export async function getAllBlogs() {
       title: page.properties.Name?.title[0]?.plain_text || "Untitled",
       slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
       date: page.properties.Date?.date?.start || "",
-      coverImage: coverFor(page), 
-      description: page.properties.Description?.rich_text[0]?.plain_text || "",
+      coverImage: coverFor(page),
+      description: descriptionFor(page),
     }));
   } catch (error) {
     return [];
@@ -115,7 +124,7 @@ export async function getBlogPost(slug: string) {
       body: JSON.stringify({
         filter: {
           and: [
-            { property: "Published", checkbox: { equals: true } },
+            ...liveFilter(),
             { property: "Slug", rich_text: { equals: slug } }
           ]
         }
@@ -127,7 +136,7 @@ export async function getBlogPost(slug: string) {
     if (!data.results || data.results.length === 0) return null;
 
     const page = data.results[0];
-    
+
     // Fetch block contents inside the Notion page
     const blocksRes = await fetch(`https://api.notion.com/v1/blocks/${page.id}/children?page_size=100`, {
       headers: {
@@ -142,7 +151,7 @@ export async function getBlogPost(slug: string) {
       title: page.properties.Name?.title[0]?.plain_text || "Untitled",
       date: page.properties.Date?.date?.start || "",
       coverImage: coverFor(page),
-      description: page.properties.Description?.rich_text[0]?.plain_text || "",
+      description: descriptionFor(page),
       contentBlocks: blocksData.results || [],
     };
   } catch (error) {
