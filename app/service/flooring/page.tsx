@@ -3,9 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import AreasWeServe from "../../components/AreasWeServe";
 import ServiceFAQ, { type Faq } from "../../components/ServiceFAQ";
+import SHOWROOM_FILES from "./showroom.json";
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
   return (
@@ -58,6 +59,148 @@ const CATEGORIES = [
   { name: 'Wall Panels', sub: 'Slat & acoustic feature walls', href: '/service/wall-panels', image: '/categories/wall-panels.webp' },
 ];
 
+// ---------------- SHOWROOM CAROUSEL ---------------- //
+// AUTOMATIC: every photo in public/showroom/ is shown. Just drop a photo in the folder and push.
+// Order = file name, so start names with 01-, 02-, 03- ...
+// Title comes from the file name ("05-oak-stairs.webp" -> "Oak Stairs").
+// Optional: add a nicer title or caption for a photo below (use the exact file name).
+const SHOWROOM_TEXT: Record<string, { title?: string; caption?: string }> = {
+  '01-stair-renovation.webp': { title: 'Stair Renovation', caption: 'Laminate stair treads in six finishes, fitted over your existing stairs' },
+  '02-herringbone-wall.webp': { title: 'Herringbone Laminate', caption: 'Water-resistant herringbone and wide planks, side by side' },
+  '03-herringbone-plank-range.webp': { title: 'Light to Dark Oak', caption: 'From pale oak to smoked cathedral, compare real boards' },
+  '04-profiles-trims.webp': { title: 'Matching Trims', caption: 'Stair nosings, ramps and flat profiles to finish every edge' },
+};
+
+const SHOWROOM = (SHOWROOM_FILES as { src: string; title: string }[]).map((p) => {
+  const file = p.src.split('/').pop() || '';
+  const text = SHOWROOM_TEXT[file] || {};
+  return { src: p.src, title: text.title ?? p.title, caption: text.caption ?? 'Real samples from the range we supply and fit' };
+});
+
+function ShowroomCarousel() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const total = SHOWROOM.length;
+  const go = (n: number) => setIndex((n + total) % total);
+  const activeRef = useRef<HTMLButtonElement>(null);
+
+  // Keep the selected thumbnail visible inside its strip (scrolls the strip only, never the page)
+  useEffect(() => {
+    const el = activeRef.current;
+    const box = el?.parentElement;
+    if (!el || !box) return;
+    box.scrollTo({ left: el.offsetLeft - box.offsetLeft - 8, top: el.offsetTop - box.offsetTop - 8, behavior: 'smooth' });
+  }, [index]);
+
+  // Auto-play every 5 seconds (pauses while hovering)
+  useEffect(() => {
+    if (paused || total < 2) return;
+    const t = setInterval(() => setIndex((i) => (i + 1) % total), 5000);
+    return () => clearInterval(t);
+  }, [paused, total]);
+
+  if (total === 0) return null; // no photos in the folder yet
+
+  return (
+    <section className="px-4 md:px-6 max-w-[1400px] mx-auto w-full pt-16 pb-24 border-t border-gray-300">
+      <FadeUp>
+        <div className="text-center mb-12">
+          <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">See It In Person</span>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Real Samples, Real Finishes</h2>
+          <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">Photos never do wood justice. Here are the actual boards, treads and trims we supply and fit.</p>
+        </div>
+      </FadeUp>
+
+      <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        {/* Main slide */}
+        <div className="lg:col-span-8 relative h-[440px] sm:h-[520px] md:h-[620px] rounded-2xl overflow-hidden bg-[#2a261f] shadow-[0_30px_60px_-20px_rgba(26,24,20,0.45)]">
+          <AnimatePresence mode="popLayout" initial={false}>
+            <motion.div
+              key={index}
+              className="absolute inset-0"
+              initial={{ opacity: 0, scale: 1.06 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={(_, info) => { if (info.offset.x < -60) go(index + 1); else if (info.offset.x > 60) go(index - 1); }}
+            >
+              <Image src={SHOWROOM[index].src} alt={SHOWROOM[index].title} fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover pointer-events-none" priority={index === 0} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+                <span className="text-[#b7935b] font-serif text-sm">{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}</span>
+                <h3 className="text-2xl md:text-4xl font-serif font-bold text-white mt-1">{SHOWROOM[index].title}</h3>
+                <p className="text-gray-200 text-sm md:text-base mt-2 max-w-lg">{SHOWROOM[index].caption}</p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Arrows */}
+          <button onClick={() => go(index - 1)} aria-label="Previous photo" className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/90 hover:bg-white text-[#1a1814] flex items-center justify-center shadow-lg transition-all hover:scale-105">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M15 18l-6-6 6-6" /></svg>
+          </button>
+          <button onClick={() => go(index + 1)} aria-label="Next photo" className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/90 hover:bg-white text-[#1a1814] flex items-center justify-center shadow-lg transition-all hover:scale-105">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M9 18l6-6-6-6" /></svg>
+          </button>
+
+          {/* Progress bar */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-white/20 z-10">
+            <motion.div key={`bar-${index}-${paused}`} className="h-full bg-[#b7935b]" initial={{ width: '0%' }} animate={{ width: paused ? '0%' : '100%' }} transition={{ duration: paused ? 0 : 5, ease: 'linear' }} />
+          </div>
+        </div>
+
+        {/* Thumbnails: list with captions for a few photos, compact grid when there are many */}
+        <div className="lg:col-span-4 min-w-0 flex flex-col gap-4">
+          {total <= 5 ? (
+            <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 -mx-1 px-1">
+              {SHOWROOM.map((s, i) => (
+                <button
+                  key={s.src}
+                  ref={i === index ? activeRef : undefined}
+                  onClick={() => setIndex(i)}
+                  aria-label={`Show ${s.title}`}
+                  className={`group flex-shrink-0 w-[150px] lg:w-full flex flex-col lg:flex-row items-stretch lg:items-center gap-3 p-2 rounded-xl border text-left transition-all ${i === index ? 'bg-white border-[#b7935b] shadow-md' : 'bg-white/50 border-transparent hover:bg-white hover:border-gray-200'}`}
+                >
+                  <span className="relative block w-full lg:w-24 h-24 lg:h-20 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
+                    <Image src={s.src} alt="" fill sizes="150px" className={`object-cover transition-transform duration-500 group-hover:scale-110 ${i === index ? '' : 'opacity-80'}`} />
+                  </span>
+                  <span className="min-w-0 px-1 lg:px-0">
+                    <span className="block text-[10px] font-bold uppercase tracking-widest text-[#b7935b]">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="block font-serif font-bold text-gray-900 text-sm lg:text-base leading-tight">{s.title}</span>
+                    <span className="hidden lg:block text-xs text-gray-500 mt-1 line-clamp-2">{s.caption}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="flex lg:grid lg:grid-cols-3 gap-2.5 overflow-x-auto lg:overflow-y-auto lg:max-h-[520px] pb-2 lg:pb-0 lg:pr-1 -mx-1 px-1">
+              {SHOWROOM.map((s, i) => (
+                <button
+                  key={s.src}
+                  ref={i === index ? activeRef : undefined}
+                  onClick={() => setIndex(i)}
+                  aria-label={`Show ${s.title}`}
+                  title={s.title}
+                  className={`group relative flex-shrink-0 w-24 lg:w-auto aspect-square rounded-xl overflow-hidden bg-gray-200 transition-all ${i === index ? 'ring-[3px] ring-[#b7935b] ring-offset-2 ring-offset-[#f0ede6]' : 'opacity-75 hover:opacity-100'}`}
+                >
+                  <Image src={s.src} alt="" fill sizes="120px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <span className="absolute top-1.5 left-1.5 bg-black/55 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md">{String(i + 1).padStart(2, '0')}</span>
+                </button>
+              ))}
+            </div>
+          )}
+          <Link href="/service/contact" className="hidden lg:flex flex-shrink-0 items-center justify-center gap-2 bg-[#1a1814] text-white px-6 py-4 rounded-full font-bold tracking-widest uppercase text-xs hover:bg-[#b7935b] transition-colors">
+            Book a Free Survey
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ---------------- BROCHURES ---------------- //
 // HOW TO ADD YOUR BROCHURE:
 // 1. Copy your PDF into the project folder:  public/brochures/   (e.g. public/brochures/laminate-brochure.pdf)
@@ -68,6 +211,7 @@ const CATEGORIES = [
 const BROCHURES: { title: string; category: string; pdf: string; photo?: string; cover?: string; pages?: string }[] = [
   { title: 'Laminate Collection', category: 'Laminate', pdf: '/brochures/laminate-brochure.pdf', photo: '/flooring/evolution.webp', pages: '24 pages' },
   { title: 'Carpet Tiles Collection', category: 'Carpets', pdf: '/brochures/carpet-brochure.pdf', photo: '/carpets/luxury-carpets/riva.webp', pages: '12 pages' },
+  { title: 'Dublin PropTech Brochure', category: 'Company', pdf: '/brochures/dublin-proptech-brochure.pdf', cover: '/brochures/dublin-proptech-brochure-cover.webp', pages: '10 pages' }
   // { title: 'Tiles Collection', category: 'Tiles', pdf: '/brochures/tiles-brochure.pdf', photo: '/tiles-prep.webp', pages: '16 pages' },
 ];
 
@@ -399,6 +543,9 @@ export default function FlooringPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Showroom photos carousel (photos from public/showroom/) */}
+      <ShowroomCarousel />
 
       {/* The Process */}
       <section className="bg-[#1a1814] text-white py-24 mb-0">
