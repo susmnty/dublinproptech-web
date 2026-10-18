@@ -13,14 +13,14 @@ import { SITE_URL, SITE_NAME, BUSINESS_ID, JsonLd, areaServedSchema } from "@/ap
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Dublin PropTech | Snagging Inspections & Flooring in Dublin",
+    default: "Dublin PropTech | Flooring, Snagging & Blinds in Dublin",
     template: "%s | Dublin PropTech",
   },
   description:
-    "Independent snagging inspections from €200 and premium flooring supply & fit in Dublin. 300+ point check, photo report in 48 hours. Get a free quote.",
+    "Premium flooring supply & fit, independent snagging inspections from €200 and made-to-measure blinds across Dublin. Free quotes, fixed prices, expert team.",
   openGraph: {
-    title: "Dublin PropTech | Snagging Inspections & Flooring in Dublin",
-    description: "Independent snagging inspections from €200 and premium flooring supply & fit in Dublin.",
+    title: "Dublin PropTech | Flooring, Snagging & Blinds in Dublin",
+    description: "Flooring supply & fit, snagging inspections and made-to-measure blinds across Dublin. Free quotes and fixed prices.",
     siteName: SITE_NAME,
     images: [{ url: "/d-logo-irish.webp", width: 1200, height: 630, alt: SITE_NAME }],
     locale: "en_IE",
