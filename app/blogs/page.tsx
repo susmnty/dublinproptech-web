@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { getAllBlogs } from "../lib/blogs";
 import { pageMeta } from "@/app/lib/seo";
+export const revalidate = 1800; // refresh Notion data every 30 minutes
+import BlogHeroGuides from "@/app/components/BlogHeroGuides";
 
 export const metadata = pageMeta({
   title: "Snagging & Flooring Guides for Irish Homeowners",
@@ -14,20 +16,12 @@ export default async function BlogIndexPage() {
 
   return (
     <main className="min-h-screen bg-[#faf9f5] text-gray-900 pb-24 font-sans">
-      
-      {/* Top Header Section */}
-      <section className="bg-[#1a1814] text-white py-24 px-6 text-center border-b border-[#2a261f]">
-        <div className="max-w-3xl mx-auto">
-          <span className="text-[#b7935b] font-bold tracking-widest uppercase text-xs mb-4 block">Dublin PropTech Journal</span>
-          <h1 className="text-4xl md:text-6xl font-serif font-bold tracking-tight mb-6 text-white">Insights & Articles</h1>
-          <p className="text-gray-300 text-base md:text-lg max-w-xl mx-auto font-normal leading-relaxed">
-            Guides, tips, and many more for new build homeowners in Ireland.
-          </p>
-        </div>
-      </section>
+
+      {/* Video hero + New Build Guides cards (replaces the old dark header) */}
+      <BlogHeroGuides />
 
       {/* Main Content Full-Width Layout */}
-      <section className="max-w-4xl mx-auto px-6 w-full pt-16">
+      <section id="latest" className="max-w-4xl mx-auto px-6 w-full pt-16 scroll-mt-24">
         
         {/* Section Sub-header */}
         <div className="mb-10 flex items-center justify-between border-b border-gray-200 pb-4">
@@ -74,29 +68,22 @@ export default async function BlogIndexPage() {
                 {/* Right Side: Title, Date, Description & Read Link */}
                 <div className="p-6 sm:p-8 flex flex-col justify-between flex-grow">
                   <div>
-                    {/* Date */}
                     <span className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2 block">
                       {blog.date ? new Date(blog.date).toLocaleDateString("en-IE", { month: "long", day: "numeric", year: "numeric" }) : ""}
                     </span>
-                    
-                    {/* Title */}
                     <h3 className="text-xl sm:text-2xl font-serif font-bold text-gray-900 mb-3 group-hover:text-[#b7935b] transition-colors leading-snug line-clamp-2">
                       {blog.title}
                     </h3>
-                    
-                    {/* Description */}
                     <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 font-normal mb-6">
                       {blog.description}
                     </p>
                   </div>
 
-                  {/* Read Action */}
                   <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
                     <span className="text-xs font-bold uppercase tracking-widest text-[#b7935b] flex items-center gap-2 group-hover:translate-x-1 transition-transform">
                       Read Article <span aria-hidden="true">&rarr;</span>
                     </span>
                   </div>
-
                 </div>
 
               </Link>
