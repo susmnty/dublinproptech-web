@@ -42,7 +42,14 @@ const jsonLd = {
       telephone: "+353899655102",
       email: "dublinproptech@gmail.com",
       priceRange: "€€",
-      address: { "@type": "PostalAddress", addressLocality: "Dublin", addressCountry: "IE" },
+      address: {
+        "@type": "PostalAddress",
+        // streetAddress: "Your street address",   // add if you have a public business address
+        addressLocality: "Dublin",
+        addressRegion: "Co. Dublin",
+        // postalCode: "D24 XXXX",                 // add your Eircode
+        addressCountry: "IE",
+      },
       areaServed: areaServedSchema(),
       sameAs: [
         "https://www.instagram.com/dublinproptech/",
@@ -116,6 +123,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <div className="flex flex-col gap-4 text-[15px]">
                 <h4 className="font-bold text-white text-base mb-1">Services</h4>
                 <Link href="/service/snaglist" className="text-gray-300 hover:text-white transition-colors">Snagging Inspections Dublin</Link>
+                <Link href="/new-build-guides" className="text-gray-300 hover:text-white transition-colors">New Build Guides</Link>
                 <Link href="/service/flooring" className="text-gray-300 hover:text-white transition-colors">Flooring Supply &amp; Fit</Link>
                 <Link href="/service/lvt" className="text-gray-300 hover:text-white transition-colors">LVT &amp; Tiles</Link>
                 <Link href="/service/stairs" className="text-gray-300 hover:text-white transition-colors">Stair Cladding &amp; Runners</Link>
