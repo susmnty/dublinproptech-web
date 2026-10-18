@@ -7,6 +7,12 @@ export const metadata: Metadata = {
   description:
     "Independent buyer guides to new build developments in Dublin: prices, schemes, location and snagging checklists before handover.",
   alternates: { canonical: "/new-build-guides/" },
+  openGraph: {
+    title: "New Build Guides – Dublin Developments",
+    description: "Independent buyer guides to new build developments in Dublin: prices, schemes and snagging checklists.",
+    url: "/new-build-guides/",
+    type: "website",
+  },
 };
 
 // Add a new development here (and create its page folder)

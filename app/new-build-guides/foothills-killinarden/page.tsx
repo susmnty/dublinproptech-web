@@ -210,10 +210,14 @@ export default function FoothillsGuide() {
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-xs text-gray-500">
+          <p className="mt-3 text-xs text-gray-500">
           Source:{" "}
           <a href="https://sdcc.ie/en/services/housing/starter-homes-programme/foothills-killinarden/" className="underline hover:text-[#b7935b]" rel="nofollow noopener" target="_blank">
             South Dublin County Council
+          </a>
+          {" "}and{" "}
+          <a href="https://affordablehomes.ie/buy/foothills/" className="underline hover:text-[#b7935b]" rel="nofollow noopener" target="_blank">
+            affordablehomes.ie
           </a>
           . Prices can change, so always confirm with the selling agent.
         </p>
