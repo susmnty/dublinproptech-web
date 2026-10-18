@@ -400,6 +400,30 @@ export default function Home() {
         <AreasWeServe />
       </div>
 
+      {/* NEW: New Build Guides strip (above Get in Touch) */}
+      <section className="px-4 md:px-6 max-w-4xl mx-auto w-full mb-16">
+        <FadeUp>
+          <Link
+            href="/new-build-guides/"
+            className="group relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-5 rounded-2xl bg-[#b7935b] text-white px-6 md:px-10 py-8 shadow-md hover:shadow-xl transition-all hover:-translate-y-0.5"
+          >
+            <div className="pointer-events-none absolute -right-16 -bottom-16 h-56 w-56 rounded-full bg-white/10 blur-2xl" />
+            <div className="relative">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/80">New Build Guides</span>
+              <p className="mt-1 font-serif text-2xl md:text-3xl font-bold leading-tight">
+                Buying a new build in Dublin?
+              </p>
+              <p className="mt-1 text-white/85 text-sm md:text-base">
+                Free guides: prices, buying schemes and a snagging checklist for each development.
+              </p>
+            </div>
+            <span className="relative self-start md:self-center inline-flex items-center gap-2 bg-white text-[#1a1814] px-7 py-4 rounded-full text-xs font-bold uppercase tracking-widest group-hover:bg-[#1a1814] group-hover:text-white transition-colors whitespace-nowrap">
+              Explore Guides <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </span>
+          </Link>
+        </FadeUp>
+      </section>
+
       <section className="px-4 md:px-6 max-w-4xl mx-auto w-full mb-20">
         <FadeUp>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-800 mb-12 text-center tracking-tight">

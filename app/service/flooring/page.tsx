@@ -583,6 +583,30 @@ export default function FlooringPage() {
         </div>
       </section>
 
+      {/* NEW: New Build Guides strip */}
+      <section className="px-4 md:px-6 max-w-6xl mx-auto w-full pt-20">
+        <FadeUp>
+          <Link
+            href="/new-build-guides/"
+            className="group relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-5 rounded-3xl bg-[#b7935b] text-white px-6 md:px-10 py-8 shadow-md hover:shadow-xl transition-all hover:-translate-y-0.5"
+          >
+            <div className="pointer-events-none absolute -right-16 -bottom-16 h-56 w-56 rounded-full bg-white/10 blur-2xl" />
+            <div className="relative">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/80">New Build Guides</span>
+              <p className="mt-1 font-serif text-2xl md:text-3xl font-bold leading-tight">
+                Moving into a new build?
+              </p>
+              <p className="mt-1 text-white/85 text-sm md:text-base">
+                Free guides for Dublin developments: prices, schemes, snagging and flooring tips before you move in.
+              </p>
+            </div>
+            <span className="relative self-start md:self-center inline-flex items-center gap-2 bg-white text-[#1a1814] px-7 py-4 rounded-full text-xs font-bold uppercase tracking-widest group-hover:bg-[#1a1814] group-hover:text-white transition-colors">
+              Explore Guides <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </span>
+          </Link>
+        </FadeUp>
+      </section>
+
       {/* FAQ */}
       <ServiceFAQ title="Flooring FAQs" faqs={FAQS} />
 
