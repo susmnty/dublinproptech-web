@@ -29,6 +29,34 @@ const heroImages = [
   "/wall-panels-prep.webp?v=2"
 ]
 
+// "Why a snag list" benefits
+const BENEFITS = [
+  {
+    title: "Catch costly defects early",
+    text: "Find problems before your warranty clock starts running out.",
+    icon: <path d="M21 21l-4.35-4.35M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" />,
+  },
+  {
+    title: "Builder pays, not you",
+    text: "A clear report means the developer fixes issues at their own cost.",
+    icon: <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />,
+  },
+  {
+    title: "Checked against regulations",
+    text: "BCAR-standard checks across plumbing, electrics and ventilation.",
+    icon: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />,
+  },
+];
+
+// Sample findings shown in the report preview card (illustration only)
+const SAMPLE_SNAGS = [
+  { room: "Bedroom 2", issue: "Window not closing flush, draught at seal", level: "Major" },
+  { room: "Utility", issue: "Heat pump pipework insulation missing", level: "Major" },
+  { room: "Bathroom", issue: "Extractor fan not running", level: "Major" },
+  { room: "Kitchen", issue: "Silicone gap behind sink", level: "Minor" },
+  { room: "Hallway", issue: "Hairline crack at ceiling joint", level: "Minor" },
+];
+
 // FAQ: shown on the page AND sent to Google as FAQ schema (keep both in sync automatically)
 const FAQS = [
   {
@@ -131,7 +159,7 @@ export default function SnaglistPage() {
             </div>
           </FadeUp>
 
-          {/* NEW: Circular Social Media Icons directly under the buttons */}
+          {/* Circular Social Media Icons directly under the buttons */}
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-10%" }} transition={{ duration: 0.7, ease: "easeOut", delay: 0.6 }} className="mt-12">
             <div className="flex justify-center gap-6 relative z-20">
               {/* Instagram */}
@@ -204,38 +232,134 @@ export default function SnaglistPage() {
         </div>
       </section>
 
-      {/* Feature Split: Why You Need a Snag List */}
+      {/* NEW: Why You Need a Snag List (redesigned, no photo) */}
       <section className="px-4 md:px-6 max-w-[1400px] mx-auto w-full mb-32">
-        <FadeUp>
-          <div className="flex flex-col md:flex-row-reverse w-full overflow-hidden bg-white border border-gray-200 rounded-2xl shadow-sm">
-            <div className="w-full md:w-1/2 p-12 md:p-20 flex flex-col justify-center">
-              <span className="text-[#b7935b] font-bold tracking-widest uppercase text-sm mb-4 block">Hold Developers Accountable</span>
-              <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 mb-6 leading-tight">New doesn't always mean flawless.</h2>
-              
-              <div className="mt-8 space-y-6">
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  Rushed timelines and multiple contractors overlapping on site often lead to cosmetic defects, poor finishing, and sometimes serious compliance issues with Irish Building Regulations. 
-                </p>
-                <ul className="space-y-4">
-                  <li className="flex items-start gap-3 text-gray-800 font-medium">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mt-1 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Identify costly defects before your warranty expires.</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-gray-800 font-medium">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mt-1 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Force developers to fix issues on their dime, not yours.</span>
-                  </li>
-                  <li className="flex items-start gap-3 text-gray-800 font-medium">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mt-1 flex-shrink-0"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    <span>Ensure BCAR standard compliance across plumbing and electrical.</span>
-                  </li>
-                </ul>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          {/* Left: message + benefits */}
+          <FadeUp className="h-full">
+            <div className="h-full bg-white border border-gray-200 rounded-3xl shadow-sm p-8 md:p-14 flex flex-col justify-center">
+              <span className="inline-flex items-center gap-2 text-[#b7935b] font-bold tracking-[0.2em] uppercase text-xs mb-5">
+                <span className="w-8 h-px bg-[#b7935b]" />
+                Hold Developers Accountable
+              </span>
+              <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 leading-tight">
+                New doesn't always <span className="italic text-[#b7935b]">mean flawless.</span>
+              </h2>
+              <p className="mt-6 text-gray-600 leading-relaxed text-lg">
+                Rushed timelines and multiple contractors overlapping on site often lead to cosmetic defects,
+                poor finishing, and sometimes serious compliance issues with Irish Building Regulations.
+              </p>
+
+              <div className="mt-10 space-y-5">
+                {BENEFITS.map((b) => (
+                  <div key={b.title} className="flex items-start gap-4">
+                    <span className="w-12 h-12 flex-shrink-0 rounded-full bg-[#f6f4f0] border border-[#e8e4db] flex items-center justify-center">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">{b.icon}</svg>
+                    </span>
+                    <div>
+                      <p className="font-serif text-lg font-bold text-gray-900">{b.title}</p>
+                      <p className="text-gray-600 text-[15px] leading-relaxed">{b.text}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
+
+              <Link
+                href="/service/contact"
+                className="mt-10 self-start inline-block bg-[#1a1814] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-[#b7935b] transition-colors rounded-full shadow-lg"
+              >
+                Book Your Inspection
+              </Link>
             </div>
-            <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-200">
-              <Image src="/snagging-inspection.webp" alt="Home inspector checking a new build home in Dublin" fill className="object-cover" />
+          </FadeUp>
+
+          {/* Right: sample snag report preview */}
+          <FadeUp delay={0.15} className="h-full">
+            <div className="relative h-full overflow-hidden bg-[#1a1814] text-white rounded-3xl shadow-xl p-6 md:p-10">
+              <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#b7935b]/20 blur-3xl" />
+
+              {/* Report header */}
+              <div className="relative flex items-center justify-between gap-4 pb-6 border-b border-white/10">
+                <div className="flex items-center gap-3">
+                  <span className="w-11 h-11 rounded-xl bg-[#b7935b] flex items-center justify-center">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
+                  </span>
+                  <div>
+                    <p className="font-serif text-lg font-bold leading-tight">Snag Report</p>
+                    <p className="text-xs text-gray-400">3-bed new build · Dublin</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-widest border border-white/20 rounded-full px-3 py-1 text-gray-300">
+                  Sample
+                </span>
+              </div>
+
+              {/* Snag rows */}
+              <ul className="relative mt-4 divide-y divide-white/10">
+                {SAMPLE_SNAGS.map((s) => (
+                  <li key={s.issue} className="py-4 flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-widest text-[#d9bc8c]">{s.room}</p>
+                      <p className="mt-1 text-sm text-gray-200">{s.issue}</p>
+                    </div>
+                    <span
+                      className={`flex-shrink-0 text-[10px] font-bold uppercase tracking-widest rounded-full px-3 py-1 ${
+                        s.level === "Major" ? "bg-[#b7935b] text-white" : "border border-white/25 text-gray-300"
+                      }`}
+                    >
+                      {s.level}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Report footer */}
+              <div className="relative mt-6 pt-6 border-t border-white/10 grid grid-cols-3 gap-3 text-center">
+                {[
+                  ["Photo", "every defect"],
+                  ["Room", "by room"],
+                  ["48h", "delivery"],
+                ].map(([big, small]) => (
+                  <div key={big} className="rounded-xl bg-white/5 border border-white/10 py-3">
+                    <p className="font-serif text-xl font-bold text-[#d9bc8c]">{big}</p>
+                    <p className="text-[11px] uppercase tracking-widest text-gray-400">{small}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="relative mt-4 text-[11px] text-gray-500">Example findings for illustration. Every home is different.</p>
             </div>
-          </div>
+          </FadeUp>
+        </div>
+
+        {/* Foothills guide banner */}
+        <FadeUp delay={0.2}>
+          <Link
+            href="/new-build-guides/foothills-killinarden/"
+            className="group mt-6 relative overflow-hidden flex flex-col md:flex-row md:items-center gap-6 md:gap-10 rounded-3xl bg-[#b7935b] text-white p-8 md:p-10 shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5"
+          >
+            <div className="pointer-events-none absolute -right-16 -bottom-16 h-56 w-56 rounded-full bg-white/10 blur-2xl" />
+            <div className="relative flex-1">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/80">New Build Guide</span>
+              <p className="mt-2 font-serif text-2xl md:text-4xl font-bold leading-tight">Buying at Foothills, Killinarden?</p>
+              <p className="mt-2 text-white/85">Prices, buying schemes and a snagging checklist for A-rated homes.</p>
+            </div>
+            <div className="relative flex gap-6 md:gap-8">
+              {[
+                ["635", "Homes"],
+                ["1–4", "Bed"],
+                ["A", "Rated"],
+              ].map(([v, l]) => (
+                <div key={l}>
+                  <p className="font-serif text-3xl font-bold">{v}</p>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-white/75">{l}</p>
+                </div>
+              ))}
+            </div>
+            <span className="relative inline-flex items-center justify-center gap-2 self-start md:self-center bg-white text-[#1a1814] px-7 py-4 rounded-full text-xs font-bold uppercase tracking-widest group-hover:bg-[#1a1814] group-hover:text-white transition-colors">
+              Read the Guide <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </span>
+          </Link>
         </FadeUp>
       </section>
 
