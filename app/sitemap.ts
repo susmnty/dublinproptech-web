@@ -34,6 +34,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/service/contact", priority: 0.7, freq: "yearly" },
     { path: "/reviews", priority: 0.7, freq: "monthly" },
     { path: "/blogs", priority: 0.7, freq: "weekly" },
+    // NEW: New Build Guides (development-name SEO pages)
+    { path: "/new-build-guides", priority: 0.7, freq: "weekly" },
+    { path: "/new-build-guides/foothills-killinarden", priority: 0.8, freq: "weekly" },
     { path: "/privacy-policy", priority: 0.2, freq: "yearly" },
     { path: "/cookie-policy", priority: 0.2, freq: "yearly" },
     { path: "/terms-conditions", priority: 0.2, freq: "yearly" },
