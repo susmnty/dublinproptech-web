@@ -1,6 +1,12 @@
 RewriteEngine On
 
 # ------------------------------------------------------------
+# 0. FORCE NON-WWW (www.dublinproptech.com -> dublinproptech.com)
+# ------------------------------------------------------------
+RewriteCond %{HTTP_HOST} ^www\.dublinproptech\.com$ [NC]
+RewriteRule ^(.*)$ https://dublinproptech.com/$1 [R=301,L]
+
+# ------------------------------------------------------------
 # 1. OLD LINKS THAT HAVE A NEW PAGE -> 301 redirect
 # ------------------------------------------------------------
 
