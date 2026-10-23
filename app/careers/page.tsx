@@ -44,7 +44,7 @@ export default function CareersPage() {
         <div className="max-w-6xl mx-auto px-6 md:px-12 py-20 md:py-28">
           <p className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-5">Careers · Dublin</p>
           <h1 className="text-4xl md:text-6xl font-serif font-bold leading-[1.08] tracking-tight mb-6 max-w-4xl">
-            Build your career with Dublin PropTech.
+            Build your career with <br className="hidden md:block" /> Dublin PropTech
           </h1>
           <p className="text-lg md:text-xl text-[#cfc7b8] leading-relaxed max-w-2xl mb-9">
             From snagging and flooring to websites and cloud platforms - we&apos;re growing, and we&apos;re looking for
