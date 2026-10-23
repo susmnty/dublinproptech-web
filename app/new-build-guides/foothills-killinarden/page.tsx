@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 const URL = "https://dublinproptech.com/new-build-guides/foothills-killinarden/";
-const UPDATED = "2026-10-18";
+const PUBLISHED = "2026-10-18";
+const UPDATED = "2026-10-23"; // change this every time you edit the page — Google likes fresh guides
+const UPDATED_LABEL = new Date(UPDATED + "T00:00:00").toLocaleDateString("en-IE", { day: "numeric", month: "long", year: "numeric" });
 const OG_IMAGE = "/d-logo-irish.webp";
 
+// Your own photo of the site / area (e.g. public/new-build-guides/foothills-killinarden.webp).
+// Leave as null until you have one — the photo block only shows when this is set.
+const HERO_IMAGE: string | null = null;
+
 export const metadata: Metadata = {
-  title: "Foothills Killinarden: 2026 Buyer's Guide (Prices, Schemes, Snagging)",
+  // absolute = skip the "| Dublin PropTech" template, so the title stays under ~60 characters in Google
+  title: { absolute: "Foothills Killinarden: 2026 Prices, Schemes & Snag List Guide" },
   description:
     "Buying at Foothills, Killinarden? Prices, Starter Home Scheme, location, amenities and an independent snagging checklist before handover.",
   alternates: { canonical: "/new-build-guides/foothills-killinarden/" },
@@ -14,6 +22,8 @@ export const metadata: Metadata = {
     title: "Foothills Killinarden: 2026 Buyer's Guide",
     description: "Prices, schemes, location and a snagging checklist for Foothills buyers.",
     url: URL,
+    siteName: "Dublin PropTech",
+    locale: "en_IE",
     type: "article",
     images: [
       {
@@ -91,7 +101,8 @@ const schema = {
     {
       "@type": "Article",
       headline: "Foothills Killinarden: 2026 Buyer's Guide",
-      image: `https://dublinproptech.com${OG_IMAGE}`,
+      image: `https://dublinproptech.com${HERO_IMAGE ?? OG_IMAGE}`,
+      datePublished: PUBLISHED,
       dateModified: UPDATED,
       author: { "@type": "Organization", name: "Dublin PropTech" },
       publisher: { "@type": "Organization", name: "Dublin PropTech", url: "https://dublinproptech.com" },
@@ -127,7 +138,7 @@ export default function FoothillsGuide() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
         {/* Breadcrumb */}
-        <nav className="text-sm text-gray-500">
+        <nav aria-label="Breadcrumb" className="text-sm text-gray-500">
           <Link href="/" className="hover:text-[#b7935b]">Home</Link>
           <span className="mx-2">/</span>
           <Link href="/new-build-guides/" className="hover:text-[#b7935b]">New Build Guides</Link>
@@ -142,9 +153,9 @@ export default function FoothillsGuide() {
             Independent Buyer's Guide
           </span>
           <h1 className="mt-4 font-serif text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight text-[#1a1814]">
-            Foothills, Killinarden - Independent Buyer's Guide
+            Foothills Killinarden: Prices, Schemes &amp; Snagging Guide
           </h1>
-          <p className="mt-4 text-sm text-gray-500">Last updated: 18 October 2026</p>
+          <p className="mt-4 text-sm text-gray-500">Last updated: {UPDATED_LABEL}</p>
           <p className={P}>
             Foothills Killinarden is one of the biggest new home schemes in South Dublin. If you have
             reserved a home there, or are thinking about it, this guide covers what is being built,
@@ -165,6 +176,21 @@ export default function FoothillsGuide() {
             </a>
           </div>
         </header>
+
+        {/* Your own photo (shows only when HERO_IMAGE is set) */}
+        {HERO_IMAGE && (
+          <figure className="mt-12 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+            <Image
+              src={HERO_IMAGE}
+              alt="Foothills new homes development in Killinarden, Tallaght, Dublin 24"
+              width={1200}
+              height={675}
+              className="h-auto w-full object-cover"
+              priority
+            />
+            <figcaption className="px-5 py-3 text-xs text-gray-500">Foothills, Killinarden — photo by Dublin PropTech</figcaption>
+          </figure>
+        )}
 
         {/* Stats */}
         <div className="mt-12 grid grid-cols-2 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm md:grid-cols-4">
@@ -404,7 +430,7 @@ export default function FoothillsGuide() {
           <p className="text-xs leading-relaxed text-gray-500">
             <strong className="text-gray-700">Independent guide.</strong> Dublin PropTech is an independent
             snagging and flooring company and is not affiliated with Arden, South Dublin County Council or
-            Sherry FitzGerald. Information is based on public sources and may change. Last updated 18 October 2026.
+            Sherry FitzGerald. Information is based on public sources and may change. Last updated {UPDATED_LABEL}.
           </p>
         </div>
       </main>
