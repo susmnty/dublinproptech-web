@@ -482,7 +482,7 @@ export default function Home() {
                 Build a career with Dublin PropTech
               </p>
               <p className="mt-1 text-white/85 text-sm md:text-base">
-                Join our new Cloud Practice in Dublin. See open roles and apply online.
+                Property, digital and cloud roles in Dublin. See open roles and apply online.
               </p>
             </div>
             <span className="relative self-start md:self-center inline-flex items-center gap-2 bg-white text-[#1a1814] px-7 py-4 rounded-full text-xs font-bold uppercase tracking-widest group-hover:bg-[#b7935b] group-hover:text-white transition-colors whitespace-nowrap">
