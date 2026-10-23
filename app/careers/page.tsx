@@ -47,7 +47,7 @@ export default function CareersPage() {
             Build your career with <br className="hidden md:block" /> Dublin PropTech
           </h1>
           <p className="text-lg md:text-xl text-[#cfc7b8] leading-relaxed max-w-2xl mb-9">
-            From snagging and flooring to websites and cloud platforms - we&apos;re growing, and we&apos;re looking for
+            From snagging and flooring to websites and cloud platforms - we&apos;re growing, & we&apos;re looking for
             people who take pride in doing the job properly.
           </p>
           <div className="flex flex-wrap gap-4">
