@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const URL = "https://dublinproptech.com/new-build-guides/foothills-killinarden/";
 const UPDATED = "2026-10-18";
+const OG_IMAGE = "/d-logo-irish.webp";
 
 export const metadata: Metadata = {
   title: "Foothills Killinarden: 2026 Buyer's Guide (Prices, Schemes, Snagging)",
@@ -14,6 +15,20 @@ export const metadata: Metadata = {
     description: "Prices, schemes, location and a snagging checklist for Foothills buyers.",
     url: URL,
     type: "article",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Foothills Killinarden 2026 Buyer's Guide by Dublin PropTech",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Foothills Killinarden: 2026 Buyer's Guide",
+    description: "Prices, schemes, location and a snagging checklist for Foothills buyers.",
+    images: [OG_IMAGE],
   },
 };
 
@@ -76,6 +91,7 @@ const schema = {
     {
       "@type": "Article",
       headline: "Foothills Killinarden: 2026 Buyer's Guide",
+      image: `https://dublinproptech.com${OG_IMAGE}`,
       dateModified: UPDATED,
       author: { "@type": "Organization", name: "Dublin PropTech" },
       publisher: { "@type": "Organization", name: "Dublin PropTech", url: "https://dublinproptech.com" },
@@ -210,7 +226,7 @@ export default function FoothillsGuide() {
             </tbody>
           </table>
         </div>
-          <p className="mt-3 text-xs text-gray-500">
+        <p className="mt-3 text-xs text-gray-500">
           Source:{" "}
           <a href="https://sdcc.ie/en/services/housing/starter-homes-programme/foothills-killinarden/" className="underline hover:text-[#b7935b]" rel="nofollow noopener" target="_blank">
             South Dublin County Council

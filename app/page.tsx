@@ -7,6 +7,7 @@ import Script from "next/script";
 import { useState, useEffect, useRef } from "react";
 import HeroSlider from "./components/HeroSlider";
 import AreasWeServe from "./components/AreasWeServe";
+import InstagramFeed from "./components/InstagramFeed";
 import { submitEnquiry } from "./lib/hubspot";
 
 // Fade up animation wrapper
@@ -358,13 +359,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Conditionally rendering Elfsight Divs removes them from Lighthouse sight entirely */}
-      <section className="px-4 md:px-6 max-w-5xl mx-auto w-full mb-32 text-center">
+      {/* Instagram photos — self-hosted from public/instagram/ (no Elfsight) */}
+      <section className="px-4 md:px-6 max-w-6xl mx-auto w-full mb-32 text-center">
         <FadeUp>
-          <h2 className="text-5xl md:text-[3.5rem] font-serif font-bold text-gray-800 mb-20 tracking-tight">
+          <h2 className="text-5xl md:text-[3.5rem] font-serif font-bold text-gray-800 mb-14 tracking-tight">
             Discover
           </h2>
-          {loadThirdParty && <div className="elfsight-app-b2db6c3f-151d-46a5-87e0-a1d8e3bc34b7"></div>}
+          <InstagramFeed />
         </FadeUp>
       </section>
 
@@ -414,7 +415,7 @@ export default function Home() {
                 Buying a new build in Dublin?
               </p>
               <p className="mt-1 text-white/85 text-sm md:text-base">
-                Free guides: prices, buying schemes and a snagging checklist for each development.
+                Free guides: prices, schemes and snagging checklists.
               </p>
             </div>
             <span className="relative self-start md:self-center inline-flex items-center gap-2 bg-white text-[#1a1814] px-7 py-4 rounded-full text-xs font-bold uppercase tracking-widest group-hover:bg-[#1a1814] group-hover:text-white transition-colors whitespace-nowrap">
@@ -462,6 +463,32 @@ export default function Home() {
               </button>
             </form>
           </div>
+        </FadeUp>
+      </section>
+
+      {/* Careers strip (last section, above the footer) — same gold style as New Build Guides */}
+      <section className="px-4 md:px-6 max-w-4xl mx-auto w-full mb-20">
+        <FadeUp>
+          <Link
+            href="/careers/"
+            className="group relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-5 rounded-2xl bg-[#000000] text-white px-6 md:px-10 py-8 shadow-md hover:shadow-xl transition-all hover:-translate-y-0.5"
+          >
+            <div className="pointer-events-none absolute -right-16 -bottom-16 h-56 w-56 rounded-full bg-white/10 blur-2xl" />
+            <div className="relative">
+              <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-white/80">
+                <span className="h-2 w-2 rounded-full bg-white" aria-hidden="true" /> We&apos;re hiring
+              </span>
+              <p className="mt-1 font-serif text-2xl md:text-3xl font-bold leading-tight">
+                Build a career with Dublin PropTech
+              </p>
+              <p className="mt-1 text-white/85 text-sm md:text-base">
+                Join our new Cloud Practice in Dublin. See open roles and apply online.
+              </p>
+            </div>
+            <span className="relative self-start md:self-center inline-flex items-center gap-2 bg-white text-[#1a1814] px-7 py-4 rounded-full text-xs font-bold uppercase tracking-widest group-hover:bg-[#b7935b] group-hover:text-white transition-colors whitespace-nowrap">
+              View Careers <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </span>
+          </Link>
         </FadeUp>
       </section>
 

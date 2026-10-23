@@ -33,6 +33,10 @@ export default function Navbar() {
   const linkClass =
     "relative py-1 hover:text-[#b7935b] transition-colors after:absolute after:left-0 after:-bottom-0.5 after:h-[2px] after:w-full after:bg-[#b7935b] after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300";
 
+  // Highlighted "Get a quote" button (gold rectangle)
+  const quoteBtnClass =
+    "inline-flex items-center justify-center rounded-md bg-[#b7935b] px-5 py-2.5 font-semibold text-[#1a1814] shadow-sm transition-colors duration-300 hover:bg-[#1a1814] hover:text-[#b7935b]";
+
   const links = (
     <>
       <Link href="/" className={linkClass}>Home</Link>
@@ -40,7 +44,7 @@ export default function Navbar() {
       <Link href="/service/snaglist" className={linkClass}>Snaglist</Link>
       <Link href="https://luxblinds.ie/" target="_blank" rel="noopener noreferrer" className={linkClass}>Blinds</Link>
       <Link href="/blogs" className={linkClass}>Blogs</Link>
-      <Link href="/service/contact" className={linkClass}>Contact</Link>
+      <Link href="/service/contact" className={`ml-1 ${quoteBtnClass}`}>Get a quote</Link>
     </>
   );
 
@@ -51,7 +55,7 @@ export default function Navbar() {
       <Link href="/service/snaglist" className="hover:text-[#b7935b] transition-colors w-full text-center" onClick={closeMenu}>Snaglist</Link>
       <Link href="https://luxblinds.ie/" target="_blank" rel="noopener noreferrer" className="hover:text-[#b7935b] transition-colors w-full text-center" onClick={closeMenu}>Blinds</Link>
       <Link href="/blogs" className="hover:text-[#b7935b] transition-colors w-full text-center" onClick={closeMenu}>Blogs</Link>
-      <Link href="/service/contact" className="hover:text-[#b7935b] transition-colors w-full text-center" onClick={closeMenu}>Contact</Link>
+      <Link href="/service/contact" className={`w-[85%] py-3 ${quoteBtnClass}`} onClick={closeMenu}>Get a quote</Link>
     </div>
   );
 
@@ -111,7 +115,7 @@ export default function Navbar() {
           <div
             className={`md:hidden absolute top-full left-0 w-full bg-white shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${
               scrolled ? "mt-0 rounded-none border-b border-gray-200" : "mt-2 rounded-2xl"
-            } ${isOpen ? "max-h-[460px] opacity-100 py-5" : "max-h-0 opacity-0 py-0"}`}
+            } ${isOpen ? "max-h-[520px] opacity-100 py-5" : "max-h-0 opacity-0 py-0"}`}
           >
             {mobileLinks}
           </div>
@@ -132,7 +136,7 @@ export default function Navbar() {
       {/* Mobile Menu Dropdown Panel */}
       <div
         className={`md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-200 shadow-xl overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-[460px] opacity-100 py-4" : "max-h-0 opacity-0 py-0"
+          isOpen ? "max-h-[520px] opacity-100 py-4" : "max-h-0 opacity-0 py-0"
         }`}
       >
         {mobileLinks}

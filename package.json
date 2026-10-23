@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/notion-images.mjs && node scripts/showroom-list.mjs",
-    "predev": "node scripts/showroom-list.mjs",
+    "prebuild": "node scripts/notion-images.mjs && node scripts/showroom-list.mjs && node scripts/instagram-list.mjs",
+    "predev": "node scripts/showroom-list.mjs && node scripts/instagram-list.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
