@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: "17 0 * * *"     # rebuilds every day at about 6am Irish time (picks up new Notion posts)
 
+# Only one deploy at a time — if you push twice quickly, the second waits for the first to finish
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
