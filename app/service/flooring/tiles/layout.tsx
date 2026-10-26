@@ -4,7 +4,7 @@ import { pageMeta, JsonLd, serviceJsonLd } from "@/app/lib/seo";
 // Page is "use client", so metadata lives here (client components can't export metadata).
 export const metadata: Metadata = pageMeta({
   title: "Floor Tiles Dublin – Porcelain & Ceramic Fitting",
-  description: "Porcelain, ceramic and large-format floor tiles supplied and fitted in Dublin. Levelled subfloors, tanking for wet areas, ideal with underfloor heating. Free quote.",
+  description: "Porcelain, ceramic and large-format floor tiles supplied and fitted in Dublin. Levelled subfloors, tanking for wet areas, underfloor-heating ready.",
   path: "/service/flooring/tiles",
   image: "/tiles-prep.webp",
 });

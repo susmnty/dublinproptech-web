@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { pageMeta, JsonLd, serviceJsonLd } from "@/app/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Stair Cladding Dublin – Oak & Laminate Stairs, Carpet Runners",
+  title: "Stair Cladding & Carpet Runners Dublin",
   description: "Oak and laminate stair cladding and bespoke carpet runners fitted in Dublin. Squeaks fixed first, custom nosing, colour-matched to your floors. Free quote.",
   path: "/service/stairs",
   image: "/stair-cladding.webp",

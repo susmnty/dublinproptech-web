@@ -5,7 +5,7 @@ export const metadata: Metadata = pageMeta({
   title: "Flooring Dublin | Laminate, LVT, Tiles & Carpets – Supply & Fitting",
   absoluteTitle: true,
   description:
-    "Flooring supply & installation in Dublin. Laminate, engineered wood, herringbone, LVT & SPC, floor tiles and carpets, with expert subfloor prep and a flawless finish. Free survey & quote.",
+    "Flooring supply & fitting in Dublin: laminate, engineered wood, herringbone, LVT & SPC, tiles and carpets, with expert subfloor prep. Free survey & quote.",
   path: "/service/flooring",
   image: "/flooring.webp?v=2",
 });

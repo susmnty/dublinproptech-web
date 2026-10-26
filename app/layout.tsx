@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import RecentBlogs from "./components/RecentBlogs";
 import Navbar from "./components/Navbar";
+import ConsentBanner from "./components/ConsentBanner";
+import ConversionTracking from "./components/ConversionTracking";
+import CookieSettingsButton from "./components/CookieSettingsButton";
+import { GA_ID, gaInitScript } from "./lib/analytics";
 import { SITE_URL, SITE_NAME, BUSINESS_ID, JsonLd, areaServedSchema } from "@/app/lib/seo";
 
 // No canonical here: a root canonical is inherited by every page without its own
@@ -137,12 +140,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/cookie-policy" className="hover:text-white underline underline-offset-4">Cookie Policy</Link>
               <Link href="/privacy-policy" className="hover:text-white underline underline-offset-4">Legal &amp; privacy</Link>
               <Link href="/terms-conditions" className="hover:text-white underline underline-offset-4">Terms &amp; conditions</Link>
+              <CookieSettingsButton className="hover:text-white underline underline-offset-4" />
             </div>
           </div>
         </footer>
 
-        <Script id="hs-script-loader" strategy="lazyOnload" src="//js-na2.hs-scripts.com/246058565.js" />
-        <GoogleAnalytics gaId="G-BX0MTVEM6X" />
+        {/* Google Analytics 4 with Consent Mode v2: no cookies until the visitor accepts */}
+        <Script id="ga-init" strategy="afterInteractive">{gaInitScript}</Script>
+        <Script id="ga" strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+        <ConversionTracking />
+        {/* Cookie banner; also loads HubSpot only after consent */}
+        <ConsentBanner />
       </body>
     </html>
   );

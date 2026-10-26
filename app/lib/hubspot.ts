@@ -1,5 +1,7 @@
 // Sends website form enquiries straight to HubSpot from the browser.
 // (The old /api/contact route can't run on Hostinger because the site is a static export.)
+import { trackEvent } from "./analytics";
+
 // Portal ID and form ID are public values (they're visible in HubSpot's own embed code), so it's safe to keep them here.
 
 const HUBSPOT_PORTAL_ID = "246058565";
@@ -20,7 +22,10 @@ function getHubspotCookie(): string | undefined {
   return match ? match[1] : undefined;
 }
 
-export async function submitEnquiry(data: Enquiry): Promise<boolean> {
+// Which form sent the enquiry — reported to GA4 so you can compare forms.
+export type FormName = "homepage" | "contact_page" | "area_request" | "careers";
+
+export async function submitEnquiry(data: Enquiry, form: FormName): Promise<boolean> {
   const hutk = getHubspotCookie();
   try {
     const res = await fetch(
@@ -44,6 +49,11 @@ export async function submitEnquiry(data: Enquiry): Promise<boolean> {
         }),
       }
     );
+    // Conversion is recorded only after HubSpot confirms the submission (once per submit).
+    // Job applications are tracked separately so they don't count as customer leads.
+    if (res.ok) {
+      trackEvent(form === "careers" ? "job_application" : "generate_lead", { form_name: form });
+    }
     return res.ok;
   } catch (error) {
     console.error("HubSpot submission error:", error);

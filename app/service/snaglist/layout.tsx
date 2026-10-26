@@ -5,7 +5,7 @@ export const metadata: Metadata = pageMeta({
   title: "Snag List & Home Inspector Dublin | From €200 | Dublin PropTech",
   absoluteTitle: true,
   description:
-    "Independent home inspector in Dublin. New build snag lists, house, apartment and rental property inspections from €200. 300+ point check, thermal imaging and a photo report in 48 hours.",
+    "Independent snag list inspections in Dublin from €200. New build houses and apartments: 300+ point check, thermal imaging and a photo report in 48 hours.",
   path: "/service/snaglist",
   image: "/snaglist.webp?v=2",
 });

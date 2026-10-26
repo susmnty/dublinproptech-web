@@ -4,9 +4,9 @@ import { pageMeta } from "@/app/lib/seo";
 import { JOBS } from "./jobs";
 
 export const metadata: Metadata = pageMeta({
-  title: "Careers - Join Dublin PropTech",
+  title: "Careers in Dublin – Join Our Team",
   description:
-    "Work with Dublin PropTech in Dublin. We hire across property services, digital and cloud - snagging, flooring, marketing and engineering. See open roles and apply online.",
+    "Work with Dublin PropTech. We hire across property services, digital and cloud: snagging, flooring, marketing and engineering. See open roles and apply.",
   path: "/careers",
 });
 
