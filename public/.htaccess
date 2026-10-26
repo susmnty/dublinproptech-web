@@ -60,3 +60,13 @@ RewriteRule ^(real-money-play-nonetheless-unlocks-money-winnings|wand-types-are-
     Header set Cache-Control "public, max-age=86400"
   </FilesMatch>
 </IfModule>
+# ------------------------------------------------------------
+# 4. JS / CSS / FONTS: cache for 1 year
+# Safe because Next.js puts a content hash in these file names (/_next/static/...),
+# so every deploy creates new file names and visitors always get the latest version.
+# ------------------------------------------------------------
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

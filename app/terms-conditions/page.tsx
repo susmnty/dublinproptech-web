@@ -1,9 +1,11 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { pageMeta } from "@/app/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Terms & Conditions | Dublin Proptech",
-  description: "Terms and conditions of service for Dublin Proptech.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Terms & Conditions",
+  description: "Terms and conditions of service for Dublin PropTech snagging inspections, flooring supply and fitting in Dublin, Ireland.",
+  path: "/terms-conditions",
+});
 
 export default function TermsConditions() {
   return (
@@ -33,7 +35,7 @@ export default function TermsConditions() {
             <h2 className="text-2xl font-bold text-gray-900 mt-8 mb-4">5. Governing Law</h2>
             <p>These Terms and Conditions are governed by the laws of Ireland. Any disputes relating to these terms will be subject to the exclusive jurisdiction of the courts of Ireland.</p>
 
-            <p className="mt-8">For any queries regarding these terms, please email us at <strong>info@dublinproptech.com</strong>.</p>
+            <p className="mt-8">For any queries regarding these terms, please email us at <strong>dublinproptech@gmail.com</strong>.</p>
           </div>
         </div>
       </div>

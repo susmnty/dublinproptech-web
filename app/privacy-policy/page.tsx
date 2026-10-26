@@ -1,9 +1,11 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { pageMeta } from "@/app/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Legal & Privacy | Dublin Proptech",
-  description: "Privacy policy and legal information for Dublin Proptech.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Legal & Privacy Policy",
+  description: "Privacy policy and legal information for Dublin PropTech, a snagging and flooring company in Dublin, Ireland.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicy() {
   return (

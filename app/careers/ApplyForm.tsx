@@ -39,7 +39,7 @@ export default function ApplyForm({ jobTitle }: { jobTitle: string }) {
       email: get("email"),
       phone: get("phone"),
       message,
-    });
+    }, "careers");
 
     setStatus(ok ? "sent" : "error");
   }

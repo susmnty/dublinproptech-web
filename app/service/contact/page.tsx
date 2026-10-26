@@ -77,7 +77,7 @@ export default function ContactPage() {
     };
 
     try {
-      const ok = await submitEnquiry(payload);
+      const ok = await submitEnquiry(payload, "contact_page");
 
       if (ok) {
         setStatus("Message Sent!");

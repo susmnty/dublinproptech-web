@@ -80,7 +80,7 @@ function RequestModal({ area, onClose }: { area: string; onClose: () => void }) 
         email: String(f.get("email") || ""),
         phone: String(f.get("phone") || ""),
         message: `NEW AREA REQUEST\nLocation: ${location}\nService: ${service}${note ? `\nDetails: ${note}` : ""}`,
-      });
+      }, "area_request");
       setStatus(ok ? "sent" : "error");
     } catch {
       setStatus("error");
