@@ -23,11 +23,11 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 
 // Background images for the slider
 const heroImages = [
-  "/snaglist.webp?v=2", 
-  "/flooring.webp?v=2", 
-  "/Blinds.webp?v=2", 
-  "/wall-panels-prep.webp?v=2"
-]
+  { src: "/snaglist.webp?v=2", alt: "Home inspector carrying out a snag list inspection in Dublin" },
+  { src: "/flooring.webp?v=2", alt: "New floor fitted in a Dublin new build after snagging" },
+  { src: "/Blinds.webp?v=2", alt: "Made-to-measure window blinds in a new build home" },
+  { src: "/wall-panels-prep.webp?v=2", alt: "Wall panels being fitted in a Dublin home" },
+];
 
 // "Why a snag list" benefits
 const BENEFITS = [
@@ -57,11 +57,92 @@ const SAMPLE_SNAGS = [
   { room: "Hallway", issue: "Hairline crack at ceiling joint", level: "Minor" },
 ];
 
+// NEW: Us vs a basic snag list (comparison table)
+const COMPARISON = [
+  { feature: "Fixed price published by bedrooms", us: "€200–€300", basic: "Quote on request" },
+  { feature: "Thermal imaging", us: "Included", basic: "Often extra" },
+  { feature: "Calibrated RCD & socket testing", us: "Included", basic: "Visual only" },
+  { feature: "Laser-level floor & stair checks", us: "Included", basic: "Rarely" },
+  { feature: "Flooring specialists on the team", us: "Yes", basic: "No" },
+  { feature: "Photo report, room by room", us: "48 hours", basic: "Varies" },
+  { feature: "Re-inspection after fixes", us: "€150", basic: "Full price again" },
+];
+
+// NEW: defects we see most in new builds (no stats, illustration of what we check)
+const COMMON_DEFECTS = [
+  { area: "Windows & Doors", items: ["Draughts at seals", "Scratched glazing", "Misaligned hinges", "Doors catching frames"] },
+  { area: "Ventilation & Heat Pump", items: ["Extract fans not running", "Missing pipe insulation", "Noisy or loose units", "Blocked vents"] },
+  { area: "Floors & Stairs", items: ["Uneven subfloor", "Squeaking boards", "Loose spindles", "Gaps at skirting"] },
+  { area: "Finishes", items: ["Paint runs & patches", "Plaster cracks", "Missing grout & silicone", "Loose architraves"] },
+];
+
+// NEW: snagging timeline from booking to moving in
+const TIMELINE = [
+  { when: "Closing date confirmed", what: "Book your snag. Tell us your development and handover date." },
+  { when: "Inspection day", what: "3 to 5 hours on site. You're welcome to walk round with us." },
+  { when: "Within 48 hours", what: "Photo report lands in your inbox. Forward it to the developer." },
+  { when: "Developer fixes", what: "Builder works through every item on the list at their cost." },
+  { when: "Re-inspection", what: "We come back and sign off each fix for €150." },
+  { when: "Move in", what: "Want new floors? Our flooring team fits once the snags are cleared." },
+];
+
+// NEW: handover-day checklist for the buyer
+const HANDOVER_CHECKLIST = [
+  "Take photos of all meter readings (electric, water, heat pump)",
+  "Collect every key, fob and window key, and test each one",
+  "Get your BER certificate and guarantee/warranty documents",
+  "Ask for appliance, boiler and heat pump manuals",
+  "Check the consumer unit is labelled circuit by circuit",
+  "Note the developer's aftercare contact and email address",
+  "Run every tap and shower for a few minutes, check for leaks",
+  "Keep our snag report and all emails with the developer in one folder",
+];
+
+// NEW: internal links shown above the FAQ
+const RELATED_LINKS = [
+  {
+    href: "/blogs/snag-list-dublin-cost/",
+    label: "Snag list cost in Dublin (2026)",
+    text: "2026 prices, what a snag list includes and how it saves you money.",
+    tag: "Pricing",
+    cta: "Read guide",
+    img: "/report-mockup.webp",
+    pos: "object-top",
+  },
+  {
+    href: "/blogs/snag-list-vs-house-survey/",
+    label: "Snag list vs house survey",
+    text: "What each one checks and which you need for a new build.",
+    tag: "Compare",
+    cta: "Read guide",
+    img: "/snagging-inspection.webp",
+    pos: "object-center",
+  },
+  {
+    href: "/new-build-guides/",
+    label: "New build guides",
+    text: "Prices, buying schemes and snagging checklists for Dublin developments.",
+    tag: "Developments",
+    cta: "Explore guides",
+    img: "/instagram/07-floor.webp",
+    pos: "object-top",
+  },
+  {
+    href: "/service/flooring/",
+    label: "Flooring after your snag",
+    text: "Snags cleared? Our team supplies and fits floors from the same visit.",
+    tag: "Flooring",
+    cta: "Explore flooring",
+    img: "/flooring-details.webp",
+    pos: "object-center",
+  },
+];
+
 // FAQ: shown on the page AND sent to Google as FAQ schema (keep both in sync automatically)
 const FAQS = [
   {
     q: "What is a snag list?",
-    a: "A snag list is a written report of every defect in a newly built home, from paint and plaster marks to doors, windows, plumbing and electrics. Your developer uses it to fix the issues before or soon after you move in.",
+    a: "A snag list is a written report of every defect in a newly built home, from paint and plaster marks to doors, windows, plumbing and electrics. It is also called a snagging survey or snagging inspection. Your developer uses it to fix the issues before or soon after you move in.",
   },
   {
     q: "How much does a snag list inspection cost in Dublin?",
@@ -77,11 +158,27 @@ const FAQS = [
   },
   {
     q: "Do you inspect apartments and duplexes as well as houses?",
-    a: "Yes. We carry out snag list and home inspections on new build houses, apartments and duplexes across Dublin, Kildare, Wicklow and Meath.",
+    a: "Yes. We carry out snag list and home inspections on new build houses, apartments and duplexes across Dublin, Kildare, Westmeath and Drogheda (Co. Louth). Somewhere else? Ask us and we will confirm.",
   },
   {
     q: "What is included in the snag report?",
     a: "Every defect is photographed, grouped room by room and explained in clear building terms, with thermal imaging and moisture readings included. You can forward it straight to your builder's customer care team.",
+  },
+  {
+    q: "Can I be there during the snag list inspection?",
+    a: "Yes, and we recommend it. You can walk round with our inspector, see the issues first hand and ask questions about your new home as we go.",
+  },
+  {
+    q: "What if the developer won't fix something on the snag list?",
+    a: "Our report uses clear building terms and photo evidence, which makes defects hard to dispute. If an item is still open, our €150 re-inspection documents what is outstanding so you can raise it with the developer or your solicitor.",
+  },
+  {
+    q: "Is it too late to snag if I've already moved in?",
+    a: "No. We can inspect after you get the keys. The sooner the better, so defects are reported to the developer while they are still responsible for fixing them.",
+  },
+  {
+    q: "Can you fit new floors after the snag list is done?",
+    a: "Yes. Dublin PropTech is also a flooring company. Once your snags are cleared we can supply and fit laminate, LVT, carpet, stair cladding and wall panels, so one team looks after your new home from inspection to finish.",
   },
 ];
 
@@ -113,11 +210,12 @@ export default function SnaglistPage() {
       <section className="relative w-full min-h-[100svh] flex flex-col items-center justify-center overflow-hidden bg-[#1a1814]">
         
         {/* Background Sliding Images */}
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence mode="popLayout" initial={false}>
           <motion.img
             key={currentIndex}
-            src={heroImages[currentIndex]}
-            alt="Home inspector carrying out a snag list inspection in Dublin"
+            src={heroImages[currentIndex].src}
+            alt={heroImages[currentIndex].alt}
+            fetchPriority={currentIndex === 0 ? "high" : "auto"}
             className="absolute inset-0 w-full h-full object-cover"
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -137,7 +235,7 @@ export default function SnaglistPage() {
           
           <FadeUp delay={0.1}>
             <h1 className="text-4xl md:text-6xl font-serif font-bold text-white leading-[1.1] mb-6 tracking-tight drop-shadow-lg">
-              Snag List Dublin
+              Snag List Dublin{" "}
               <span className="block text-xl md:text-2xl mt-4 font-sans font-medium text-gray-200">New Build Home Inspections from €200</span>
             </h1>
           </FadeUp>
@@ -165,6 +263,7 @@ export default function SnaglistPage() {
               {/* Instagram */}
               <a 
                 href="https://www.instagram.com/dublinproptech/" 
+                aria-label="Dublin PropTech on Instagram"
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"
@@ -179,6 +278,7 @@ export default function SnaglistPage() {
               {/* Facebook */}
               <a 
                 href="https://www.facebook.com/people/Dublin-Proptech/61580488380589/" 
+                aria-label="Dublin PropTech on Facebook"
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"
@@ -191,6 +291,7 @@ export default function SnaglistPage() {
               {/* YouTube */}
               <a 
                 href="https://www.youtube.com/@DublinProptech" 
+                aria-label="Dublin PropTech on YouTube"
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-16 h-16 rounded-full flex items-center justify-center border border-white/40 bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all shadow-lg"
@@ -211,22 +312,22 @@ export default function SnaglistPage() {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <FadeUp delay={0.1} className="flex flex-col items-center">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">300+ Point Check</h4>
+            <p className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">300+ Point Check</p>
             <p className="text-sm text-gray-500">Exhaustive detail</p>
           </FadeUp>
           <FadeUp delay={0.2} className="flex flex-col items-center">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">48-Hour Turnaround</h4>
+            <p className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">48-Hour Turnaround</p>
             <p className="text-sm text-gray-500">Rapid report delivery</p>
           </FadeUp>
           <FadeUp delay={0.3} className="flex flex-col items-center">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M2 12h4l2-9 5 18 2-9h5"></path></svg>
-            <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Thermal Imaging</h4>
+            <p className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Thermal Imaging</p>
             <p className="text-sm text-gray-500">Detect hidden issues</p>
           </FadeUp>
           <FadeUp delay={0.4} className="flex flex-col items-center">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2" className="mb-4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-            <h4 className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Developer Ready</h4>
+            <p className="font-bold text-gray-900 text-sm uppercase tracking-wider mb-2">Developer Ready</p>
             <p className="text-sm text-gray-500">Actionable formatting</p>
           </FadeUp>
         </div>
@@ -244,7 +345,7 @@ export default function SnaglistPage() {
                 Hold Developers Accountable
               </span>
               <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 leading-tight">
-                New doesn't always <span className="italic text-[#b7935b]">mean flawless.</span>
+                New doesn&apos;t always <span className="italic text-[#b7935b]">mean flawless.</span>
               </h2>
               <p className="mt-6 text-gray-600 leading-relaxed text-lg">
                 Rushed timelines and multiple contractors overlapping on site often lead to cosmetic defects,
@@ -404,7 +505,7 @@ export default function SnaglistPage() {
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
               </div>
               <div>
-                <h4 className="font-serif font-bold text-xl md:text-2xl tracking-wide mb-2">Snaglist Specialist - Dublin's #1</h4>
+                <p className="font-serif font-bold text-xl md:text-2xl tracking-wide mb-2">Snaglist Specialist - Dublin&apos;s #1</p>
                 <div className="flex flex-col gap-2">
                   <p className="text-gray-300 flex items-center justify-center md:justify-start gap-2">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -420,6 +521,35 @@ export default function SnaglistPage() {
                 DubSnag50
               </div>
             </div>
+          </div>
+        </FadeUp>
+      </section>
+
+      {/* NEW: Why Dublin PropTech vs a basic snag list */}
+      <section className="px-6 max-w-5xl mx-auto w-full mb-32">
+        <FadeUp>
+          <div className="text-center mb-12">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">Compare Before You Book</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Not All Snag Lists Are Equal</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Same price range, very different report. Here is what is included with us as standard.</p>
+          </div>
+        </FadeUp>
+        <FadeUp delay={0.1}>
+          <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+            <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-[#1a1814] text-white text-xs md:text-sm font-bold uppercase tracking-widest">
+              <div className="p-4 md:p-5">What you get</div>
+              <div className="p-4 md:p-5 text-center bg-[#b7935b]">Dublin PropTech</div>
+              <div className="p-4 md:p-5 text-center text-gray-400">Basic snag list</div>
+            </div>
+            {COMPARISON.map((row) => (
+              <div key={row.feature} className="grid grid-cols-[1.4fr_1fr_1fr] border-t border-gray-100 text-sm md:text-[15px]">
+                <div className="p-4 md:p-5 font-medium text-gray-900">{row.feature}</div>
+                <div className="p-4 md:p-5 text-center font-bold text-[#1a1814] bg-[#f6f4f0]">
+                  <span className="text-[#b7935b] mr-1">✓</span>{row.us}
+                </div>
+                <div className="p-4 md:p-5 text-center text-gray-500">{row.basic}</div>
+              </div>
+            ))}
           </div>
         </FadeUp>
       </section>
@@ -486,6 +616,32 @@ export default function SnaglistPage() {
         </div>
       </section>
 
+      {/* NEW: Most common new build defects */}
+      <section className="px-6 max-w-7xl mx-auto w-full mb-32">
+        <FadeUp>
+          <div className="text-center mb-14">
+            <span className="text-sm font-bold tracking-widest uppercase text-[#b7935b] mb-4 block">From Our Inspections</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 mb-4 tracking-tight">Defects We Find Most in Dublin New Builds</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">Easy to miss on a viewing. Easy to prove with a proper snag report.</p>
+          </div>
+        </FadeUp>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {COMMON_DEFECTS.map((d, i) => (
+            <FadeUp key={d.area} delay={0.1 * (i + 1)} className="bg-[#1a1814] text-white rounded-2xl p-7 shadow-lg">
+              <p className="font-serif text-xl font-bold text-[#d9bc8c] mb-5">{d.area}</p>
+              <ul className="space-y-3">
+                {d.items.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-[15px] text-gray-300">
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-[#b7935b] flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </FadeUp>
+          ))}
+        </div>
+      </section>
+
       {/* The Report Detail Section */}
       <section id="report-details" className="bg-[#2a261f] text-white py-24 border-b border-[#3a352c]">
         <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
@@ -496,7 +652,7 @@ export default function SnaglistPage() {
                 Within 48 hours of your inspection, you receive a meticulously detailed, developer-ready PDF report. Every defect is photographed, categorized by room, and clearly explained using correct building terminology. 
               </p>
               <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                We hand this over to you so you can forward it straight to your builder's customer care team, making it impossible for them to dispute the findings.
+                We hand this over to you so you can forward it straight to your builder&apos;s customer care team, making it impossible for them to dispute the findings.
               </p>
               <ul className="space-y-3 mb-8 text-sm uppercase tracking-wider font-bold text-[#b7935b]">
                 <li>✓ High-Resolution Imagery</li>
@@ -507,8 +663,7 @@ export default function SnaglistPage() {
           </div>
           <div className="w-full md:w-1/2">
             <FadeUp delay={0.2} className="relative w-full aspect-[4/3] shadow-2xl rounded-xl overflow-hidden bg-[#1a1814]">
-              {/* Added priority tag to prevent LCP warnings */}
-              <Image src="/report-mockup.webp" alt="Sample snag list report from a Dublin home inspection" fill className="object-cover opacity-90" priority />
+              <Image src="/report-mockup.webp" alt="Sample snag list report from a Dublin home inspection" fill sizes="(min-width: 768px) 600px, 100vw" className="object-cover opacity-90" />
             </FadeUp>
           </div>
         </div>
@@ -560,7 +715,7 @@ export default function SnaglistPage() {
             <FadeUp className="relative w-[280px] md:w-[320px] h-[350px] md:h-[400px] shadow-2xl rounded-lg overflow-hidden bg-[#2a2215]">
               <Image 
                 src="/anil.webp" 
-                alt="Dublin PropTech Quality Standard" 
+                alt="Dublin PropTech snag list inspector on site in Dublin" 
                 fill 
                 className="object-cover" 
               />
@@ -580,6 +735,127 @@ export default function SnaglistPage() {
             </FadeUp>
           </div>
 
+        </div>
+      </section>
+
+      {/* NEW: Snagging timeline + handover checklist */}
+      <section className="px-4 md:px-6 max-w-[1400px] mx-auto w-full pt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          {/* Left: timeline */}
+          <FadeUp className="h-full">
+            <div className="h-full bg-white border border-gray-200 rounded-3xl shadow-sm p-8 md:p-12">
+              <span className="inline-flex items-center gap-2 text-[#b7935b] font-bold tracking-[0.2em] uppercase text-xs mb-5">
+                <span className="w-8 h-px bg-[#b7935b]" />
+                Booking to Moving In
+              </span>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 leading-tight mb-10">
+                Your Snagging <span className="italic text-[#b7935b]">Timeline.</span>
+              </h2>
+              <ol className="relative border-l border-[#e8e4db] ml-3 space-y-8">
+                {TIMELINE.map((t, i) => (
+                  <li key={t.when} className="pl-8 relative">
+                    <span className="absolute -left-[13px] top-0 w-6 h-6 rounded-full bg-[#b7935b] text-white text-[11px] font-bold flex items-center justify-center">{i + 1}</span>
+                    <p className="font-serif text-lg font-bold text-gray-900">{t.when}</p>
+                    <p className="text-gray-600 text-[15px] leading-relaxed">{t.what}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </FadeUp>
+
+          {/* Right: handover checklist */}
+          <FadeUp delay={0.15} className="h-full">
+            <div className="relative h-full overflow-hidden bg-[#1a1814] text-white rounded-3xl shadow-xl p-8 md:p-12">
+              <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-[#b7935b]/20 blur-3xl" />
+              <span className="relative text-xs font-bold uppercase tracking-[0.2em] text-[#d9bc8c]">Free Checklist</span>
+              <h2 className="relative mt-3 text-3xl md:text-4xl font-serif font-bold leading-tight mb-3">Handover Day Checklist</h2>
+              <p className="relative text-gray-400 mb-8">Do these yourself on the day you get the keys. Our snag covers the build quality.</p>
+              <ul className="relative space-y-4">
+                {HANDOVER_CHECKLIST.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-[15px] text-gray-200">
+                    <span className="mt-0.5 w-5 h-5 rounded border border-[#b7935b] flex-shrink-0 flex items-center justify-center">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#b7935b" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/service/contact"
+                className="relative mt-10 inline-block bg-[#b7935b] text-white px-8 py-4 font-bold tracking-widest uppercase text-sm hover:bg-white hover:text-[#1a1814] transition-colors rounded-full shadow-lg"
+              >
+                Book Your Snag
+              </Link>
+            </div>
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* NEW: Internal links to related guides (SEO + helps buyers) */}
+      <section className="px-4 md:px-6 max-w-[1400px] mx-auto w-full pt-24">
+        <FadeUp>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+            <div>
+              <span className="inline-flex items-center gap-2 text-[#b7935b] font-bold tracking-[0.2em] uppercase text-xs mb-4">
+                <span className="w-8 h-px bg-[#b7935b]" />
+                Snagging Guides
+              </span>
+              <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900 leading-tight">
+                Read before <span className="italic text-[#b7935b]">you book.</span>
+              </h2>
+              <p className="mt-3 text-gray-600 text-lg max-w-xl">Free guides from our inspectors to help you buy, snag and finish your new home.</p>
+            </div>
+            <Link
+              href="/blogs/"
+              className="group self-start md:self-auto inline-flex items-center gap-2 border border-[#1a1814] text-[#1a1814] px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#1a1814] hover:text-white transition-colors"
+            >
+              All guides <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
+          </div>
+        </FadeUp>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {RELATED_LINKS.map((l, i) => (
+            <FadeUp key={l.href} delay={0.08 * (i + 1)} className="h-full">
+              <Link
+                href={l.href}
+                className="group h-full flex flex-col overflow-hidden rounded-3xl bg-white border border-gray-200 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-[#b7935b] transition-all duration-300"
+              >
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden bg-[#1a1814]">
+                  <Image
+                    src={l.img}
+                    alt={l.label}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className={`object-cover ${l.pos} transition-transform duration-700 group-hover:scale-110`}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1a1814]/80 via-[#1a1814]/10 to-transparent" />
+                  <span className="absolute top-4 left-4 bg-white/95 text-[#1a1814] text-[10px] font-bold uppercase tracking-widest rounded-full px-3 py-1.5 shadow-sm">
+                    {l.tag}
+                  </span>
+                  <span className="absolute bottom-3 right-5 font-serif text-4xl font-bold text-white/90 drop-shadow">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {/* Text */}
+                <div className="flex-1 flex flex-col p-6">
+                  <h3 className="font-serif text-xl font-bold text-gray-900 leading-snug group-hover:text-[#b7935b] transition-colors">
+                    {l.label}
+                  </h3>
+                  <p className="mt-2 text-gray-600 text-[15px] leading-relaxed flex-1">{l.text}</p>
+                  <span className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-bold uppercase tracking-widest text-[#b7935b]">
+                    {l.cta}
+                    <span className="w-9 h-9 rounded-full border border-[#e8e4db] flex items-center justify-center group-hover:bg-[#b7935b] group-hover:border-[#b7935b] group-hover:text-white transition-colors">
+                      →
+                    </span>
+                  </span>
+                </div>
+              </Link>
+            </FadeUp>
+          ))}
         </div>
       </section>
 
