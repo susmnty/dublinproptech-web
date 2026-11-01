@@ -59,7 +59,7 @@ const SAMPLE_SNAGS = [
 
 // NEW: Us vs a basic snag list (comparison table)
 const COMPARISON = [
-  { feature: "Fixed price published by bedrooms", us: "€200–€300", basic: "Quote on request" },
+  { feature: "Fixed price published by bedrooms", us: "€200-€300", basic: "Quote on request" },
   { feature: "Thermal imaging", us: "Included", basic: "Often extra" },
   { feature: "Calibrated RCD & socket testing", us: "Included", basic: "Visual only" },
   { feature: "Laser-level floor & stair checks", us: "Included", basic: "Rarely" },
