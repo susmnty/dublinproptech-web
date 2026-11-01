@@ -1,28 +1,24 @@
 RewriteEngine On
 
 # ------------------------------------------------------------
-# 0. FORCE NON-WWW (www.dublinproptech.com -> dublinproptech.com)
+# 0. FORCE NON-WWW
 # ------------------------------------------------------------
 RewriteCond %{HTTP_HOST} ^www\.dublinproptech\.com$ [NC]
 RewriteRule ^(.*)$ https://dublinproptech.com/$1 [R=301,L]
 
 # ------------------------------------------------------------
-# 1. OLD LINKS THAT HAVE A NEW PAGE -> 301 redirect
+# 1. OLD LINKS THAT HAVE A NEW PAGE -> 301
 # ------------------------------------------------------------
 
-# Home
-RewriteRule ^home/?$ / [R=301,L]
-RewriteRule ^about-us/?$ / [R=301,L]
+# Home / About
+RewriteRule ^(home|about|about-us)/?$ / [R=301,L]
 
-# Old /blog/ posts -> /blogs/
+# Blogs
 RewriteRule ^blog/(.*)$ /blogs/$1 [R=301,L]
-RewriteRule ^blog-archieve/?$ /blogs/ [R=301,L]
-RewriteRule ^from-concept-to-construction-what-makes-a-project/?$ /blogs/ [R=301,L]
-
-# New build guides
+RewriteRule ^(blog-archieve|from-concept-to-construction-what-makes-a-project)/?$ /blogs/ [R=301,L]
 RewriteRule ^key-considerations-before-starting-a-new-build/?$ /new-build-guides/ [R=301,L]
 
-# Capital letters -> lowercase pages
+# Capital letters -> lowercase
 RewriteRule ^Service/(.*)$ /service/$1 [R=301,L]
 RewriteRule ^Reviews/?$ /reviews/ [R=301,L]
 
@@ -38,8 +34,8 @@ RewriteRule ^(lvt|luxury-vinyl-tile-lvt|product-category/spc|product/oak-spirit-
 # Wall panels
 RewriteRule ^wall-panel/?$ /service/wall-panels/ [R=301,L]
 
-# Blinds -> LuxBlinds
-RewriteRule ^blinds-2/?$ https://luxblinds.ie/ [R=301,L]
+# Blinds
+RewriteRule ^blinds(-[0-9]+)?/?$ https://luxblinds.ie/ [R=301,L]
 
 # Flooring
 RewriteRule ^carpets/?$ /service/flooring/carpets/ [R=301,L]
@@ -47,49 +43,46 @@ RewriteRule ^laminate-flooring/?$ /service/flooring/laminate/ [R=301,L]
 RewriteRule ^tile-flooring/?$ /service/flooring/tiles/ [R=301,L]
 RewriteRule ^(underlay|product-category/samples|home-renovation)/?$ /service/flooring/ [R=301,L]
 RewriteRule ^shop(/.*)?$ /service/flooring/ [R=301,L]
-
-# Old laminate product pages (…-oak-details, …oakdetails, …hickorydetails, …-deatils)
 RewriteRule ^[a-z-]+-?(oak|hickory)-?(details|deatils)/?$ /service/flooring/laminate/ [R=301,L]
 
 # ------------------------------------------------------------
-# 2. OLD WORDPRESS / SPAM PAGES WITH NO REPLACEMENT -> 410 Gone
+# 2. ALL OLD WORDPRESS PATTERNS -> 410 (future-proof)
 # ------------------------------------------------------------
 
-# WordPress system files & folders (wp-admin, wp-content, wp-json, wp-login.php …)
+# WP system files/folders: wp-admin, wp-content, wp-json, wp-login.php...
 RewriteRule ^wp- - [G,L]
-RewriteRule ^(xmlrpc\.php|feed|comments/feed)/?$ - [G,L]
+RewriteRule ^xmlrpc\.php$ - [G,L]
 
-# WordPress links like /?page_id=123 and /?wc-ajax=…
-RewriteCond %{QUERY_STRING} (^|&)(page_id|wc-ajax)= [NC]
+# Any feed anywhere: /feed/, /author/x/feed/, /category/x/feed/...
+RewriteRule (^|/)feed/?$ - [G,L]
+
+# WP archive & WooCommerce folders
+RewriteRule ^(author|category|tag|comments|attachment|product|product-category|product-tag|cart|checkout|my-account)/ - [G,L]
+
+# Elementor drafts & duplicate pages (elementor-4713, documents-2, 404-3...)
+RewriteRule ^elementor- - [G,L]
+RewriteRule ^[a-z0-9-]+-[0-9]+/?$ - [G,L]
+
+# Any WordPress query on homepage: ?p= ?page_id= ?cat= ?s= ?wc-ajax= ?templately_library=...
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id|cat|s|attachment_id|replytocom|wc-ajax|templately_library|elementor_library|post_type)= [NC]
 RewriteRule ^$ - [G,L]
 
-# Junk URL "/*"
+# Junk "/*"
 RewriteRule ^\*$ - [G,L]
 
 # Old pages not on the new site
-RewriteRule ^(404-3|seo|fsp|peace-commissioner|digital-hub|mortgage|tradesmen|documents(-[0-9]+)?|boutique|grass|resources|directory|digital-agency|website-development|community-offer|share-your-images-be-featured|events)/?$ - [G,L]
-RewriteRule ^(outdoor-structures|outdoor-garden-projects|decking-installation|lawn-installation)/?$ - [G,L]
-RewriteRule ^elementor-[a-z0-9-]+/?$ - [G,L]
-RewriteRule ^(how-to-increase-your-roi-through-scientific-sem|timeless-vs-trend-driven-design-finding-the-right-balance)/?$ - [G,L]
+RewriteRule ^(seo|fsp|peace-commissioner|digital-hub|mortgage|tradesmen|documents|boutique|grass|resources|directory|digital-agency|website-development|community-offer|share-your-images-be-featured|events|outdoor-structures|outdoor-garden-projects|decking-installation|lawn-installation|how-to-increase-your-roi-through-scientific-sem|timeless-vs-trend-driven-design-finding-the-right-balance)/?$ - [G,L]
 
-# Spam pages from the old hacked site
+# Spam pages from old hacked site
 RewriteRule ^(real-money-play-nonetheless-unlocks-money-winnings|wand-types-are-classics-since-theyre-so-easy-to-hold-and|from-the-critiques-this-one-could-be-quite-explosive-and|panellists-tried-every-velocity-setting-and-vibration-sample|today-with-several-iterations-available-the-product)/?$ - [G,L]
 
 # ------------------------------------------------------------
-# 3. IMAGES: browsers re-check after 1 day
+# 3. CACHING
 # ------------------------------------------------------------
 <IfModule mod_headers.c>
   <FilesMatch "\.(webp|jpg|jpeg|png|svg|gif|avif)$">
     Header set Cache-Control "public, max-age=86400"
   </FilesMatch>
-</IfModule>
-
-# ------------------------------------------------------------
-# 4. JS / CSS / FONTS: cache for 1 year
-# Safe because Next.js puts a content hash in these file names (/_next/static/...),
-# so every deploy creates new file names and visitors always get the latest version.
-# ------------------------------------------------------------
-<IfModule mod_headers.c>
   <FilesMatch "\.(js|css|woff2?)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
