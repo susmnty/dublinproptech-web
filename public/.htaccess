@@ -10,24 +10,43 @@ RewriteRule ^(.*)$ https://dublinproptech.com/$1 [R=301,L]
 # 1. OLD LINKS THAT HAVE A NEW PAGE -> 301 redirect
 # ------------------------------------------------------------
 
+# Home
+RewriteRule ^home/?$ / [R=301,L]
+RewriteRule ^about-us/?$ / [R=301,L]
+
 # Old /blog/ posts -> /blogs/
 RewriteRule ^blog/(.*)$ /blogs/$1 [R=301,L]
 RewriteRule ^blog-archieve/?$ /blogs/ [R=301,L]
-RewriteRule ^what-is-a-snag-list-in-dublin-and-why-is-it-important-for-new-homes/?$ /service/snaglist/ [R=301,L]
+RewriteRule ^from-concept-to-construction-what-makes-a-project/?$ /blogs/ [R=301,L]
+
+# New build guides
+RewriteRule ^key-considerations-before-starting-a-new-build/?$ /new-build-guides/ [R=301,L]
 
 # Capital letters -> lowercase pages
 RewriteRule ^Service/(.*)$ /service/$1 [R=301,L]
 RewriteRule ^Reviews/?$ /reviews/ [R=301,L]
 
-# Old service pages
-RewriteRule ^(lvt|product-category/spc)/?$ /service/lvt/ [R=301,L]
+# Snagging
+RewriteRule ^(snaglist|what-is-a-snag-list-in-dublin-and-why-is-it-important-for-new-homes|pricing|faq)/?$ /service/snaglist/ [R=301,L]
+
+# Contact
+RewriteRule ^contact(-us|-[0-9]+)?/?$ /service/contact/ [R=301,L]
+
+# LVT / SPC
+RewriteRule ^(lvt|luxury-vinyl-tile-lvt|product-category/spc|product/oak-spirit-spc)/?$ /service/lvt/ [R=301,L]
+
+# Wall panels
+RewriteRule ^wall-panel/?$ /service/wall-panels/ [R=301,L]
+
+# Blinds -> LuxBlinds
+RewriteRule ^blinds-2/?$ https://luxblinds.ie/ [R=301,L]
+
+# Flooring
 RewriteRule ^carpets/?$ /service/flooring/carpets/ [R=301,L]
 RewriteRule ^laminate-flooring/?$ /service/flooring/laminate/ [R=301,L]
 RewriteRule ^tile-flooring/?$ /service/flooring/tiles/ [R=301,L]
 RewriteRule ^(underlay|product-category/samples|home-renovation)/?$ /service/flooring/ [R=301,L]
-RewriteRule ^(pricing|faq)/?$ /service/snaglist/ [R=301,L]
-RewriteRule ^contact(-[0-9]+)?/?$ /service/contact/ [R=301,L]
-RewriteRule ^about-us/?$ / [R=301,L]
+RewriteRule ^shop(/.*)?$ /service/flooring/ [R=301,L]
 
 # Old laminate product pages (…-oak-details, …oakdetails, …hickorydetails, …-deatils)
 RewriteRule ^[a-z-]+-?(oak|hickory)-?(details|deatils)/?$ /service/flooring/laminate/ [R=301,L]
@@ -44,8 +63,12 @@ RewriteRule ^(xmlrpc\.php|feed|comments/feed)/?$ - [G,L]
 RewriteCond %{QUERY_STRING} (^|&)(page_id|wc-ajax)= [NC]
 RewriteRule ^$ - [G,L]
 
+# Junk URL "/*"
+RewriteRule ^\*$ - [G,L]
+
 # Old pages not on the new site
 RewriteRule ^(404-3|seo|fsp|peace-commissioner|digital-hub|mortgage|tradesmen|documents(-[0-9]+)?|boutique|grass|resources|directory|digital-agency|website-development|community-offer|share-your-images-be-featured|events)/?$ - [G,L]
+RewriteRule ^(outdoor-structures|outdoor-garden-projects|decking-installation|lawn-installation)/?$ - [G,L]
 RewriteRule ^elementor-[a-z0-9-]+/?$ - [G,L]
 RewriteRule ^(how-to-increase-your-roi-through-scientific-sem|timeless-vs-trend-driven-design-finding-the-right-balance)/?$ - [G,L]
 
@@ -60,6 +83,7 @@ RewriteRule ^(real-money-play-nonetheless-unlocks-money-winnings|wand-types-are-
     Header set Cache-Control "public, max-age=86400"
   </FilesMatch>
 </IfModule>
+
 # ------------------------------------------------------------
 # 4. JS / CSS / FONTS: cache for 1 year
 # Safe because Next.js puts a content hash in these file names (/_next/static/...),
