@@ -15,7 +15,7 @@ RewriteRule ^(home|about|about-us)/?$ / [R=301,L]
 
 # Blogs
 RewriteRule ^blog/(.*)$ /blogs/$1 [R=301,L]
-RewriteRule ^(blog-archieve|from-concept-to-construction-what-makes-a-project)/?$ /blogs/ [R=301,L]
+RewriteRule ^(blog-archieve|knowledge-center|from-concept-to-construction-what-makes-a-project|from-concept-to-construction-what-makes-a-project-last)/?$ /blogs/ [R=301,L]
 RewriteRule ^key-considerations-before-starting-a-new-build/?$ /new-build-guides/ [R=301,L]
 
 # Capital letters -> lowercase
@@ -26,7 +26,7 @@ RewriteRule ^Reviews/?$ /reviews/ [R=301,L]
 RewriteRule ^(snaglist|what-is-a-snag-list-in-dublin-and-why-is-it-important-for-new-homes|pricing|faq)/?$ /service/snaglist/ [R=301,L]
 
 # Contact
-RewriteRule ^contact(-us|-[0-9]+)?/?$ /service/contact/ [R=301,L]
+RewriteRule ^contact(-us|-[0-9]+|-message-form)?/?$ /service/contact/ [R=301,L]
 
 # LVT / SPC
 RewriteRule ^(lvt|luxury-vinyl-tile-lvt|product-category/spc|product/oak-spirit-spc)/?$ /service/lvt/ [R=301,L]
@@ -34,16 +34,27 @@ RewriteRule ^(lvt|luxury-vinyl-tile-lvt|product-category/spc|product/oak-spirit-
 # Wall panels
 RewriteRule ^wall-panel/?$ /service/wall-panels/ [R=301,L]
 
+# Stairs
+RewriteRule ^stair/?$ /service/stairs/ [R=301,L]
+
 # Blinds
 RewriteRule ^blinds(-[0-9]+)?/?$ https://luxblinds.ie/ [R=301,L]
 
-# Flooring
-RewriteRule ^carpets/?$ /service/flooring/carpets/ [R=301,L]
-RewriteRule ^laminate-flooring/?$ /service/flooring/laminate/ [R=301,L]
-RewriteRule ^tile-flooring/?$ /service/flooring/tiles/ [R=301,L]
-RewriteRule ^(underlay|product-category/samples|home-renovation)/?$ /service/flooring/ [R=301,L]
-RewriteRule ^shop(/.*)?$ /service/flooring/ [R=301,L]
+# Flooring - laminate
+RewriteRule ^(laminate|laminate-flooring|brown-melba-oak|product-category/laminate)/?$ /service/flooring/laminate/ [R=301,L]
+RewriteRule ^product/[a-z0-9-]*laminate/?$ /service/flooring/laminate/ [R=301,L]
 RewriteRule ^[a-z-]+-?(oak|hickory)-?(details|deatils)/?$ /service/flooring/laminate/ [R=301,L]
+
+# Flooring - carpets
+RewriteRule ^(carpets|carpet-flooring)/?$ /service/flooring/carpets/ [R=301,L]
+RewriteRule ^product/[a-z0-9-]*carpet/?$ /service/flooring/carpets/ [R=301,L]
+
+# Flooring - tiles
+RewriteRule ^(tile|tile-flooring)/?$ /service/flooring/tiles/ [R=301,L]
+
+# Flooring - general
+RewriteRule ^(underlay|surfaces|engineered-wood-flooring|flooring-and-stair-solutions|home-renovation|product-category/samples)/?$ /service/flooring/ [R=301,L]
+RewriteRule ^shop(/.*)?$ /service/flooring/ [R=301,L]
 
 # ------------------------------------------------------------
 # 2. ALL OLD WORDPRESS PATTERNS -> 410 (future-proof)
@@ -57,14 +68,14 @@ RewriteRule ^xmlrpc\.php$ - [G,L]
 RewriteRule (^|/)feed/?$ - [G,L]
 
 # WP archive & WooCommerce folders
-RewriteRule ^(author|category|tag|comments|attachment|product|product-category|product-tag|cart|checkout|my-account)/ - [G,L]
+RewriteRule ^(author|category|tag|comments|attachment|product|product-category|product-tag|cart|checkout|my-account)(/|$) - [G,L]
 
-# Elementor drafts & duplicate pages (elementor-4713, documents-2, 404-3...)
+# Elementor drafts & duplicate pages (elementor-4713, about-2, flooring-2, 404-3...)
 RewriteRule ^elementor- - [G,L]
 RewriteRule ^[a-z0-9-]+-[0-9]+/?$ - [G,L]
 
-# Any WordPress query on homepage: ?p= ?page_id= ?cat= ?s= ?wc-ajax= ?templately_library=...
-RewriteCond %{QUERY_STRING} (^|&)(p|page_id|cat|s|attachment_id|replytocom|wc-ajax|templately_library|elementor_library|post_type)= [NC]
+# Any WordPress query on homepage
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id|cat|s|attachment_id|replytocom|wc-ajax|templately_library|elementor_library|post_type|wpforms_form_preview|preview|preview_id)= [NC]
 RewriteRule ^$ - [G,L]
 
 # Junk "/*"
@@ -72,6 +83,9 @@ RewriteRule ^\*$ - [G,L]
 
 # Old pages not on the new site
 RewriteRule ^(seo|fsp|peace-commissioner|digital-hub|mortgage|tradesmen|documents|boutique|grass|resources|directory|digital-agency|website-development|community-offer|share-your-images-be-featured|events|outdoor-structures|outdoor-garden-projects|decking-installation|lawn-installation|how-to-increase-your-roi-through-scientific-sem|timeless-vs-trend-driven-design-finding-the-right-balance)/?$ - [G,L]
+
+# Old Dubai/agency/misc pages
+RewriteRule ^(invest-in-dubai|dubai-contact-form|fvac|payment-solutions|paid-ads|fit-out|interiors-fit-out|pergola-installation|home-extensions|new-home|projects|project-details|package-details|offer|what-property-services-are-commonly-needed-by-homeowners-in-dublin)/?$ - [G,L]
 
 # Spam pages from old hacked site
 RewriteRule ^(real-money-play-nonetheless-unlocks-money-winnings|wand-types-are-classics-since-theyre-so-easy-to-hold-and|from-the-critiques-this-one-could-be-quite-explosive-and|panellists-tried-every-velocity-setting-and-vibration-sample|today-with-several-iterations-available-the-product)/?$ - [G,L]
